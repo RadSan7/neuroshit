@@ -1,0 +1,26 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Backup files
+*~
+*.bak
+
+# VS Code
+.vscode/
+
+# Logs
+*.log
+
+# npm
+node_modules/
+package-lock.json
+
+# Others
+.env

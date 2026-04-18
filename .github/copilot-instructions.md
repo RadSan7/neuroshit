@@ -1,0 +1,3 @@
+- Scaffold the project with a basic static HTML application.
+- Create `index.html`, `styles.css`, and `script.js` in the repository root.
+- Add a `README.md` with startup instructions.

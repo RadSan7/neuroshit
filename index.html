@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#05080f">
+  <title>NeuroShit — Neuro Atlas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <div id="app">
+    <header id="toolbar">
+      <h1>NeuroShit</h1>
+      <span class="subtitle">Neuro · Atlas Biochemiczny</span>
+
+      <div id="system-filters">
+        <button id="toggle-filters" class="filter-toggle" title="Filtruj systemy neuroprzekaźnikowe">Systemy</button>
+        <div id="filter-dropdown" class="filter-dropdown hidden">
+          <!-- populated by script.js -->
+        </div>
+      </div>
+
+      <div class="toolbar-controls">
+        <button id="toggleInteractions" class="filter-toggle" title="Pokaż wszystkie interakcje receptorów">Interakcje</button>
+        <button id="zoomOut" title="Oddal (−)">−</button>
+        <span id="zoomLevel">100%</span>
+        <button id="zoomIn" title="Przybliż (+)">+</button>
+        <button id="resetView" title="Reset widoku (0)">⌂</button>
+      </div>
+    </header>
+
+    <div id="canvas-container">
+      <canvas id="map"></canvas>
+    </div>
+
+    <div id="tooltip" class="tooltip hidden"></div>
+
+    <div id="info-panel" class="info-panel hidden">
+      <button id="close-panel" class="close-btn" aria-label="Zamknij">&times;</button>
+      <h2 id="panel-title"></h2>
+      <div id="panel-content"></div>
+    </div>
+
+    <div id="minimap">
+      <canvas id="minimap-canvas"></canvas>
+      <div id="minimap-viewport"></div>
+    </div>
+
+    <aside id="legend">
+      <header id="legend-header" title="Zwiń / rozwiń legendę">
+        <h3>Legenda</h3>
+        <button id="legend-toggle" aria-label="Zwiń legendę"></button>
+      </header>
+      <div id="legend-body">
+        <div class="legend-col">
+          <div class="legend-section-title">Węzły</div>
+          <div class="legend-item"><span class="shape-sample shape-circle" style="background:#4ade80"></span>Neuroprzekaźnik</div>
+          <div class="legend-item"><span class="shape-sample shape-pill" style="background:#60a5fa">E</span>Enzym syntezy</div>
+          <div class="legend-item"><span class="shape-sample shape-pill" style="background:#f87171">E</span>Enzym degradacji</div>
+          <div class="legend-item"><span class="shape-sample shape-hexagon" style="background:#c084fc"></span>Receptor</div>
+          <div class="legend-item"><span class="shape-sample shape-diamond" style="background:#22d3ee"></span>Transporter</div>
+          <div class="legend-item"><span class="shape-sample shape-circle-sm" style="background:#f59e0b"></span>Prekursor</div>
+          <div class="legend-item"><span class="shape-sample shape-circle-sm" style="background:#94a3b8"></span>Metabolit</div>
+        </div>
+        <div class="legend-col">
+          <div class="legend-section-title">Połączenia</div>
+          <div class="legend-item"><span class="line-sample line-synthesis"></span>Synteza</div>
+          <div class="legend-item"><span class="line-sample line-degradation"></span>Degradacja</div>
+          <div class="legend-item"><span class="line-sample line-reuptake"></span>Wychwyt zwrotny</div>
+          <div class="legend-item"><span class="line-sample line-conversion"></span>Konwersja prekursora</div>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <script src="medical-encyclopedia.js"></script>
+  <script src="script.js"></script>
+</body>
+
+</html>
