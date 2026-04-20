@@ -1,0 +1,160 @@
+/* ═══════════════════════════════════════════════════════════════
+   NeuroShit — Colors & Type Foundations
+   Cyber / medical / biohacker aesthetic — dark glass + neon accents
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Fonts — pulled from the source stylesheet (@import) */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap');
+
+:root {
+  /* ── Surface / background ─────────────────────────── */
+  --bg-base: #040812;        /* deepest — body background */
+  --bg-1:   #06101d;         /* top of gradient */
+  --bg-2:   #07111d;         /* mid */
+  --bg-3:   #040812;         /* bottom */
+  --panel-bg:      rgba(12, 17, 33, 0.75);
+  --panel-bg-solid:#0a0f1c;
+  --panel-border:  rgba(45, 212, 191, 0.15);
+  --glass-shadow:  0 12px 40px rgba(0, 0, 0, 0.5);
+
+  /* ── Foreground / text ────────────────────────────── */
+  --fg1:       #f1f5f9;      /* primary */
+  --fg2:       #cbd5e1;      /* secondary */
+  --fg-muted:  #94a3b8;      /* tertiary / muted */
+  --fg-dim:    #64748b;      /* dimmest */
+
+  /* ── Accents — "neon" palette ─────────────────────── */
+  --accent:           #4ade80; /* primary — dopamine green */
+  --accent-glow:      rgba(74, 222, 128, 0.4);
+  --accent-secondary: #22d3ee; /* cyan — transporter */
+  --accent-cyan-glow: rgba(34, 211, 238, 0.4);
+
+  /* ── Domain colors — node types ───────────────────── */
+  --node-neurotransmitter: #4ade80; /* green */
+  --node-synth-enzyme:     #60a5fa; /* blue */
+  --node-catabolic-enzyme: #f87171; /* red */
+  --node-receptor:         #c084fc; /* purple */
+  --node-transporter:      #22d3ee; /* cyan */
+  --node-precursor:        #f59e0b; /* amber */
+  --node-metabolite:       #94a3b8; /* slate */
+
+  /* ── Domain colors — neurotransmitter systems ─────── */
+  --sys-dopamine:       #4ade80;
+  --sys-norepinephrine: #fb923c;
+  --sys-serotonin:      #a78bfa;
+  --sys-acetylcholine:  #34d399;
+  --sys-glutamate:      #fbbf24;
+  --sys-gaba:           #f472b6;
+  --sys-histamine:      #fb7185;
+  --sys-endocannabinoid:#10b981;
+  --sys-opioid:         #818cf8;
+
+  /* ── Connection / edge colors ─────────────────────── */
+  --edge-synthesis:     rgba(96, 165, 250, 0.7);
+  --edge-degradation:   rgba(248, 113, 113, 0.75);
+  --edge-binding:       rgba(192, 132, 252, 0.7);
+  --edge-reuptake:      rgba(34, 211, 238, 0.75);
+  --edge-conversion:    rgba(245, 158, 11, 0.6);
+  --edge-inhibition:    rgba(248, 113, 113, 0.95);
+  --edge-interaction:   rgba(251, 191, 36, 0.6);
+
+  /* ── Controls ─────────────────────────────────────── */
+  --btn-bg:     rgba(30, 41, 59, 0.6);
+  --btn-hover:  rgba(51, 65, 85, 0.8);
+  --btn-border: rgba(255, 255, 255, 0.08);
+
+  /* ── Radii ────────────────────────────────────────── */
+  --r-sm: 6px;
+  --r-md: 10px;
+  --r-lg: 12px;
+  --r-xl: 16px;
+  --r-pill: 9999px;
+
+  /* ── Spacing scale ────────────────────────────────── */
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-5: 20px;
+  --s-6: 24px;
+  --s-8: 32px;
+  --s-10: 40px;
+
+  /* ── Elevation / shadow system ────────────────────── */
+  --elev-1: 0 2px 10px rgba(0, 0, 0, 0.2);
+  --elev-2: 0 4px 12px rgba(0, 0, 0, 0.3);
+  --elev-3: 0 12px 40px rgba(0, 0, 0, 0.5);
+  --elev-panel-right: -18px 0 60px rgba(0, 0, 0, 0.45);
+
+  /* ── Type scale ───────────────────────────────────── */
+  --font-sans: "Outfit", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "Fira Code", ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* display-1 — brand gradient headline */
+  --fs-display-1: 22px;
+  --fw-display-1: 800;
+  --ls-display-1: -0.5px;
+
+  /* h1 — panel headings */
+  --fs-h1: 22px;
+  --fw-h1: 800;
+
+  /* h2 — secondary headings */
+  --fs-h2: 18px;
+  --fw-h2: 700;
+
+  /* h3 — card section labels */
+  --fs-h3: 11px;
+  --fw-h3: 700;
+  --ls-h3: 1px;
+
+  /* body / p */
+  --fs-body: 14px;
+  --fw-body: 400;
+  --lh-body: 1.6;
+
+  /* small / caption */
+  --fs-small: 13px;
+  --fs-xs: 11px;
+
+  /* overline / eyebrow — uppercase subtitles */
+  --fs-overline: 12px;
+  --fw-overline: 500;
+  --ls-overline: 1px;
+
+  /* tag / pill */
+  --fs-tag: 11px;
+  --fw-tag: 700;
+  --ls-tag: 0.5px;
+
+  /* mono — zoom level, formulas */
+  --fs-mono: 12px;
+  --fw-mono: 600;
+
+  /* button */
+  --fs-btn: 13px;
+  --fw-btn: 600;
+}
+
+/* ── Semantic base styles ─────────────────────────── */
+
+.n-display-1 {
+  font-family: var(--font-sans);
+  font-size: var(--fs-display-1);
+  font-weight: var(--fw-display-1);
+  letter-spacing: var(--ls-display-1);
+  background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 20px var(--accent-glow);
+}
+
+.n-h1 { font-family: var(--font-sans); font-size: var(--fs-h1); font-weight: var(--fw-h1); color: #fff; }
+.n-h2 { font-family: var(--font-sans); font-size: var(--fs-h2); font-weight: var(--fw-h2); color: var(--fg1); background: linear-gradient(to right, #fff, #cbd5e1); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.n-h3 { font-family: var(--font-sans); font-size: var(--fs-h3); font-weight: var(--fw-h3); letter-spacing: var(--ls-h3); text-transform: uppercase; color: var(--fg-muted); }
+.n-p  { font-family: var(--font-sans); font-size: var(--fs-body); font-weight: var(--fw-body); line-height: var(--lh-body); color: var(--fg1); }
+.n-small    { font-family: var(--font-sans); font-size: var(--fs-small); color: var(--fg-muted); line-height: 1.5; }
+.n-overline { font-family: var(--font-sans); font-size: var(--fs-overline); font-weight: var(--fw-overline); letter-spacing: var(--ls-overline); text-transform: uppercase; color: var(--fg-muted); }
+.n-mono     { font-family: var(--font-mono); font-size: var(--fs-mono); font-weight: var(--fw-mono); color: var(--accent-secondary); }
+.n-tag      { font-family: var(--font-sans); font-size: var(--fs-tag); font-weight: var(--fw-tag); letter-spacing: var(--ls-tag); text-transform: uppercase; }

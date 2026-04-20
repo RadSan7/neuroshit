@@ -18,9 +18,28 @@ __pycache__/
 # Logs
 *.log
 
+# Playwright MCP
+.playwright-mcp/
+
 # npm
 node_modules/
 package-lock.json
 
 # Others
 .env
+
+# Local QA captures
+ach-click.png
+ach-selected.png
+after-esc.png
+after-escape.png
+at45.png
+check-minimap.png
+final-check.png
+overview-new.png
+overview.png
+panel-new.png
+rings-check.png
+serotonin-click.png
+zoomed-157.png
+zoomed.png

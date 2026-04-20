@@ -1,0 +1,141 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="_shared.css"><style>
+svg { width: 100%; height: 260px; }
+text { font-family: "Fira Code", monospace; font-size: 10px; fill: #cbd5e1; font-weight: 500; letter-spacing: 0.04em; }
+.coord { fill: #475569; font-size: 8px; letter-spacing: 0.1em; }
+.sec-lbl { fill: #64748b; font-size: 8px; letter-spacing: 0.18em; text-transform: uppercase; }
+</style></head>
+<body><div class="card-pad">
+  <div class="label-tiny">Biochemical map — material: glass+neon, layered halos, zone bands</div>
+  <svg viewBox="0 0 720 280" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <!-- soft halos per hue -->
+      <radialGradient id="halo-g"><stop offset="0%" stop-color="#4ade80" stop-opacity="0.55"/><stop offset="100%" stop-color="#4ade80" stop-opacity="0"/></radialGradient>
+      <radialGradient id="halo-a"><stop offset="0%" stop-color="#f59e0b" stop-opacity="0.45"/><stop offset="100%" stop-color="#f59e0b" stop-opacity="0"/></radialGradient>
+      <radialGradient id="halo-b"><stop offset="0%" stop-color="#60a5fa" stop-opacity="0.45"/><stop offset="100%" stop-color="#60a5fa" stop-opacity="0"/></radialGradient>
+      <radialGradient id="halo-p"><stop offset="0%" stop-color="#c084fc" stop-opacity="0.5"/><stop offset="100%" stop-color="#c084fc" stop-opacity="0"/></radialGradient>
+      <radialGradient id="halo-c"><stop offset="0%" stop-color="#22d3ee" stop-opacity="0.5"/><stop offset="100%" stop-color="#22d3ee" stop-opacity="0"/></radialGradient>
+      <radialGradient id="halo-m"><stop offset="0%" stop-color="#ec4899" stop-opacity="0.5"/><stop offset="100%" stop-color="#ec4899" stop-opacity="0"/></radialGradient>
+
+      <!-- glass surface gradient for nodes -->
+      <linearGradient id="glass-g" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#86efac"/><stop offset="100%" stop-color="#16a34a"/></linearGradient>
+      <linearGradient id="glass-a" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#fcd34d"/><stop offset="100%" stop-color="#b45309"/></linearGradient>
+      <linearGradient id="glass-b" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#93c5fd"/><stop offset="100%" stop-color="#1d4ed8"/></linearGradient>
+      <linearGradient id="glass-p" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#d8b4fe"/><stop offset="100%" stop-color="#7e22ce"/></linearGradient>
+      <linearGradient id="glass-c" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#67e8f9"/><stop offset="100%" stop-color="#0e7490"/></linearGradient>
+      <linearGradient id="glass-m" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f9a8d4"/><stop offset="100%" stop-color="#be185d"/></linearGradient>
+
+      <filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+
+      <!-- arrowheads -->
+      <marker id="a-a" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#f59e0b"/></marker>
+      <marker id="a-b" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#4ade80"/></marker>
+      <marker id="a-p" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#c084fc"/></marker>
+      <marker id="a-c" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#22d3ee"/></marker>
+      <marker id="a-m" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#f87171"/></marker>
+
+      <!-- grid pattern -->
+      <pattern id="grid" width="30" height="30" patternUnits="userSpaceOnUse">
+        <path d="M 30 0 L 0 0 0 30" fill="none" stroke="rgba(148,163,184,0.05)" stroke-width="0.5"/>
+      </pattern>
+    </defs>
+
+    <!-- bg -->
+    <rect width="720" height="280" fill="url(#grid)"/>
+
+    <!-- zone bands -->
+    <rect x="0" y="0" width="240" height="280" fill="url(#halo-a)" opacity="0.08"/>
+    <rect x="240" y="0" width="200" height="280" fill="url(#halo-b)" opacity="0.08"/>
+    <rect x="440" y="0" width="280" height="280" fill="url(#halo-g)" opacity="0.1"/>
+
+    <text x="10" y="16" class="sec-lbl">SUBSTRATE</text>
+    <text x="250" y="16" class="sec-lbl">ENZYMATIC</text>
+    <text x="450" y="16" class="sec-lbl">SIGNALING</text>
+
+    <!-- coord ticks -->
+    <text x="10" y="272" class="coord">X:-0.420</text>
+    <text x="610" y="272" class="coord">X:+1.280  Y:-0.814</text>
+
+    <!-- HALOS behind nodes -->
+    <circle cx="80" cy="155" r="55" fill="url(#halo-a)"/>
+    <ellipse cx="210" cy="155" rx="80" ry="40" fill="url(#halo-b)"/>
+    <ellipse cx="340" cy="155" rx="80" ry="40" fill="url(#halo-b)"/>
+    <circle cx="470" cy="155" r="70" fill="url(#halo-g)"/>
+    <circle cx="620" cy="95" r="55" fill="url(#halo-p)"/>
+    <circle cx="620" cy="215" r="55" fill="url(#halo-p)"/>
+    <circle cx="540" cy="245" r="45" fill="url(#halo-c)"/>
+    <circle cx="400" cy="245" r="45" fill="url(#halo-m)"/>
+
+    <!-- EDGES (behind nodes) -->
+    <path d="M 98 155 Q 140 155 172 155" fill="none" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="1,4" stroke-linecap="round" marker-end="url(#a-a)"/>
+    <path d="M 248 155 L 302 155" fill="none" stroke="#4ade80" stroke-width="1.6" marker-end="url(#a-b)" filter="url(#glow)"/>
+    <path d="M 378 155 L 432 155" fill="none" stroke="#4ade80" stroke-width="1.6" marker-end="url(#a-b)" filter="url(#glow)"/>
+
+    <path d="M 495 140 Q 550 120 590 95" fill="none" stroke="#c084fc" stroke-width="1.8" stroke-dasharray="8,4" marker-end="url(#a-p)"/>
+    <path d="M 495 170 Q 550 195 590 215" fill="none" stroke="#c084fc" stroke-width="1.8" stroke-dasharray="8,4" marker-end="url(#a-p)"/>
+
+    <path d="M 470 245 Q 470 200 470 180" fill="none" stroke="#22d3ee" stroke-width="1.4" stroke-dasharray="3,3" marker-end="url(#a-c)"/>
+    <path d="M 430 245 L 410 245" fill="none" stroke="#22d3ee" stroke-width="1.4" stroke-dasharray="3,3"/>
+
+    <path d="M 440 130 Q 420 110 400 80" fill="none" stroke="#f87171" stroke-width="1.5" stroke-dasharray="6,3" marker-end="url(#a-m)"/>
+
+    <!-- NODES -->
+    <!-- precursor (small glass circle) -->
+    <circle cx="80" cy="155" r="22" fill="url(#glass-a)" filter="url(#glow)" stroke="#fcd34d" stroke-width="0.5"/>
+    <circle cx="80" cy="145" r="8" fill="rgba(255,255,255,0.25)"/>
+    <text x="80" y="158" text-anchor="middle" fill="#1a1a2e" font-weight="800">Tyr</text>
+
+    <!-- enzyme pill 1 -->
+    <rect x="172" y="141" width="76" height="28" rx="14" fill="url(#glass-b)" filter="url(#glow)" stroke="#bfdbfe" stroke-width="0.5"/>
+    <rect x="174" y="143" width="72" height="10" rx="5" fill="rgba(255,255,255,0.2)"/>
+    <text x="210" y="159" text-anchor="middle" fill="#0a0a1a" font-weight="800">TH</text>
+
+    <!-- enzyme pill 2 -->
+    <rect x="302" y="141" width="76" height="28" rx="14" fill="url(#glass-b)" filter="url(#glow)" stroke="#bfdbfe" stroke-width="0.5"/>
+    <rect x="304" y="143" width="72" height="10" rx="5" fill="rgba(255,255,255,0.2)"/>
+    <text x="340" y="159" text-anchor="middle" fill="#0a0a1a" font-weight="800">AADC</text>
+
+    <!-- NT (big glass circle w/ highlight) -->
+    <circle cx="470" cy="155" r="34" fill="url(#glass-g)" filter="url(#glow)" stroke="#bbf7d0" stroke-width="0.6"/>
+    <ellipse cx="465" cy="140" rx="14" ry="7" fill="rgba(255,255,255,0.3)"/>
+    <text x="470" y="152" text-anchor="middle" fill="#0a2f13" font-weight="800" font-size="13">DA</text>
+    <text x="470" y="166" text-anchor="middle" fill="rgba(6,30,8,0.65)" font-size="8" font-weight="700">DOPAMINA</text>
+
+    <!-- receptor hex (D1) -->
+    <g transform="translate(595,68)">
+      <polygon points="25,0 50,14 50,42 25,56 0,42 0,14" fill="url(#glass-p)" filter="url(#glow)" stroke="#e9d5ff" stroke-width="0.5"/>
+      <polygon points="25,3 47,16 47,26 25,26" fill="rgba(255,255,255,0.18)"/>
+      <text x="25" y="34" text-anchor="middle" fill="#2e1065" font-weight="800">D₁</text>
+    </g>
+
+    <!-- receptor hex (D2) -->
+    <g transform="translate(595,188)">
+      <polygon points="25,0 50,14 50,42 25,56 0,42 0,14" fill="url(#glass-p)" filter="url(#glow)" stroke="#e9d5ff" stroke-width="0.5"/>
+      <polygon points="25,3 47,16 47,26 25,26" fill="rgba(255,255,255,0.18)"/>
+      <text x="25" y="34" text-anchor="middle" fill="#2e1065" font-weight="800">D₂</text>
+    </g>
+
+    <!-- transporter diamond (DAT) -->
+    <g transform="translate(446,225)">
+      <polygon points="24,0 48,24 24,48 0,24" fill="url(#glass-c)" filter="url(#glow)" stroke="#a5f3fc" stroke-width="0.5"/>
+      <polygon points="24,3 45,24 24,24" fill="rgba(255,255,255,0.22)"/>
+      <text x="24" y="28" text-anchor="middle" fill="#083344" font-weight="800" font-size="10">DAT</text>
+    </g>
+
+    <!-- catabolic pill (MAO-A) -->
+    <g transform="translate(360,60)">
+      <rect x="0" y="0" width="76" height="28" rx="14" fill="url(#glass-m)" filter="url(#glow)" stroke="#fecdd3" stroke-width="0.5"/>
+      <rect x="2" y="2" width="72" height="10" rx="5" fill="rgba(255,255,255,0.22)"/>
+      <text x="38" y="18" text-anchor="middle" fill="#4c0519" font-weight="800">MAO-A</text>
+    </g>
+
+    <!-- edge labels -->
+    <text x="135" y="147" fill="#f59e0b" font-size="8" font-weight="600">conv.</text>
+    <text x="273" y="147" fill="#4ade80" font-size="8" font-weight="600">synth.</text>
+    <text x="403" y="147" fill="#4ade80" font-size="8" font-weight="600">synth.</text>
+    <text x="545" y="115" fill="#c084fc" font-size="8" font-weight="600">binding</text>
+    <text x="545" y="200" fill="#c084fc" font-size="8" font-weight="600">binding</text>
+    <text x="480" y="215" fill="#22d3ee" font-size="8" font-weight="600">reuptake</text>
+    <text x="398" y="105" fill="#f87171" font-size="8" font-weight="600">degr.</text>
+  </svg>
+</div></body></html>

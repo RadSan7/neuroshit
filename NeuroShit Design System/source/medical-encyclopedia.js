@@ -12,7 +12,6 @@
     transporter: "#22d3ee",
     precursor: "#f59e0b",
     metabolite: "#94a3b8",
-    brainRegion: "#38bdf8",
   };
 
   const NODE_SHAPES = {
@@ -23,7 +22,6 @@
     transporter: { shape: "diamond", radius: 32 },
     precursor: { shape: "circle", radius: 30 },
     metabolite: { shape: "circle", radius: 18 },
-    brainRegion: { shape: "roundedRect", width: 190, height: 58 },
   };
 
   const CONNECTION_TYPES = {
@@ -69,12 +67,6 @@
       arrow: "triangle", arrowInset: 7, arrowSize: 6,
       curvature: 20, labelOffset: 14, minLabelLength: 60,
     },
-    brainRegion: {
-      label: "Obecność w regionie", shortLabel: "region",
-      color: "rgba(56, 189, 248, 0.35)", lineWidth: 1.05, dash: [3, 6],
-      arrow: "triangle", arrowInset: 7, arrowSize: 6,
-      curvature: 16, labelOffset: 14, minLabelLength: 90, renderLabel: false,
-    },
   };
 
   const SHARED_NODES = [
@@ -104,9 +96,9 @@
       { id: "DA_D3", type: "receptor", label: "D3", x: 435, y: 285, description: "Receptor D3. D2-like. Jądro półleżące. Rola w uzależnieniach. Cel: pramipeksol, ropinirol.", gProtein: "Gi/Go", signaling: "↓cAMP", functions: ["Uzależnienia", "Nastrój", "Poznanie"], activationEffects: "Efekty przeciwdepresyjne, ↑motywacja", blockadeEffects: "Potencjalnie antykrakingowe (↓nawroty uzależnień)", naturalLigands: ["Dopamina"], pharmaceuticalAgonists: ["Pramipeksol", "Ropinirol", "Rotigotyna"], pharmaceuticalAntagonists: ["Buspiron (słaby)", "GSK598809 (eksperymentalny)"] },
       { id: "DA_D4", type: "receptor", label: "D4", x: 510, y: 235, description: "Receptor D4. D2-like. Kora przedczołowa, hipokamp. Polimorfizm D4.7 → ADHD. Cel: klozapina.", gProtein: "Gi/Go", signaling: "↓cAMP", functions: ["Uwaga", "Impulsywność", "Eksploracja"], activationEffects: "↓pobudliwość korowa", blockadeEffects: "Poprawa uwagi (potencjalnie)", naturalLigands: ["Dopamina", "Noradrenalina"], pharmaceuticalAgonists: ["A-412997 (eksperymentalny)"], pharmaceuticalAntagonists: ["Klozapina", "Nemonaprid"] },
       { id: "DA_D5", type: "receptor", label: "D5", x: 305, y: 285, description: "Receptor D5. D1-like. Najwyższe powinowactwo do DA. Hipokamp, podwzgórze.", gProtein: "Gs", signaling: "↑cAMP → PKA", functions: ["Pamięć", "Regulacja ciśnienia"], activationEffects: "↑pobudliwość neuronalna, ↑pamięć", blockadeEffects: "Słabo poznane", naturalLigands: ["Dopamina"], pharmaceuticalAgonists: ["SKF-83959 (preferencyjny)"], pharmaceuticalAntagonists: ["SCH-23390 (nieselektywny D1/D5)"] },
-      { id: "DA_DOPAC", type: "metabolite", label: "DOPAC", x: 570, y: 195, description: "Kwas 3,4-dihydroksyfenylooctowy. Metabolit DA po działaniu MAO." },
-      { id: "DA_HVA", type: "metabolite", label: "HVA", x: 660, y: 265, description: "Kwas homowanilowy. Główny końcowy metabolit dopaminy w OUN." },
-      { id: "DA_3MT", type: "metabolite", label: "3-MT", x: 540, y: 310, description: "3-metoksytyramina. Metabolit DA po działaniu COMT." },
+      { id: "DA_DOPAC", type: "metabolite", label: "DOPAC", x: 700, y: 170, description: "Kwas 3,4-dihydroksyfenylooctowy. Metabolit DA po działaniu MAO." },
+      { id: "DA_HVA", type: "metabolite", label: "HVA", x: 920, y: 240, description: "Kwas homowanilowy. Główny końcowy metabolit dopaminy w OUN." },
+      { id: "DA_3MT", type: "metabolite", label: "3-MT", x: 700, y: 300, description: "3-metoksytyramina. Metabolit DA po działaniu COMT." },
       { id: "DAT", type: "transporter", label: "DAT", x: 540, y: 20, description: "Transporter dopaminy (SLC6A3). Cel: kokaina, amfetamina, metylfenidat." },
     ],
     connections: [
@@ -147,8 +139,8 @@
       { id: "NE_b1", type: "receptor", label: "β₁", x: 980, y: 235, description: "β1-adrenergiczny. Gs→↑cAMP. Serce (↑HR, ↑kurczliwość). Metoprolol (antagonista).", gProtein: "Gs", signaling: "↑cAMP → PKA", functions: ["↑częstość serca", "↑kurczliwość", "↑lipoliza", "↑wydzielanie reniny"], activationEffects: "Tachykardia, ↑kurczliwość, ↑renina", blockadeEffects: "Bradykardia, ↓ciśnienie, kardioprotekcja w niewydolności serca", naturalLigands: ["Noradrenalina", "Adrenalina"], pharmaceuticalAgonists: ["Dobutamina", "Isoproterenol"], pharmaceuticalAntagonists: ["Metoprolol", "Atenolol", "Bisoprolol", "Nebiwolol"] },
       { id: "NE_b2", type: "receptor", label: "β₂", x: 1045, y: 285, description: "β2-adrenergiczny. Gs→↑cAMP. Oskrzela (rozkurcz). Salbutamol (agonista).", gProtein: "Gs", signaling: "↑cAMP → PKA → relaksacja mięśni gładkich", functions: ["Bronchodilatacja", "Wazodylatacja", "Tocoliza", "Glikogenoliza"], activationEffects: "Rozszerzenie oskrzeli, ↓napięcie macicy, wazodylatacja", blockadeEffects: "Bronchospazm (przeciwwskazany w astmie!)", naturalLigands: ["Adrenalina"], pharmaceuticalAgonists: ["Salbutamol", "Salmeterol", "Formoterol", "Terbutalina"], pharmaceuticalAntagonists: ["Propranolol (nieselektywny)", "Karwedilol"] },
       { id: "NE_b3", type: "receptor", label: "β₃", x: 1110, y: 235, description: "β3-adrenergiczny. Gs→↑cAMP. Tkanka tłuszczowa brązowa. Mirabegron (agonista).", gProtein: "Gs", signaling: "↑cAMP → termogeneza, lipoliza", functions: ["Termogeneza", "Lipoliza", "Relaksacja pęcherza"], activationEffects: "↑termogeneza w BAT, ↓napięcie pęcherza", blockadeEffects: "Słabo poznane klinicznie", naturalLigands: ["Noradrenalina"], pharmaceuticalAgonists: ["Mirabegron", "Wibregronu"], pharmaceuticalAntagonists: ["SR 59230A (eksperymentalny)"] },
-      { id: "NE_MHPG", type: "metabolite", label: "MHPG", x: 1010, y: 160, description: "3-metoksy-4-hydroksyfenyloglikol. Główny metabolit NE w OUN." },
-      { id: "NE_VMA", type: "metabolite", label: "VMA", x: 1150, y: 175, description: "Kwas wanilinomigdałowy. Końcowy metabolit NE/Epi na obwodzie." },
+      { id: "NE_MHPG", type: "metabolite", label: "MHPG", x: 1160, y: 180, description: "3-metoksy-4-hydroksyfenyloglikol. Główny metabolit NE w OUN." },
+      { id: "NE_VMA", type: "metabolite", label: "VMA", x: 1240, y: 270, description: "Kwas wanilinomigdałowy. Końcowy metabolit NE/Epi na obwodzie." },
       { id: "NET", type: "transporter", label: "NET", x: 1040, y: 20, description: "Transporter noradrenaliny (SLC6A2). Cel: atomoksetyna, wenlafaksyna, trójcykliczne AD." },
     ],
     connections: [
@@ -183,18 +175,18 @@
       { id: "5HT_TPH1", type: "syntheticEnzyme", label: "TPH1\n(Hydroksylaza\ntryptofanu 1)", x: -700, y: -250, description: "Hydroksylaza tryptofanu 1. Obwodowa: jelito (90% 5-HT), szyszynka. Kofaktor: BH4." },
       { id: "5HT_TPH2", type: "syntheticEnzyme", label: "TPH2\n(Hydroksylaza\ntryptofanu 2)", x: -700, y: -150, description: "Hydroksylaza tryptofanu 2. OUN: jądra szwu. Etap limitujący syntezę 5-HT w mózgu." },
       { id: "5HT", type: "neurotransmitter", label: "Serotonina\n(5-HT)", x: -500, y: 100, formula: "C₁₀H₁₂N₂O", description: "5-hydroksytryptamina. Regulacja nastroju, snu, apetytu, bólu. 90% w jelicie. Źródło OUN: jądra szwu." },
-      { id: "5HT_1A", type: "receptor", label: "5-HT₁A", x: -740, y: 280, description: "5-HT1A. Gi/Go→↓cAMP. Autoreceptor + postsynaptyczny. Cel: buspiron (lęk).", gProtein: "Gi/Go", signaling: "↓cAMP, ↑K⁺ (GIRK)", functions: ["Anksjoliza", "Antydepresja", "Termoregulacja", "Autoreceptor (jądra szwu)"], activationEffects: "↓lęk, ↓agresja, hipotermia, zespół serotoninowy (nadm. aktywacja)", blockadeEffects: "↑lęk (eksperymentalnie)", naturalLigands: ["Serotonina"], pharmaceuticalAgonists: ["Buspiron (częściowy)", "8-OH-DPAT", "Tandospiron"], pharmaceuticalAntagonists: ["WAY-100635", "Pindolol (częściowy ag.)"] },
-      { id: "5HT_1B", type: "receptor", label: "5-HT₁B", x: -670, y: 280, description: "5-HT1B. Gi. Autoreceptor presynaptyczny. Tryptany (migrena).", gProtein: "Gi", signaling: "↓cAMP", functions: ["Autoreceptor (terminale)", "Wazokonstrykcja oponowa"], activationEffects: "↓uwalnianie 5-HT, ↓migrena", blockadeEffects: "↑uwalnianie 5-HT", naturalLigands: ["Serotonina"], pharmaceuticalAgonists: ["Sumatryptan", "Zolmitryptan"], pharmaceuticalAntagonists: ["SB-224289"] },
-      { id: "5HT_2A", type: "receptor", label: "5-HT₂A", x: -570, y: 280, description: "5-HT2A. Gq→↑IP3/DAG. Cel psychodelików (LSD, psylocybina). Atypowe neuroleptyki (klozapina).", gProtein: "Gq/11", signaling: "↑IP3/DAG → ↑Ca²⁺, PKC", functions: ["Percepcja", "Halucynacje", "Plastyczność synaptyczna"], activationEffects: "Halucynacje, zmieniona percepcja, ↑glutaminian korowy", blockadeEffects: "Działanie przeciwpsychotyczne, ↓halucynacje, ↑DA w PFC", naturalLigands: ["Serotonina", "DMT"], pharmaceuticalAgonists: ["LSD", "Psylocybina", "Meskalina", "DMT", "25I-NBOMe"], pharmaceuticalAntagonists: ["Klozapina", "Olanzapina", "Risperidon", "Kwetiapina", "Trazodon"] },
-      { id: "5HT_2B", type: "receptor", label: "5-HT₂B", x: -510, y: 340, description: "5-HT2B. Gq. Serce, jelito. Chroniczna aktywacja → walwulopatia.", gProtein: "Gq", signaling: "↑IP3/DAG → ↑Ca²⁺", functions: ["Rozwój serca", "Motylika jelit"], activationEffects: "Walwulopatia (chron.), ↑proliferacja zastawek", blockadeEffects: "Dezinhibicja uwalniania DA i NE", naturalLigands: ["Serotonina"], pharmaceuticalAgonists: ["BW-723C86", "Fenfluramina"], pharmaceuticalAntagonists: ["Agomelatyna", "Pizotifen"] },
-      { id: "5HT_2C", type: "receptor", label: "5-HT₂C", x: -450, y: 280, description: "5-HT2C. Gq. Kontrola apetytu, nastrój. Lorkaserina (agonista).", gProtein: "Gq", signaling: "↑IP3/DAG → ↑Ca²⁺", functions: ["Kontrola apetytu", "Nastrój", "Hamowanie DA"], activationEffects: "↓apetyt, ↓DA w n. półleżącym", blockadeEffects: "↑apetyt (przyrost masy), ↑DA, efekt antydepresyjny", naturalLigands: ["Serotonina"], pharmaceuticalAgonists: ["Lorkaserina", "mCPP"], pharmaceuticalAntagonists: ["Agomelatyna", "Mirtazapina", "Olanzapina", "Cyproheptadyna"] },
-      { id: "5HT_3", type: "receptor", label: "5-HT₃", x: -370, y: 280, description: "5-HT3. Kanał jonowy (Na⁺/K⁺) — jedyny nie-GPCR. Ondansetron (antyemetyk).", gProtein: "Brak (kanał jonowy)", signaling: "Kanał kationowy Na⁺/K⁺", functions: ["Wymioty (CTZ)", "Ból trzewny", "Modulacja DA"], activationEffects: "Nudności/wymioty, ból", blockadeEffects: "Silne działanie antyemetyczne", naturalLigands: ["Serotonina"], pharmaceuticalAgonists: ["SR-57227"], pharmaceuticalAntagonists: ["Ondansetron", "Granisetron", "Palonosetron"] },
-      { id: "5HT_4", type: "receptor", label: "5-HT₄", x: -310, y: 350, description: "5-HT4. Gs→↑cAMP. Jelito (↑perystaltyka). Prukalopryd (prokinetyk).", gProtein: "Gs", signaling: "↑cAMP → PKA", functions: ["Perystaltyka jelit", "Pamięć", "Uwalnianie ACh"], activationEffects: "↑perystaltyka, ↑pamięć", blockadeEffects: "↓motylika jelit", naturalLigands: ["Serotonina"], pharmaceuticalAgonists: ["Prukalopryd", "Tegaserod"], pharmaceuticalAntagonists: ["GR-113808", "Piboserod"] },
-      { id: "5HT_1D", type: "receptor", label: "5-HT₁D", x: -740, y: 350, description: "5-HT1D. Gi. Autoreceptor terminali. Tryptany (migrena — skurcz naczyń oponowych).", gProtein: "Gi", signaling: "↓cAMP", functions: ["Autoreceptor terminali", "Hamowanie uwalniania 5-HT i peptydów (CGRP)"], activationEffects: "↓migrena, ↓uwalnianie CGRP", blockadeEffects: "↑uwalnianie 5-HT", naturalLigands: ["Serotonina"], pharmaceuticalAgonists: ["Sumatryptan", "Naratryptan", "PNU-142633"], pharmaceuticalAntagonists: ["BRL-15572"] },
-      { id: "5HT_1F", type: "receptor", label: "5-HT₁F", x: -670, y: 350, description: "5-HT1F. Gi. Antymigrena bez wazokonstrykcji. Lasmiditan.", gProtein: "Gi", signaling: "↓cAMP", functions: ["Hamowanie uwalniania CGRP", "Antynocycepcja trójdzielna"], activationEffects: "↓migrena (bez wazokonstrykcji — bezpieczny sercowo-naczyniowo)", blockadeEffects: "Brak znaczenia klinicznego", naturalLigands: ["Serotonina"], pharmaceuticalAgonists: ["Lasmiditan", "LY-334370"], pharmaceuticalAntagonists: [] },
-      { id: "5HT_5A", type: "receptor", label: "5-HT₅A", x: -250, y: 280, description: "5-HT5A. Gi→↓cAMP. Ekspresja w hipokampie, korze. Rola: regulacja rytmu dobowego, pamięć. Słabo poznany.", gProtein: "Gi", signaling: "↓cAMP", functions: ["Regulacja rytmu dobowego", "Pamięć", "Eksploracja"], activationEffects: "Modulacja rytmu dobowego, ↓eksploracja (gryzonie)", blockadeEffects: "Słabo poznane", naturalLigands: ["Serotonina"], pharmaceuticalAgonists: ["Valerianowe alkaloidy (spekulatywne)"], pharmaceuticalAntagonists: ["SB-699551"] },
-      { id: "5HT_6", type: "receptor", label: "5-HT₆", x: -190, y: 350, description: "5-HT6. Gs→↑cAMP. Prążkowie, hipokamp. Rola: poznanie, pamięć. Cel terapeutyczny: Alzheimer, otyłość.", gProtein: "Gs", signaling: "↑cAMP → PKA", functions: ["Poznanie", "Pamięć", "Regulacja apetytu"], activationEffects: "↓pamięć (gryzonie), ↑apetyt", blockadeEffects: "↑poznanie, ↓apetyt, potencjał prokognitywny (Alzheimer)", naturalLigands: ["Serotonina"], pharmaceuticalAgonists: ["WAY-208466", "EMD-386088"], pharmaceuticalAntagonists: ["Idalopirdyna", "SB-742457", "Intepirdyna"] },
-      { id: "5HT_7", type: "receptor", label: "5-HT₇", x: -130, y: 280, description: "5-HT7. Gs→↑cAMP. Podwzgórze, hipokamp. Rytm dobowy, nastrój, termoregulacja. Cel: wortioxetyna.", gProtein: "Gs", signaling: "↑cAMP → PKA", functions: ["Rytm dobowy", "Termoregulacja", "Nastrój", "Plastyczność synaptyczna"], activationEffects: "Przesunięcie fazy rytmu, hipotermia, ↑relaksacja m. gładkich", blockadeEffects: "↑efekt antydepresyjny (wortioxetyna), ↑poznanie, normalizacja snu REM", naturalLigands: ["Serotonina"], pharmaceuticalAgonists: ["LP-44", "AS-19"], pharmaceuticalAntagonists: ["Wortioxetyna (ant.)", "SB-269970", "Lurazydion (częściowy)"] },
+      { id: "5HT_1A", type: "receptor", label: "5-HT₁A", x: -730, y: 285, description: "5-HT1A. Gi/Go→↓cAMP. Autoreceptor + postsynaptyczny. Cel: buspiron (lęk).", gProtein: "Gi/Go", signaling: "↓cAMP, ↑K⁺ (GIRK)", functions: ["Anksjoliza", "Antydepresja", "Termoregulacja", "Autoreceptor (jądra szwu)"], activationEffects: "↓lęk, ↓agresja, hipotermia, zespół serotoninowy (nadm. aktywacja)", blockadeEffects: "↑lęk (eksperymentalnie)", naturalLigands: ["Serotonina"], pharmaceuticalAgonists: ["Buspiron (częściowy)", "8-OH-DPAT", "Tandospiron"], pharmaceuticalAntagonists: ["WAY-100635", "Pindolol (częściowy ag.)"] },
+      { id: "5HT_1B", type: "receptor", label: "5-HT₁B", x: -670, y: 285, description: "5-HT1B. Gi. Autoreceptor presynaptyczny. Tryptany (migrena).", gProtein: "Gi", signaling: "↓cAMP", functions: ["Autoreceptor (terminale)", "Wazokonstrykcja oponowa"], activationEffects: "↓uwalnianie 5-HT, ↓migrena", blockadeEffects: "↑uwalnianie 5-HT", naturalLigands: ["Serotonina"], pharmaceuticalAgonists: ["Sumatryptan", "Zolmitryptan"], pharmaceuticalAntagonists: ["SB-224289"] },
+      { id: "5HT_2A", type: "receptor", label: "5-HT₂A", x: -560, y: 285, description: "5-HT2A. Gq→↑IP3/DAG. Cel psychodelików (LSD, psylocybina). Atypowe neuroleptyki (klozapina).", gProtein: "Gq/11", signaling: "↑IP3/DAG → ↑Ca²⁺, PKC", functions: ["Percepcja", "Halucynacje", "Plastyczność synaptyczna"], activationEffects: "Halucynacje, zmieniona percepcja, ↑glutaminian korowy", blockadeEffects: "Działanie przeciwpsychotyczne, ↓halucynacje, ↑DA w PFC", naturalLigands: ["Serotonina", "DMT"], pharmaceuticalAgonists: ["LSD", "Psylocybina", "Meskalina", "DMT", "25I-NBOMe"], pharmaceuticalAntagonists: ["Klozapina", "Olanzapina", "Risperidon", "Kwetiapina", "Trazodon"] },
+      { id: "5HT_2B", type: "receptor", label: "5-HT₂B", x: -510, y: 330, description: "5-HT2B. Gq. Serce, jelito. Chroniczna aktywacja → walwulopatia.", gProtein: "Gq", signaling: "↑IP3/DAG → ↑Ca²⁺", functions: ["Rozwój serca", "Motylika jelit"], activationEffects: "Walwulopatia (chron.), ↑proliferacja zastawek", blockadeEffects: "Dezinhibicja uwalniania DA i NE", naturalLigands: ["Serotonina"], pharmaceuticalAgonists: ["BW-723C86", "Fenfluramina"], pharmaceuticalAntagonists: ["Agomelatyna", "Pizotifen"] },
+      { id: "5HT_2C", type: "receptor", label: "5-HT₂C", x: -460, y: 285, description: "5-HT2C. Gq. Kontrola apetytu, nastrój. Lorkaserina (agonista).", gProtein: "Gq", signaling: "↑IP3/DAG → ↑Ca²⁺", functions: ["Kontrola apetytu", "Nastrój", "Hamowanie DA"], activationEffects: "↓apetyt, ↓DA w n. półleżącym", blockadeEffects: "↑apetyt (przyrost masy), ↑DA, efekt antydepresyjny", naturalLigands: ["Serotonina"], pharmaceuticalAgonists: ["Lorkaserina", "mCPP"], pharmaceuticalAntagonists: ["Agomelatyna", "Mirtazapina", "Olanzapina", "Cyproheptadyna"] },
+      { id: "5HT_3", type: "receptor", label: "5-HT₃", x: -380, y: 290, description: "5-HT3. Kanał jonowy (Na⁺/K⁺) — jedyny nie-GPCR. Ondansetron (antyemetyk).", gProtein: "Brak (kanał jonowy)", signaling: "Kanał kationowy Na⁺/K⁺", functions: ["Wymioty (CTZ)", "Ból trzewny", "Modulacja DA"], activationEffects: "Nudności/wymioty, ból", blockadeEffects: "Silne działanie antyemetyczne", naturalLigands: ["Serotonina"], pharmaceuticalAgonists: ["SR-57227"], pharmaceuticalAntagonists: ["Ondansetron", "Granisetron", "Palonosetron"] },
+      { id: "5HT_4", type: "receptor", label: "5-HT₄", x: -330, y: 315, description: "5-HT4. Gs→↑cAMP. Jelito (↑perystaltyka). Prukalopryd (prokinetyk).", gProtein: "Gs", signaling: "↑cAMP → PKA", functions: ["Perystaltyka jelit", "Pamięć", "Uwalnianie ACh"], activationEffects: "↑perystaltyka, ↑pamięć", blockadeEffects: "↓motylika jelit", naturalLigands: ["Serotonina"], pharmaceuticalAgonists: ["Prukalopryd", "Tegaserod"], pharmaceuticalAntagonists: ["GR-113808", "Piboserod"] },
+      { id: "5HT_1D", type: "receptor", label: "5-HT₁D", x: -730, y: 345, description: "5-HT1D. Gi. Autoreceptor terminali. Tryptany (migrena — skurcz naczyń oponowych).", gProtein: "Gi", signaling: "↓cAMP", functions: ["Autoreceptor terminali", "Hamowanie uwalniania 5-HT i peptydów (CGRP)"], activationEffects: "↓migrena, ↓uwalnianie CGRP", blockadeEffects: "↑uwalnianie 5-HT", naturalLigands: ["Serotonina"], pharmaceuticalAgonists: ["Sumatryptan", "Naratryptan", "PNU-142633"], pharmaceuticalAntagonists: ["BRL-15572"] },
+      { id: "5HT_1F", type: "receptor", label: "5-HT₁F", x: -670, y: 345, description: "5-HT1F. Gi. Antymigrena bez wazokonstrykcji. Lasmiditan.", gProtein: "Gi", signaling: "↓cAMP", functions: ["Hamowanie uwalniania CGRP", "Antynocycepcja trójdzielna"], activationEffects: "↓migrena (bez wazokonstrykcji — bezpieczny sercowo-naczyniowo)", blockadeEffects: "Brak znaczenia klinicznego", naturalLigands: ["Serotonina"], pharmaceuticalAgonists: ["Lasmiditan", "LY-334370"], pharmaceuticalAntagonists: [] },
+      { id: "5HT_5A", type: "receptor", label: "5-HT₅A", x: -280, y: 290, description: "5-HT5A. Gi→↓cAMP. Ekspresja w hipokampie, korze. Rola: regulacja rytmu dobowego, pamięć. Słabo poznany.", gProtein: "Gi", signaling: "↓cAMP", functions: ["Regulacja rytmu dobowego", "Pamięć", "Eksploracja"], activationEffects: "Modulacja rytmu dobowego, ↓eksploracja (gryzonie)", blockadeEffects: "Słabo poznane", naturalLigands: ["Serotonina"], pharmaceuticalAgonists: ["Valerianowe alkaloidy (spekulatywne)"], pharmaceuticalAntagonists: ["SB-699551"] },
+      { id: "5HT_6", type: "receptor", label: "5-HT₆", x: -230, y: 315, description: "5-HT6. Gs→↑cAMP. Prążkowie, hipokamp. Rola: poznanie, pamięć. Cel terapeutyczny: Alzheimer, otyłość.", gProtein: "Gs", signaling: "↑cAMP → PKA", functions: ["Poznanie", "Pamięć", "Regulacja apetytu"], activationEffects: "↓pamięć (gryzonie), ↑apetyt", blockadeEffects: "↑poznanie, ↓apetyt, potencjał prokognitywny (Alzheimer)", naturalLigands: ["Serotonina"], pharmaceuticalAgonists: ["WAY-208466", "EMD-386088"], pharmaceuticalAntagonists: ["Idalopirdyna", "SB-742457", "Intepirdyna"] },
+      { id: "5HT_7", type: "receptor", label: "5-HT₇", x: -180, y: 290, description: "5-HT7. Gs→↑cAMP. Podwzgórze, hipokamp. Rytm dobowy, nastrój, termoregulacja. Cel: wortioxetyna.", gProtein: "Gs", signaling: "↑cAMP → PKA", functions: ["Rytm dobowy", "Termoregulacja", "Nastrój", "Plastyczność synaptyczna"], activationEffects: "Przesunięcie fazy rytmu, hipotermia, ↑relaksacja m. gładkich", blockadeEffects: "↑efekt antydepresyjny (wortioxetyna), ↑poznanie, normalizacja snu REM", naturalLigands: ["Serotonina"], pharmaceuticalAgonists: ["LP-44", "AS-19"], pharmaceuticalAntagonists: ["Wortioxetyna (ant.)", "SB-269970", "Lurazydion (częściowy)"] },
       { id: "5HT_AANAT", type: "syntheticEnzyme", label: "AANAT\n(N-acetylotransf.)", x: -650, y: -350, description: "Arylalkiloamino-N-acetylotransferaza. 5-HT→N-acetyloserotonina. Szyszynka. Etap limitujący syntezę melatoniny. Regulacja światłem." },
       { id: "5HT_NAS", type: "precursor", label: "N-acetylo-\nserotonina", x: -500, y: -400, formula: "C₁₂H₁₄N₂O₂", description: "NAS. Pośredni metabolit w syntezie melatoniny. Sam ma właściwości neuroprotekcyjne." },
       { id: "5HT_ASMT", type: "syntheticEnzyme", label: "ASMT\n(HIOMT)", x: -650, y: -450, description: "Acetyloserotonina-O-metylotransferaza (HIOMT). NAS→melatonina. Szyszynka." },
@@ -202,7 +194,7 @@
       { id: "5HT_MT1", type: "receptor", label: "MT1", x: -400, y: -600, description: "MT1 (MTNR1A). Gi→↓cAMP. SCN (jądro nadskrzyżowaniowe). Indukcja snu, faza rytmu. Ramelteon, tasimelteon.", gProtein: "Gi", signaling: "↓cAMP, ↓PKA", functions: ["Indukcja snu", "Regulacja fazy rytmu dobowego", "Hamowanie neuronów SCN"], activationEffects: "Indukcja snu, przesunięcie fazy rytmu", blockadeEffects: "Zaburzenia snu, desynchronizacja rytmu", naturalLigands: ["Melatonina"], pharmaceuticalAgonists: ["Ramelteon", "Tasimelteon", "Agomelatyna"], pharmaceuticalAntagonists: ["Luzindol"] },
       { id: "5HT_MT2", type: "receptor", label: "MT2", x: -500, y: -620, description: "MT2 (MTNR1B). Gi→↓cAMP. SCN, siatkówka. Przesunięcie fazy rytmu. Polimorfizm → ryzyko cukrzycy T2.", gProtein: "Gi", signaling: "↓cAMP, ↓PKA, ↓cGMP", functions: ["Przesunięcie fazy rytmu", "Regulacja ciśnienia wewnątrzgałkowego", "Modulacja insuliny (trzustka)"], activationEffects: "Przesunięcie fazy rytmu, ↓IOP", blockadeEffects: "Dysregulacja rytmu, ↑IOP", naturalLigands: ["Melatonina"], pharmaceuticalAgonists: ["Tasimelteon", "Agomelatyna", "IIK-7"], pharmaceuticalAntagonists: ["Luzindol", "4-P-PDOT"] },
       { id: "5HT_CYP", type: "catabolicEnzyme", label: "CYP1A2\n/ CYP2C19", x: -620, y: -520, description: "Cytochromy P450. Główna degradacja melatoniny w wątrobie. Metabolit: 6-hydroksymelatonina." },
-      { id: "5HT_5HIAA", type: "metabolite", label: "5-HIAA", x: -410, y: 190, description: "Kwas 5-hydroksyindolooctowy. Główny metabolit 5-HT. Marker rakowiak." },
+      { id: "5HT_5HIAA", type: "metabolite", label: "5-HIAA", x: -300, y: 180, description: "Kwas 5-hydroksyindolooctowy. Główny metabolit 5-HT. Marker rakowiak." },
       { id: "SERT", type: "transporter", label: "SERT", x: -350, y: 100, description: "Transporter serotoniny (SLC6A4). Cel SSRI (fluoksetyna, sertralina) i MDMA." },
     ],
     connections: [
@@ -248,14 +240,14 @@
       { id: "ACh_ChAT", type: "syntheticEnzyme", label: "ChAT\n(Acetylotransferaza\ncholinowa)", x: 1600, y: -130, description: "Syntezuje ACh z choliny i acetylo-CoA. Marker neuronów cholinergicznych." },
       { id: "ACh", type: "neurotransmitter", label: "Acetylocholina\n(ACh)", x: 1600, y: 100, formula: "C₇H₁₆NO₂⁺", description: "Pierwszy odkryty NT. Złącze nerwowo-mięśniowe, układ przywspółczulny, pamięć, uwaga. Deficyt: Alzheimer." },
       { id: "ACh_nAChR", type: "receptor", label: "nAChR", x: 1490, y: 280, description: "Nikotynowy receptor ACh (kanał jonowy). Podtypy: α4β2, α7, mięśniowy. Agonista: nikotyna.", gProtein: "—", signaling: "Kanał Na⁺/K⁺/Ca²⁺ (jonotropowy)", functions: ["Transmisja nerwowo-mięśniowa", "Poznanie (α4β2)", "Neuroprotecja (α7)", "Czuwanie"], activationEffects: "Skurcz mięśni, ↑czuwanie, ↑poznanie, ↑uwalnianie DA (VTA)", blockadeEffects: "Paraliż mięśniowy (kurary), ↓poznanie", naturalLigands: ["Acetylocholina"], pharmaceuticalAgonists: ["Nikotyna", "Wareniklina (α4β2, częściowy)", "Galantamina (PAM α7)"], pharmaceuticalAntagonists: ["Tubokuraryna", "Mekamylamina", "α-bungarotoksyna (α7)"] },
-      { id: "ACh_M1", type: "receptor", label: "M1", x: 1580, y: 290, description: "Muskarynowy M1. Gq→↑IP3. Kora, hipokamp. Pamięć, poznanie.", gProtein: "Gq/11", signaling: "↑IP3/DAG → ↑Ca²⁺, PKC", functions: ["Pamięć", "Poznanie", "Modulacja hipokampa", "↓amyloid"], activationEffects: "↑pamięć, ↑poznanie, potencjał w Alzheimera", blockadeEffects: "↓pamięć, zaburzenia poznawcze, suchość w ustach", naturalLigands: ["Acetylocholina"], pharmaceuticalAgonists: ["Xanomelin", "Cewimelin (częściowy)"], pharmaceuticalAntagonists: ["Pirenzepin", "Triheksyfenidyl"] },
+      { id: "ACh_M1", type: "receptor", label: "M1", x: 1600, y: 290, description: "Muskarynowy M1. Gq→↑IP3. Kora, hipokamp. Pamięć, poznanie.", gProtein: "Gq/11", signaling: "↑IP3/DAG → ↑Ca²⁺, PKC", functions: ["Pamięć", "Poznanie", "Modulacja hipokampa", "↓amyloid"], activationEffects: "↑pamięć, ↑poznanie, potencjał w Alzheimera", blockadeEffects: "↓pamięć, zaburzenia poznawcze, suchość w ustach", naturalLigands: ["Acetylocholina"], pharmaceuticalAgonists: ["Xanomelin", "Cewimelin (częściowy)"], pharmaceuticalAntagonists: ["Pirenzepin", "Triheksyfenidyl"] },
       { id: "ACh_M2", type: "receptor", label: "M2", x: 1650, y: 290, description: "Muskarynowy M2. Gi→↓cAMP. Serce (↓HR). Antagonista: atropina.", gProtein: "Gi/Go", signaling: "↓cAMP, ↑K⁺ (GIRK), ↓Ca²⁺", functions: ["Bradykardia", "Autoreceptor (↓ACh)", "↓kurczliwość serca"], activationEffects: "Bradykardia, ↓przewodzenie AV, ↓uwalnianie ACh", blockadeEffects: "Tachykardia, ↑przewodzenie AV", naturalLigands: ["Acetylocholina"], pharmaceuticalAgonists: ["Betanechol", "Pilokarpin (nieselektywny)"], pharmaceuticalAntagonists: ["Atropina", "Skopolamina", "Ipratropium"] },
-      { id: "ACh_M3", type: "receptor", label: "M3", x: 1720, y: 290, description: "Muskarynowy M3. Gq. Mięśnie gładkie, gruczoły. Ipratropium (COPD).", gProtein: "Gq/11", signaling: "↑IP3/DAG → ↑Ca²⁺, PKC", functions: ["Skurcz m. gładkich (oskrzela, pęcherz)", "Sekrecja gruczołowa", "Zwężenie źrenicy"], activationEffects: "Skurcz oskrzeli, ↑perystaltyka, ↑sekrecja, mioza", blockadeEffects: "Rozkurcz oskrzeli (COPD/astma), mydriaza, ↓sekrecja", naturalLigands: ["Acetylocholina"], pharmaceuticalAgonists: ["Betanechol", "Pilokarpin"], pharmaceuticalAntagonists: ["Tiotropium", "Solifenacyna", "Ipratropium", "Darifenacyna"] },
-      { id: "ACh_M4", type: "receptor", label: "M4", x: 1615, y: 360, description: "Muskarynowy M4. Gi. Prążkowie. Modulacja DA.", gProtein: "Gi/Go", signaling: "↓cAMP, ↑K⁺ (GIRK)", functions: ["Modulacja DA w prążkowiu", "Analgezja", "↓dyskinezja"], activationEffects: "↓uwalnianie DA, ↓psychoza, ↓dyskinezja", blockadeEffects: "↑DA, ↑dyskinezja", naturalLigands: ["Acetylocholina"], pharmaceuticalAgonists: ["Xanomelin (M1/M4)", "VU0467154 (PAM)"], pharmaceuticalAntagonists: ["Tropicamid (nieselektywny)"] },
-      { id: "ACh_M5", type: "receptor", label: "M5", x: 1685, y: 360, description: "Muskarynowy M5. Gq. Substantia nigra, VTA. Modulacja DA.", gProtein: "Gq/11", signaling: "↑IP3/DAG → ↑Ca²⁺", functions: ["Modulacja DA w VTA", "Dylatacja naczyń mózgowych", "Mechanizmy nagrody"], activationEffects: "↑uwalnianie DA (VTA), ↑nagroda, wazodilatacja", blockadeEffects: "↓uwalnianie DA, potencjał antyuzależnieniowy", naturalLigands: ["Acetylocholina"], pharmaceuticalAgonists: ["Brak selektywnych"], pharmaceuticalAntagonists: ["ML-375 (selektywny M5 NAM)"] },
+      { id: "ACh_M3", type: "receptor", label: "M3", x: 1700, y: 290, description: "Muskarynowy M3. Gq. Mięśnie gładkie, gruczoły. Ipratropium (COPD).", gProtein: "Gq/11", signaling: "↑IP3/DAG → ↑Ca²⁺, PKC", functions: ["Skurcz m. gładkich (oskrzela, pęcherz)", "Sekrecja gruczołowa", "Zwężenie źrenicy"], activationEffects: "Skurcz oskrzeli, ↑perystaltyka, ↑sekrecja, mioza", blockadeEffects: "Rozkurcz oskrzeli (COPD/astma), mydriaza, ↓sekrecja", naturalLigands: ["Acetylocholina"], pharmaceuticalAgonists: ["Betanechol", "Pilokarpin"], pharmaceuticalAntagonists: ["Tiotropium", "Solifenacyna", "Ipratropium", "Darifenacyna"] },
+      { id: "ACh_M4", type: "receptor", label: "M4", x: 1625, y: 340, description: "Muskarynowy M4. Gi. Prążkowie. Modulacja DA.", gProtein: "Gi/Go", signaling: "↓cAMP, ↑K⁺ (GIRK)", functions: ["Modulacja DA w prążkowiu", "Analgezja", "↓dyskinezja"], activationEffects: "↓uwalnianie DA, ↓psychoza, ↓dyskinezja", blockadeEffects: "↑DA, ↑dyskinezja", naturalLigands: ["Acetylocholina"], pharmaceuticalAgonists: ["Xanomelin (M1/M4)", "VU0467154 (PAM)"], pharmaceuticalAntagonists: ["Tropicamid (nieselektywny)"] },
+      { id: "ACh_M5", type: "receptor", label: "M5", x: 1675, y: 340, description: "Muskarynowy M5. Gq. Substantia nigra, VTA. Modulacja DA.", gProtein: "Gq/11", signaling: "↑IP3/DAG → ↑Ca²⁺", functions: ["Modulacja DA w VTA", "Dylatacja naczyń mózgowych", "Mechanizmy nagrody"], activationEffects: "↑uwalnianie DA (VTA), ↑nagroda, wazodilatacja", blockadeEffects: "↓uwalnianie DA, potencjał antyuzależnieniowy", naturalLigands: ["Acetylocholina"], pharmaceuticalAgonists: ["Brak selektywnych"], pharmaceuticalAntagonists: ["ML-375 (selektywny M5 NAM)"] },
       { id: "ACh_AChE", type: "catabolicEnzyme", label: "AChE\n(Acetylocholino-\nesteraza)", x: 1400, y: 100, description: "Ultraszybka hydroliza ACh. Hamowana: donepezil (Alzheimer), neostygmina, gazy bojowe (sarin)." },
       { id: "ACh_BChE", type: "catabolicEnzyme", label: "BChE\n(Butyrylocholino-\nesteraza)", x: 1400, y: 180, description: "Pseudocholinesteraza. Hydroliza ACh i estrów. Wątroba." },
-      { id: "ACh_Acetate", type: "metabolite", label: "Octan", x: 1800, y: 60, formula: "CH₃COO⁻", description: "Produkt hydrolizy ACh. Recyklowany w cyklu Krebsa." },
+      { id: "ACh_Acetate", type: "metabolite", label: "Octan", x: 1250, y: 140, formula: "CH₃COO⁻", description: "Produkt hydrolizy ACh. Recyklowany w cyklu Krebsa." },
       { id: "VAChT", type: "transporter", label: "VAChT", x: 1750, y: 100, description: "Pęcherzykowy transporter ACh. Pakuje ACh do pęcherzyków. Hamowany: vesamicol." },
       { id: "CHT1", type: "transporter", label: "CHT1", x: 1750, y: 180, description: "Transporter choliny (SLC5A7). Etap limitujący syntezę ACh. Hamowany: hemicholinium-3." },
     ],
@@ -351,8 +343,8 @@
       { id: "HA_H4", type: "receptor", label: "H4", x: 1750, y: 830, description: "H4. Gi→↓cAMP. Komórki hematopoetyczne. Chemotaksja, zapalenie.", gProtein: "Gi/Go", signaling: "↓cAMP, ↑Ca²⁺ (PLC-β)", functions: ["Chemotaksja eozynofilów/mastocytów", "Modulacja zapalenia", "Świąd"], activationEffects: "↑chemotaksja, ↑zapalenie, ↑świąd", blockadeEffects: "↓zapalenie, ↓świąd (potencjalny cel: astma, atopowe zap. skóry)", naturalLigands: ["Histamina"], pharmaceuticalAgonists: ["4-metylohistamina", "VUF-8430"], pharmaceuticalAntagonists: ["JNJ-7777120", "Toreforant"] },
       { id: "His_HNMT", type: "catabolicEnzyme", label: "HNMT", x: 1800, y: 680, description: "Histamino-N-metylotransferaza. Główna degradacja HA w OUN (wewnątrzkomórkowa)." },
       { id: "His_DAO", type: "catabolicEnzyme", label: "DAO\n(Diaminooksydaza)", x: 1800, y: 760, description: "Diaminooksydaza. Degradacja HA na obwodzie. Deficyt: nietolerancja histaminy." },
-      { id: "His_NMH", type: "metabolite", label: "tele-MeHA\n(N-metylo-\nhistamina)", x: 1900, y: 660, description: "tele-Metylohistamina. Metabolit HA via HNMT. Dalej utleniana przez MAO-B do kwasu tele-metylo-imidazolooctowego." },
-      { id: "His_IAA", type: "metabolite", label: "Kw. imidazolo-\noctowy", x: 1900, y: 770, description: "Kwas imidazolooctowy. Metabolit HA via DAO (szlak obwodowy)." },
+      { id: "His_NMH", type: "metabolite", label: "tele-MeHA\n(N-metylo-\nhistamina)", x: 1960, y: 680, description: "tele-Metylohistamina. Metabolit HA via HNMT. Dalej utleniana przez MAO-B do kwasu tele-metylo-imidazolooctowego." },
+      { id: "His_IAA", type: "metabolite", label: "Kw. imidazolo-\noctowy", x: 1960, y: 760, description: "Kwas imidazolooctowy. Metabolit HA via DAO (szlak obwodowy)." },
       { id: "His_OCT", type: "transporter", label: "OCT2/3", x: 1420, y: 680, description: "Organiczny transporter kationów. Niskoowinowactwowy transport HA (brak klasycznego transportera)." },
     ],
     connections: [
@@ -454,9 +446,9 @@
       { id: "TA_TAAR1", type: "receptor", label: "TAAR1", x: 320, y: -470, description: "Receptor amin śladowych 1. Gs→↑cAMP. Modulacja DA/5-HT. Cel: ulotaront (schizofrenia). Aktywowany przez: PEA, tyramina, amfetamina, T3.", gProtein: "Gs, Gq (częściowo)", signaling: "↑cAMP → PKA, ↑β-arrestyna, modulacja DAT/SERT", functions: ["Modulacja DA (↓nadmiar)", "Modulacja 5-HT", "Regulacja metabolizmu (T3)", "Termoregulacja"], activationEffects: "↓nadmierną transmisję DA, efekt przeciwpsychotyczny, ↓masa ciała, ↓uzależnienie", blockadeEffects: "↑DA, ↑pobudzenie (eksperymentalnie)", naturalLigands: ["PEA", "Tyramina", "Tryptamina", "Oktopamina", "T3/T4"], pharmaceuticalAgonists: ["Ulotaront (SEP-363856)", "RO5256390", "Ralmitaront"], pharmaceuticalAntagonists: ["EPPTB"] },
       { id: "TA_TAAR2", type: "receptor", label: "TAAR2", x: 430, y: -455, description: "TAAR2. Słabo poznany. Komórki odpornościowe. Potencjalna rola w regulacji odporności.", gProtein: "Gs (prawdopodobnie)", signaling: "↑cAMP (przypuszczalnie)", functions: ["Immunomodulacja (wstępne dane)", "Chemosensing"], activationEffects: "Słabo poznane — badania wstępne", blockadeEffects: "Słabo poznane", naturalLigands: ["PEA (słabe)"], pharmaceuticalAgonists: [], pharmaceuticalAntagonists: [] },
       { id: "TA_TAAR5", type: "receptor", label: "TAAR5", x: 210, y: -485, description: "TAAR5. Aktywowany: trimetyloamina. Neurony opuszki węchowej. Rola w percepcji feromonów.", gProtein: "Gs", signaling: "↑cAMP", functions: ["Percepcja zapachów/feromonów", "Neurony opuszki węchowej"], activationEffects: "Sygnalizacja węchowa, detekcja trimetyloaminy", blockadeEffects: "↓percepcja specyficznych zapachów", naturalLigands: ["Trimetyloamina"], pharmaceuticalAgonists: [], pharmaceuticalAntagonists: [] },
-      { id: "TA_PAA", type: "metabolite", label: "Kw. fenylo-\noctowy", x: 380, y: -295, formula: "C₈H₈O₂", description: "Kwas fenylooctowy. Metabolit PEA via MAO-B. Marker degradacji PEA w płynie mózgowo-rdzeniowym.", systems: ["traceAmines"] },
-      { id: "TA_pHPAA", type: "metabolite", label: "Kw. p-hydroksy-\nfenylooctowy", x: 530, y: -185, formula: "C₈H₈O₃", description: "Kwas p-hydroksyfenylooctowy. Metabolit tyraminy via MAO. Marker degradacji tyraminy.", systems: ["traceAmines"] },
-      { id: "TA_IAcA", type: "metabolite", label: "Kw. indolo-\noctowy", x: 20, y: -345, formula: "C₁₀H₉NO₂", description: "Kwas indolooctowy (IAA). Metabolit tryptaminy via MAO-A. Analog roślinnego hormonu auksyny.", systems: ["traceAmines"] },
+      { id: "TA_PAA", type: "metabolite", label: "Kw. fenylo-\noctowy", x: 610, y: -240, formula: "C₈H₈O₂", description: "Kwas fenylooctowy. Metabolit PEA via MAO-B. Marker degradacji PEA w płynie mózgowo-rdzeniowym.", systems: ["traceAmines"] },
+      { id: "TA_pHPAA", type: "metabolite", label: "Kw. p-hydroksy-\nfenylooctowy", x: 640, y: -70, formula: "C₈H₈O₃", description: "Kwas p-hydroksyfenylooctowy. Metabolit tyraminy via MAO. Marker degradacji tyraminy.", systems: ["traceAmines"] },
+      { id: "TA_IAcA", type: "metabolite", label: "Kw. indolo-\noctowy", x: 120, y: -280, formula: "C₁₀H₉NO₂", description: "Kwas indolooctowy (IAA). Metabolit tryptaminy via MAO-A. Analog roślinnego hormonu auksyny.", systems: ["traceAmines"] },
     ],
     connections: [
       { from: "DA_Phe", to: "AADC", connectionType: "precursorConversion", label: "PEA", importance: "secondary" },
@@ -549,7 +541,7 @@
       { id: "TK_NKB", type: "neurotransmitter", label: "Neurokinina B\n(NKB)", x: -350, y: 1220, formula: "10 aa", description: "Neuromedin K. Neurony KNDy podwzgórza. Regulacja GnRH, reprodukcji. Fezolinetant (NK3 antagonista → uderzenia gorąca)." },
       { id: "TK_NK1", type: "receptor", label: "NK1", x: -700, y: 1380, description: "Receptor NK1. Gq→↑Ca²⁺. Ból, wymioty, zapalenie. Aprepitant (antagonista NK1 — antyemetyk chemioterapia).", gProtein: "Gq/11", signaling: "↑IP3/DAG → ↑Ca²⁺, PKC", functions: ["Nocycepcja (ból)", "Wymioty (CTZ)", "Zapalenie neurogenne", "Lęk/stres"], activationEffects: "Ból, wymioty, zapalenie neurogenne, ↑lęk, ↑neuroplastyczność bólu", blockadeEffects: "↓wymioty (chemioterapia: aprepitant), ↓ból, potencjał antydepresyjny", naturalLigands: ["Substancja P"], pharmaceuticalAgonists: ["GR-73632 (badawczy)"], pharmaceuticalAntagonists: ["Aprepitant", "Fosaprepitant", "Netupitant", "Serlopitant (świąd)"] },
       { id: "TK_NK2", type: "receptor", label: "NK2", x: -500, y: 1400, description: "Receptor NK2. Gq. Mięśnie gładkie (oskrzela, jelito). Preferowany ligand: NKA. Ibodutant (antagonista — IBS).", gProtein: "Gq/11", signaling: "↑IP3/DAG → ↑Ca²⁺", functions: ["Skurcz m. gładkich (oskrzela, jelito)", "Motylika jelit", "Zapalenie dróg oddechowych"], activationEffects: "Skurcz oskrzeli, ↑perystaltyka, zapalenie", blockadeEffects: "↓skurcz oskrzeli, ↓motylika (IBS)", naturalLigands: ["Neurokinina A (NKA)"], pharmaceuticalAgonists: ["β-ala-NKA (selektywny)"], pharmaceuticalAntagonists: ["Ibodutant", "Saredutant (badawczy — depresja)"] },
-      { id: "TK_NK3", type: "receptor", label: "NK3", x: -310, y: 1370, description: "Receptor NK3. Gq. OUN, podwzgórze. Preferowany ligand: NKB. Fezolinetant (menopauza). Rola w schizofrenii.", gProtein: "Gq/11", signaling: "↑IP3/DAG → ↑Ca²⁺", functions: ["Regulacja GnRH (reprodukcja)", "Termoregulacja (podwzgórze)", "Modulacja DA (potencjał antypsy.)"], activationEffects: "↑GnRH, uderzenia gorąca (menopauza), ↑pobudzenie", blockadeEffects: "↓uderzenia gorąca (fezolinetant), ↓GnRH, potencjał przeciwpsychotyczny", naturalLigands: ["Neurokinina B (NKB)"], pharmaceuticalAgonists: ["Senktide (selektywny NK3)"], pharmaceuticalAntagonists: ["Fezolinetant", "Talnetant", "Osanetant (badawczy — schizofrenia)"] },
+      { id: "TK_NK3", type: "receptor", label: "NK3", x: -300, y: 1380, description: "Receptor NK3. Gq. OUN, podwzgórze. Preferowany ligand: NKB. Fezolinetant (menopauza). Rola w schizofrenii.", gProtein: "Gq/11", signaling: "↑IP3/DAG → ↑Ca²⁺", functions: ["Regulacja GnRH (reprodukcja)", "Termoregulacja (podwzgórze)", "Modulacja DA (potencjał antypsy.)"], activationEffects: "↑GnRH, uderzenia gorąca (menopauza), ↑pobudzenie", blockadeEffects: "↓uderzenia gorąca (fezolinetant), ↓GnRH, potencjał przeciwpsychotyczny", naturalLigands: ["Neurokinina B (NKB)"], pharmaceuticalAgonists: ["Senktide (selektywny NK3)"], pharmaceuticalAntagonists: ["Fezolinetant", "Talnetant", "Osanetant (badawczy — schizofrenia)"] },
       { id: "TK_NEP", type: "catabolicEnzyme", label: "Neprilizyna\n(NEP)", x: -450, y: 1320, description: "Endopeptydaza neutralna (EC 3.4.24.11). Degraduje substancję P, enkefaliny, BNP. Sacubitril (inhibitor)." },
     ],
     connections: [
@@ -576,7 +568,7 @@
       { id: "NPY_PC", type: "syntheticEnzyme", label: "Konwertazy\n(PC1/3, CPE)", x: -100, y: 1100, description: "Konwertaza proproteinowa 1/3 + karboksypeptydaza E. Cięcie i amidacja C-końca." },
       { id: "NPY", type: "neurotransmitter", label: "Neuropeptyd Y\n(NPY)", x: -100, y: 1240, formula: "36 aa", description: "Najobfitszy neuropeptyd OUN. ↑apetyt (oreksygenny), anksjoliza, wazokonstrykcja, regulacja rytmu dobowego. Współwystępuje z NE." },
       { id: "NPY_PYY", type: "neurotransmitter", label: "PYY\n(Peptyd YY)", x: 100, y: 1240, formula: "36 aa", description: "Peptyd YY. Jelito (komórki L). ↓apetyt (anoreksygenny). PYY3-36 (aktywna forma) → agonista Y2R." },
-      { id: "NPY_Y1", type: "receptor", label: "Y1", x: -240, y: 1410, description: "Y1. Gi→↓cAMP. Postsynaptyczny. ↑apetyt, anksjoliza, wazokonstrykcja.", gProtein: "Gi/Go", signaling: "↓cAMP, ↑Ca²⁺", functions: ["↑apetyt (z Y5)", "Anksjoliza", "Wazokonstrykcja", "Kościotworzenie"], activationEffects: "↑apetyt, ↓lęk, wazokonstrykcja, ↑proliferacja osteoblastów", blockadeEffects: "↓apetyt, ↑lęk", naturalLigands: ["NPY", "PYY"], pharmaceuticalAgonists: ["[Leu31,Pro34]NPY"], pharmaceuticalAntagonists: ["BIBO-3304", "BMS-193885"] },
+      { id: "NPY_Y1", type: "receptor", label: "Y1", x: -250, y: 1400, description: "Y1. Gi→↓cAMP. Postsynaptyczny. ↑apetyt, anksjoliza, wazokonstrykcja.", gProtein: "Gi/Go", signaling: "↓cAMP, ↑Ca²⁺", functions: ["↑apetyt (z Y5)", "Anksjoliza", "Wazokonstrykcja", "Kościotworzenie"], activationEffects: "↑apetyt, ↓lęk, wazokonstrykcja, ↑proliferacja osteoblastów", blockadeEffects: "↓apetyt, ↑lęk", naturalLigands: ["NPY", "PYY"], pharmaceuticalAgonists: ["[Leu31,Pro34]NPY"], pharmaceuticalAntagonists: ["BIBO-3304", "BMS-193885"] },
       { id: "NPY_Y2", type: "receptor", label: "Y2", x: -100, y: 1420, description: "Y2. Gi→↓cAMP. Presynaptyczny (autoreceptor). ↓uwalnianie NT. PYY3-36 preferowany.", gProtein: "Gi/Go", signaling: "↓cAMP, ↓Ca²⁺, ↓uwalnianie NT", functions: ["Autoreceptor (↓NPY)", "↓apetyt (ARC)", "Angiogeneza"], activationEffects: "↓uwalnianie NPY i innych NT, ↓apetyt (PYY3-36 z jelita)", blockadeEffects: "↑uwalnianie NPY, ↑apetyt", naturalLigands: ["NPY", "PYY3-36 (preferowany)"], pharmaceuticalAgonists: ["PYY3-36", "NPY13-36"], pharmaceuticalAntagonists: ["BIIE-0246", "JNJ-31020028"] },
       { id: "NPY_Y4", type: "receptor", label: "Y4", x: 50, y: 1400, description: "Y4 (PP1). Gi. Preferowany ligand: polipeptyd trzustkowy (PP). ↓apetyt.", gProtein: "Gi", signaling: "↓cAMP", functions: ["↓apetyt", "Regulacja motoryki jelit", "↓sekrecja trzustkowa"], activationEffects: "↓apetyt, ↓sekrecja trzustkowa, ↓motylika", blockadeEffects: "↑apetyt (eksperymentalnie)", naturalLigands: ["Polipeptyd trzustkowy (PP)"], pharmaceuticalAgonists: ["Brak selektywnych klinicznych"], pharmaceuticalAntagonists: ["Brak selektywnych klinicznych"] },
       { id: "NPY_Y5", type: "receptor", label: "Y5", x: 200, y: 1380, description: "Y5. Gi. Podwzgórze. ↑apetyt (z Y1). Cel terapeutyczny: otyłość (velneperit — antagonista Y5).", gProtein: "Gi/Go", signaling: "↓cAMP", functions: ["↑apetyt (synergicznie z Y1)", "Regulacja masy ciała", "Padaczka (modulacja)"], activationEffects: "↑apetyt, ↑masa ciała", blockadeEffects: "↓apetyt (potencjał: otyłość)", naturalLigands: ["NPY"], pharmaceuticalAgonists: ["[cPP1-7,NPY19-23,Ala31,Aib32,Gln34]hPP"], pharmaceuticalAntagonists: ["Velneperit (S-2367)", "L-152804"] },
@@ -607,10 +599,10 @@
       { id: "PUR_Ado", type: "neurotransmitter", label: "Adenozyna", x: 1250, y: 120, formula: "C₁₀H₁₃N₅O₃", description: "Neuromodulator purynowy. ↓pobudliwość neuronów. Sen (akumulacja → 'ciśnienie snu'). Kardioprotekcja. Kofeina = antagonista." },
       { id: "PUR_P2X", type: "receptor", label: "P2X\n(1-7)", x: 1000, y: -620, description: "Receptory P2X1-7. Kanały kationowe (Na⁺/K⁺/Ca²⁺). Aktywowane przez ATP. P2X3: ból. P2X7: zapalenie, mikroglia.", gProtein: "—", signaling: "Kanał Na⁺/K⁺/Ca²⁺ (jonotropowy)", functions: ["Szybka transmisja purynergiczna", "Nocycepcja (P2X3)", "Zapalenie/aktywacja mikroglii (P2X7)", "Skurcz m. gładkich (P2X1)"], activationEffects: "Szybka depolaryzacja, ból (P2X3), aktywacja inflammasomu NLRP3 (P2X7)", blockadeEffects: "↓ból (gefapixant — P2X3, kaszel)", naturalLigands: ["ATP"], pharmaceuticalAgonists: ["α,β-meATP (P2X1/3)", "BzATP (P2X7)"], pharmaceuticalAntagonists: ["Gefapixant (P2X3 — kaszel)", "Suraminan (nieselektywny)", "A-740003 (P2X7)"] },
       { id: "PUR_P2Y", type: "receptor", label: "P2Y\n(1,2,4,6,11-14)", x: 1500, y: -620, description: "Receptory P2Y. GPCR (Gq/Gi/Gs). P2Y1: płytki (ADP). P2Y12: cel klopidogrelu. P2Y2: nabłonek oddechowy.", gProtein: "Gq (P2Y1,2,4,6,11), Gi (P2Y12,13,14), Gs (P2Y11)", signaling: "↑IP3/Ca²⁺ (Gq), ↓cAMP (Gi), ↑cAMP (P2Y11)", functions: ["Agregacja płytek (P2Y1, P2Y12)", "Sekrecja mukocyliarna (P2Y2)", "Chemotaksja (P2Y14)"], activationEffects: "Agregacja płytek (ADP→P2Y12), ↑sekrecja Cl⁻ (P2Y2)", blockadeEffects: "↓agregacja płytek (klopidogrel→P2Y12), ↓zakrzepica", naturalLigands: ["ATP", "ADP", "UTP", "UDP", "UDP-glukoza (P2Y14)"], pharmaceuticalAgonists: ["Denufosol (P2Y2 — badawczy)"], pharmaceuticalAntagonists: ["Klopidogrel (P2Y12)", "Prasugrel (P2Y12)", "Tikagrelor (P2Y12)", "Kangrelor (P2Y12 i.v.)"] },
-      { id: "PUR_A1", type: "receptor", label: "A1", x: 900, y: 225, description: "Receptor adenozynowy A1. Gi→↓cAMP. Serce (↓HR — dromotropia ujemna), mózg (↓pobudliwość). Adenozyna i.v. → SVT.", gProtein: "Gi/Go", signaling: "↓cAMP, ↑K⁺ (GIRK), ↓Ca²⁺", functions: ["↓HR (dromotropia ujemna)", "↓pobudliwość neuronalna", "Sedacja", "Neuroprotekcja"], activationEffects: "Bradykardia, ↓pobudliwość (sedacja), neuroprotekcja (niedokrwienie)", blockadeEffects: "↑pobudliwość, ↑HR (kofeina częściowo)", naturalLigands: ["Adenozyna"], pharmaceuticalAgonists: ["Adenozyna (i.v. — SVT)", "CPA (N6-cyklopentyladenozy na)"], pharmaceuticalAntagonists: ["Kofeina (niesel.)", "Teofilina (niesel.)", "DPCPX (selektywny)"] },
-      { id: "PUR_A2A", type: "receptor", label: "A2A", x: 1080, y: 350, description: "A2A. Gs→↑cAMP. Prążkowie (antagonizm D2). Kofeina = antagonista A2A. Cel w Parkinsonie: istradefilina.", gProtein: "Gs, Golf (prążkowie)", signaling: "↑cAMP → PKA", functions: ["Antagonizm D2 (prążkowie — heterodimer)", "Wazodilatacja naczyń wieńcowych", "Immunosupresja (↓zapalenie)"], activationEffects: "↓DA-ergiczne (prążkowie), wazodilatacja, immunosupresja, sedacja", blockadeEffects: "↑DA-ergiczne (efekt kofeiny), ↓Parkinson (istradefilina), ↑czuwanie", naturalLigands: ["Adenozyna"], pharmaceuticalAgonists: ["Regadenoson (diagnostyka sercowa)", "CGS-21680"], pharmaceuticalAntagonists: ["Kofeina (niesel.)", "Istradefilina (Parkinson)", "Ciforadenant (immunoonkologia)"] },
+      { id: "PUR_A1", type: "receptor", label: "A1", x: 900, y: 270, description: "Receptor adenozynowy A1. Gi→↓cAMP. Serce (↓HR — dromotropia ujemna), mózg (↓pobudliwość). Adenozyna i.v. → SVT.", gProtein: "Gi/Go", signaling: "↓cAMP, ↑K⁺ (GIRK), ↓Ca²⁺", functions: ["↓HR (dromotropia ujemna)", "↓pobudliwość neuronalna", "Sedacja", "Neuroprotekcja"], activationEffects: "Bradykardia, ↓pobudliwość (sedacja), neuroprotekcja (niedokrwienie)", blockadeEffects: "↑pobudliwość, ↑HR (kofeina częściowo)", naturalLigands: ["Adenozyna"], pharmaceuticalAgonists: ["Adenozyna (i.v. — SVT)", "CPA (N6-cyklopentyladenozy na)"], pharmaceuticalAntagonists: ["Kofeina (niesel.)", "Teofilina (niesel.)", "DPCPX (selektywny)"] },
+      { id: "PUR_A2A", type: "receptor", label: "A2A", x: 1080, y: 310, description: "A2A. Gs→↑cAMP. Prążkowie (antagonizm D2). Kofeina = antagonista A2A. Cel w Parkinsonie: istradefilina.", gProtein: "Gs, Golf (prążkowie)", signaling: "↑cAMP → PKA", functions: ["Antagonizm D2 (prążkowie — heterodimer)", "Wazodilatacja naczyń wieńcowych", "Immunosupresja (↓zapalenie)"], activationEffects: "↓DA-ergiczne (prążkowie), wazodilatacja, immunosupresja, sedacja", blockadeEffects: "↑DA-ergiczne (efekt kofeiny), ↓Parkinson (istradefilina), ↑czuwanie", naturalLigands: ["Adenozyna"], pharmaceuticalAgonists: ["Regadenoson (diagnostyka sercowa)", "CGS-21680"], pharmaceuticalAntagonists: ["Kofeina (niesel.)", "Istradefilina (Parkinson)", "Ciforadenant (immunoonkologia)"] },
       { id: "PUR_A2B", type: "receptor", label: "A2B", x: 1420, y: 310, description: "A2B. Gs. Niskoowinowactwowy. Zapalenie, angiogeneza. Aktywowany przy wysokich stężeniach adenozyny (niedokrwienie).", gProtein: "Gs, Gq", signaling: "↑cAMP, ↑IP3/Ca²⁺ (Gq)", functions: ["Angiogeneza", "Zapalenie", "Bronchospazm", "Regulacja glukozy"], activationEffects: "↑angiogeneza, ↑zapalenie, bronchospazm, ↑wydzielanie IL-6", blockadeEffects: "↓zapalenie, potencjał w astmie/cukrzycy", naturalLigands: ["Adenozyna (niskoowinowactwowy — aktywny przy ↑stężeniach)"], pharmaceuticalAgonists: ["BAY-60-6583 (selektywny)"], pharmaceuticalAntagonists: ["MRS-1754", "PSB-603"] },
-      { id: "PUR_A3", type: "receptor", label: "A3", x: 1600, y: 220, description: "A3. Gi. Kardioprotekcja (precondycjonowanie), zapalenie. Piclidenoson (agonista — RA).", gProtein: "Gi/Go, Gq", signaling: "↓cAMP, ↑IP3/Ca²⁺ (Gq)", functions: ["Kardioprotekcja (precondycjonowanie)", "Immunomodulacja", "↓zapalenie (reumatoidalne)"], activationEffects: "Kardioprotekcja, ↓zapalenie, ↓proliferacja (niektóre nowotwory)", blockadeEffects: "↑zapalenie (eksperymentalnie)", naturalLigands: ["Adenozyna"], pharmaceuticalAgonists: ["Piclidenoson (CF-101 — RA)", "Namodenoson (CF-102 — wątroba)"], pharmaceuticalAntagonists: ["MRS-1523", "MRS-1220"] },
+      { id: "PUR_A3", type: "receptor", label: "A3", x: 1600, y: 270, description: "A3. Gi. Kardioprotekcja (precondycjonowanie), zapalenie. Piclidenoson (agonista — RA).", gProtein: "Gi/Go, Gq", signaling: "↓cAMP, ↑IP3/Ca²⁺ (Gq)", functions: ["Kardioprotekcja (precondycjonowanie)", "Immunomodulacja", "↓zapalenie (reumatoidalne)"], activationEffects: "Kardioprotekcja, ↓zapalenie, ↓proliferacja (niektóre nowotwory)", blockadeEffects: "↑zapalenie (eksperymentalnie)", naturalLigands: ["Adenozyna"], pharmaceuticalAgonists: ["Piclidenoson (CF-101 — RA)", "Namodenoson (CF-102 — wątroba)"], pharmaceuticalAntagonists: ["MRS-1523", "MRS-1220"] },
       { id: "PUR_ADA", type: "catabolicEnzyme", label: "ADA\n(Deaminaza\nadenozyny)", x: 1650, y: 120, description: "Adenozyna-deaminaza. Adenozyna→inozyna. Deficyt ADA → SCID (ciężki złożony niedobór odporności)." },
       { id: "PUR_ENT", type: "transporter", label: "ENT1/2", x: 950, y: 120, description: "Równoważnikowy transporter nukleozydów. Wychwyt adenozyny. Hamowany: dipirydamol (↑adenozyna → wazodylatacja)." },
     ],
@@ -633,251 +625,8 @@
 
   const SYSTEMS = [DOPAMINE, NOREPINEPHRINE, SEROTONIN, ACETYLCHOLINE, GLUTAMATE, GABA_SYSTEM, HISTAMINE_SYS, ENDORPHINS, ENDOCANNABINOIDS, TRACE_AMINES, OREXIN, OXYTOCIN_VASOPRESSIN, TACHYKININS, NPY_SYSTEM, PURINES];
 
-  const BRAIN_REGIONS = [
-    {
-      id: "BR_PFC",
-      type: "brainRegion",
-      label: "Kora\nprzedczołowa",
-      x: -1760,
-      y: 1650,
-      description: "Obwody wykonawcze, kontrola top-down i pamięć robocza.",
-    },
-    {
-      id: "BR_CORTEX",
-      type: "brainRegion",
-      label: "Kora\nasocjacyjna",
-      x: -1380,
-      y: 1650,
-      description: "Rozproszone obszary korowe odpowiedzialne za integrację sensoryczną, poznanie i plastyczność.",
-    },
-    {
-      id: "BR_HIPPOCAMPUS",
-      type: "brainRegion",
-      label: "Hipokamp",
-      x: -1000,
-      y: 1650,
-      description: "Pamięć epizodyczna, kontekst i plastyczność synaptyczna.",
-    },
-    {
-      id: "BR_AMYGDALA",
-      type: "brainRegion",
-      label: "Ciało\nmigdałowate",
-      x: -620,
-      y: 1650,
-      description: "Salience emocjonalna, lęk i uczenie awersyjne.",
-    },
-    {
-      id: "BR_STRIATUM",
-      type: "brainRegion",
-      label: "Prążkowie\n/ BG",
-      x: -240,
-      y: 1650,
-      description: "Brama ruchu, nawyków i selekcji akcji w jądrach podstawy.",
-    },
-    {
-      id: "BR_NACC",
-      type: "brainRegion",
-      label: "Nucleus\naccumbens",
-      x: 140,
-      y: 1650,
-      description: "Węzeł nagrody, motywacji i wzmocnienia.",
-    },
-    {
-      id: "BR_HYPOTHALAMUS",
-      type: "brainRegion",
-      label: "Podwzgórze",
-      x: 520,
-      y: 1650,
-      description: "Homeostaza, neuroendokrynnie i rytmy biologiczne.",
-    },
-    {
-      id: "BR_THALAMUS",
-      type: "brainRegion",
-      label: "Wzgórze",
-      x: 900,
-      y: 1650,
-      description: "Przekaźnik czuciowy i bramka pobudzenia korowego.",
-    },
-    {
-      id: "BR_MIDBRAIN_DA",
-      type: "brainRegion",
-      label: "Śródmózgowie DA\n(VTA / SNc)",
-      x: 1280,
-      y: 1650,
-      description: "Neurony dopaminowe VTA i SNc, napęd nagrody oraz ruchu.",
-    },
-    {
-      id: "BR_BRAINSTEM",
-      type: "brainRegion",
-      label: "Pień\nmózgu",
-      x: 1660,
-      y: 1650,
-      description: "Autonomia, czuwanie, oddech i integracja odruchowa.",
-    },
-    {
-      id: "BR_LC",
-      type: "brainRegion",
-      label: "Locus\ncoeruleus",
-      x: -1570,
-      y: 1780,
-      description: "Główne jądro noradrenergiczne czuwania i stresu.",
-    },
-    {
-      id: "BR_RAPHE",
-      type: "brainRegion",
-      label: "Jądra\nszwu",
-      x: -1190,
-      y: 1780,
-      description: "Jądra serotoninowe regulujące nastrój, ból i rytmy.",
-    },
-    {
-      id: "BR_CEREBELLUM",
-      type: "brainRegion",
-      label: "Móżdżek",
-      x: -810,
-      y: 1780,
-      description: "Koordynacja, timing i predykcyjne strojenie sygnału.",
-    },
-    {
-      id: "BR_PAG",
-      type: "brainRegion",
-      label: "PAG",
-      x: -430,
-      y: 1780,
-      description: "Ośrodek zstępującej kontroli bólu i reakcji obronnych.",
-    },
-    {
-      id: "BR_NTS_AP",
-      type: "brainRegion",
-      label: "NTS /\narea postrema",
-      x: -50,
-      y: 1780,
-      description: "Ośrodek trzewno-wagalny, nudności i sygnałów interoceptywnych.",
-    },
-    {
-      id: "BR_OLFACTORY",
-      type: "brainRegion",
-      label: "Opuszka\ni guzek węchowy",
-      x: 330,
-      y: 1780,
-      description: "Opuszka węchowa i guzek węchowy, salience zapachowe i wejście limbiczne.",
-    },
-    {
-      id: "BR_SEPTAL_BNST",
-      type: "brainRegion",
-      label: "Przegroda\n/ BNST",
-      x: 710,
-      y: 1780,
-      description: "Przegroda i BNST: stres przedłużony, więź i społeczne salience.",
-    },
-    {
-      id: "BR_SCN",
-      type: "brainRegion",
-      label: "SCN / rytm\ndobowy",
-      x: 1090,
-      y: 1780,
-      description: "Zegar dobowy i synchronizacja rytmów biologicznych.",
-    },
-    {
-      id: "BR_CHOROID",
-      type: "brainRegion",
-      label: "Splot\nnaczyniowy",
-      x: 1470,
-      y: 1780,
-      description: "Interfejs komorowy: splot naczyniowy, ependyma i sygnały CSF.",
-    },
-  ];
-
-  const RECEPTOR_BRAIN_REGION_MAP = {
-    DA_D1: ["BR_STRIATUM", "BR_NACC", "BR_PFC", "BR_OLFACTORY"],
-    DA_D2: ["BR_STRIATUM", "BR_NACC", "BR_MIDBRAIN_DA", "BR_HYPOTHALAMUS"],
-    DA_D3: ["BR_NACC", "BR_STRIATUM", "BR_OLFACTORY"],
-    DA_D4: ["BR_PFC", "BR_HIPPOCAMPUS", "BR_AMYGDALA"],
-    DA_D5: ["BR_HIPPOCAMPUS", "BR_HYPOTHALAMUS", "BR_THALAMUS", "BR_CORTEX"],
-
-    NE_a1: ["BR_PFC", "BR_HIPPOCAMPUS", "BR_AMYGDALA", "BR_THALAMUS", "BR_HYPOTHALAMUS"],
-    NE_a2: ["BR_LC", "BR_PFC", "BR_HIPPOCAMPUS", "BR_AMYGDALA", "BR_NTS_AP"],
-    NE_b1: ["BR_CORTEX", "BR_HIPPOCAMPUS", "BR_AMYGDALA", "BR_CEREBELLUM", "BR_BRAINSTEM"],
-    NE_b2: ["BR_CORTEX", "BR_HIPPOCAMPUS", "BR_CEREBELLUM", "BR_BRAINSTEM"],
-    NE_b3: ["BR_HYPOTHALAMUS", "BR_BRAINSTEM"],
-
-    "5HT_1A": ["BR_RAPHE", "BR_HIPPOCAMPUS", "BR_PFC", "BR_AMYGDALA", "BR_SEPTAL_BNST"],
-    "5HT_1B": ["BR_STRIATUM", "BR_CORTEX", "BR_MIDBRAIN_DA"],
-    "5HT_2A": ["BR_PFC", "BR_CORTEX", "BR_THALAMUS", "BR_AMYGDALA"],
-    "5HT_2B": ["BR_CHOROID"],
-    "5HT_2C": ["BR_CHOROID", "BR_HYPOTHALAMUS", "BR_NACC", "BR_AMYGDALA", "BR_MIDBRAIN_DA"],
-    "5HT_3": ["BR_NTS_AP", "BR_BRAINSTEM", "BR_HIPPOCAMPUS", "BR_AMYGDALA"],
-    "5HT_4": ["BR_HIPPOCAMPUS", "BR_STRIATUM", "BR_CORTEX", "BR_BRAINSTEM"],
-    "5HT_1D": ["BR_BRAINSTEM", "BR_NTS_AP", "BR_STRIATUM"],
-    "5HT_1F": ["BR_BRAINSTEM", "BR_PAG"],
-    "5HT_5A": ["BR_HIPPOCAMPUS", "BR_CORTEX", "BR_HYPOTHALAMUS", "BR_SCN"],
-    "5HT_6": ["BR_STRIATUM", "BR_NACC", "BR_CORTEX", "BR_HIPPOCAMPUS"],
-    "5HT_7": ["BR_THALAMUS", "BR_HIPPOCAMPUS", "BR_HYPOTHALAMUS", "BR_CORTEX", "BR_RAPHE"],
-    "5HT_MT1": ["BR_SCN", "BR_HYPOTHALAMUS", "BR_THALAMUS", "BR_HIPPOCAMPUS"],
-    "5HT_MT2": ["BR_SCN", "BR_THALAMUS", "BR_HIPPOCAMPUS"],
-
-    ACh_nAChR: ["BR_THALAMUS", "BR_CORTEX", "BR_HIPPOCAMPUS", "BR_MIDBRAIN_DA", "BR_STRIATUM"],
-    ACh_M1: ["BR_CORTEX", "BR_HIPPOCAMPUS", "BR_STRIATUM"],
-    ACh_M2: ["BR_HIPPOCAMPUS", "BR_CORTEX", "BR_THALAMUS"],
-    ACh_M3: ["BR_HIPPOCAMPUS", "BR_THALAMUS", "BR_HYPOTHALAMUS", "BR_STRIATUM"],
-    ACh_M4: ["BR_STRIATUM", "BR_CORTEX", "BR_HIPPOCAMPUS"],
-    ACh_M5: ["BR_MIDBRAIN_DA", "BR_HIPPOCAMPUS"],
-
-    Glu_NMDA: ["BR_CORTEX", "BR_HIPPOCAMPUS", "BR_THALAMUS", "BR_STRIATUM", "BR_CEREBELLUM"],
-    Glu_AMPA: ["BR_CORTEX", "BR_HIPPOCAMPUS", "BR_THALAMUS", "BR_CEREBELLUM"],
-    Glu_KA: ["BR_HIPPOCAMPUS", "BR_CORTEX", "BR_AMYGDALA", "BR_STRIATUM"],
-    Glu_mGluR1: ["BR_CEREBELLUM", "BR_HIPPOCAMPUS", "BR_PFC", "BR_STRIATUM", "BR_AMYGDALA"],
-    Glu_mGluR2: ["BR_CORTEX", "BR_HIPPOCAMPUS", "BR_THALAMUS"],
-    Glu_mGluR4: ["BR_CEREBELLUM", "BR_STRIATUM", "BR_THALAMUS", "BR_HIPPOCAMPUS"],
-
-    GABA_A: ["BR_CORTEX", "BR_HIPPOCAMPUS", "BR_THALAMUS", "BR_CEREBELLUM", "BR_BRAINSTEM"],
-    GABA_B: ["BR_CORTEX", "BR_HIPPOCAMPUS", "BR_THALAMUS", "BR_BRAINSTEM"],
-
-    HA_H1: ["BR_CORTEX", "BR_THALAMUS", "BR_HYPOTHALAMUS", "BR_HIPPOCAMPUS", "BR_NTS_AP"],
-    HA_H2: ["BR_CORTEX", "BR_HIPPOCAMPUS", "BR_AMYGDALA", "BR_STRIATUM"],
-    HA_H3: ["BR_CORTEX", "BR_HIPPOCAMPUS", "BR_STRIATUM", "BR_HYPOTHALAMUS"],
-    HA_H4: ["BR_CORTEX", "BR_HIPPOCAMPUS"],
-
-    Opi_MOR: ["BR_PAG", "BR_THALAMUS", "BR_MIDBRAIN_DA", "BR_NACC", "BR_LC", "BR_AMYGDALA", "BR_NTS_AP"],
-    Opi_DOR: ["BR_CORTEX", "BR_HIPPOCAMPUS", "BR_STRIATUM", "BR_AMYGDALA", "BR_OLFACTORY"],
-    Opi_KOR: ["BR_HYPOTHALAMUS", "BR_AMYGDALA", "BR_NACC", "BR_PAG", "BR_MIDBRAIN_DA"],
-
-    eCB_CB1: ["BR_CORTEX", "BR_HIPPOCAMPUS", "BR_STRIATUM", "BR_CEREBELLUM", "BR_AMYGDALA"],
-    eCB_CB2: ["BR_HIPPOCAMPUS", "BR_MIDBRAIN_DA"],
-    eCB_TRPV1: ["BR_PAG", "BR_HYPOTHALAMUS", "BR_HIPPOCAMPUS", "BR_AMYGDALA", "BR_BRAINSTEM"],
-    eCB_GPR55: ["BR_HIPPOCAMPUS", "BR_STRIATUM", "BR_CEREBELLUM", "BR_HYPOTHALAMUS"],
-
-    TA_TAAR1: ["BR_PFC", "BR_STRIATUM", "BR_MIDBRAIN_DA", "BR_RAPHE"],
-    TA_TAAR2: ["BR_OLFACTORY", "BR_AMYGDALA"],
-    TA_TAAR5: ["BR_OLFACTORY", "BR_AMYGDALA", "BR_HYPOTHALAMUS"],
-
-    OX_OX1R: ["BR_LC", "BR_MIDBRAIN_DA", "BR_AMYGDALA", "BR_THALAMUS", "BR_CORTEX"],
-    OX_OX2R: ["BR_HYPOTHALAMUS", "BR_RAPHE", "BR_BRAINSTEM"],
-
-    OXY_OXTR: ["BR_HYPOTHALAMUS", "BR_AMYGDALA", "BR_SEPTAL_BNST", "BR_NACC", "BR_HIPPOCAMPUS"],
-    AVP_V1a: ["BR_SEPTAL_BNST", "BR_AMYGDALA", "BR_HYPOTHALAMUS", "BR_NACC"],
-    AVP_V1b: ["BR_HYPOTHALAMUS", "BR_HIPPOCAMPUS", "BR_AMYGDALA"],
-    AVP_V2: ["BR_CHOROID"],
-
-    TK_NK1: ["BR_AMYGDALA", "BR_HYPOTHALAMUS", "BR_PAG", "BR_NTS_AP", "BR_BRAINSTEM", "BR_STRIATUM"],
-    TK_NK2: ["BR_HYPOTHALAMUS", "BR_BRAINSTEM"],
-    TK_NK3: ["BR_HYPOTHALAMUS", "BR_MIDBRAIN_DA", "BR_STRIATUM"],
-
-    NPY_Y1: ["BR_AMYGDALA", "BR_HIPPOCAMPUS", "BR_CORTEX", "BR_HYPOTHALAMUS", "BR_STRIATUM"],
-    NPY_Y2: ["BR_HIPPOCAMPUS", "BR_CORTEX", "BR_AMYGDALA", "BR_HYPOTHALAMUS"],
-    NPY_Y4: ["BR_NTS_AP", "BR_HYPOTHALAMUS"],
-    NPY_Y5: ["BR_HYPOTHALAMUS", "BR_HIPPOCAMPUS"],
-
-    PUR_P2X: ["BR_HIPPOCAMPUS", "BR_BRAINSTEM", "BR_CORTEX"],
-    PUR_P2Y: ["BR_HIPPOCAMPUS", "BR_CORTEX", "BR_CEREBELLUM"],
-    PUR_A1: ["BR_CORTEX", "BR_HIPPOCAMPUS", "BR_CEREBELLUM", "BR_THALAMUS", "BR_HYPOTHALAMUS"],
-    PUR_A2A: ["BR_STRIATUM", "BR_OLFACTORY", "BR_HIPPOCAMPUS", "BR_CORTEX"],
-    PUR_A2B: ["BR_HIPPOCAMPUS", "BR_CORTEX"],
-    PUR_A3: ["BR_HIPPOCAMPUS", "BR_CORTEX"],
-  };
-
   // Receptor-receptor interactions (cross-system crosstalk)
-  const RECEPTOR_INTERACTIONS = [
+    const RECEPTOR_INTERACTIONS = [
     // --- Istniejące receptor - receptor ---
     { from: "5HT_2A", to: "DA_D2", effect: "facilitation", description: "Blokada 5-HT2A ↑DA w PFC (mechanizm atypowych neuroleptyków)" },
     { from: "5HT_2B", to: "DA_D2", effect: "inhibition", description: "Blokada 5-HT2B → dezinhibicja DA (agomelatyna)" },
@@ -905,7 +654,7 @@
     { from: "ACh_M4", to: "DA_D2", effect: "inhibition", description: "M4 na neuronach prążkowia moduluje (hamuje) DA-ergiczną transmisję" },
     { from: "TA_TAAR1", to: "DA_D2", effect: "modulation", description: "TAAR1 moduluje DA — aktywacja ↓firing neuronów DA" },
     { from: "TA_TAAR1", to: "5HT_1A", effect: "modulation", description: "TAAR1 moduluje 5-HT — aktywacja ↓firing neuronów 5-HT" },
-
+    
     // --- Dodane: Interakcje receptorów dopaminy poza D2 ---
     { from: "DA_D1", to: "Glu_NMDA", effect: "facilitation", description: "D1 wzmacnia prąd NMDA w neuronach kory przedczołowej, wspierając plastyczność i pamięć" },
     { from: "DA_D1", to: "ACh_M1", effect: "facilitation", description: "D1 synergizuje z receptorami M1 w PFC, poprawiając pamięć roboczą" },
@@ -922,7 +671,7 @@
     { from: "ACh_N_a7", to: "Glu_NMDA", effect: "facilitation", description: "Receptor α7 nAChR presynaptycznie ułatwia uwalnianie glutaminianu (prokognitywnie)" },
     { from: "5HT_3", to: "GABA_A", effect: "facilitation", description: "Szlaki 5-HT3 potęgują uwalnianie GABA na interneuronach (hamowanie kory)" },
     { from: "NE_b1", to: "ACh_M2", effect: "inhibition", description: "Receptory β1 i M2 działają przeciwstawnie na serce (Gs vs Gi) - crosstalk na poziomie komórki" },
-
+    
     // --- Dodane: Interakcje receptor - neuroprzekaźnik (Wpływ Globalny na System) ---
     { from: "eCB_CB1", to: "Glu", effect: "inhibition", description: "Globalne hamowanie uwalniania Glutaminianu przez wsteczne sygnały eCB" },
     { from: "eCB_CB1", to: "GABA", effect: "inhibition", description: "Globalne hamowanie uwalniania GABA przez CB1 na interneuronach" },
@@ -932,7 +681,7 @@
     { from: "GABA_B", to: "Glu", effect: "inhibition", description: "GABA-B postsynaptyczny hyperpolaryzuje rzut Glutaminianu jako ogólny ton gaszący" },
     { from: "Opi_MOR", to: "GABA", effect: "inhibition", description: "Depresja całego układu interneuronów przez opioidy Egzogenne" },
     { from: "HA_H3", to: "HA", effect: "inhibition", description: "H3 to autohamowanie globalnego tonu pobudzenia histaminowego mózgu" },
-
+    
     // --- Dodane: Interakcje receptor - enzym (Kaskady Wewnątrzkomórkowe) ---
     { from: "DA_D2", to: "DA_TH", effect: "inhibition", description: "Autoreceptor D2 defosforyluje TH, zatrzymując twardo syntezę na etapie tyrozyny" },
     { from: "5HT_1A", to: "5HT_TPH2", effect: "inhibition", description: "Gi wyciąga sygnał do TPH2 hamując enzymatyczną produkcję Serotoniny de novo" },
@@ -941,14 +690,12 @@
   ];
 
   window.MEDICAL_ENCYCLOPEDIA = {
-    version: "2.1.0",
+    version: "2.0.0",
     colors: COLORS,
     nodeShapes: NODE_SHAPES,
     connectionTypes: CONNECTION_TYPES,
     sharedNodes: SHARED_NODES,
     systems: SYSTEMS,
-    brainRegions: BRAIN_REGIONS,
-    receptorBrainRegions: RECEPTOR_BRAIN_REGION_MAP,
     receptorInteractions: RECEPTOR_INTERACTIONS,
   };
 })();

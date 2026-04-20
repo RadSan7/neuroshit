@@ -1,0 +1,626 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8"/>
+<title>NeuroShit — UI Kit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../colors_and_type.css"/>
+<link rel="stylesheet" href="/colors_and_type.css"/>
+<style>
+  html, body { margin:0; padding:0; height:100%; background: radial-gradient(ellipse at center, #1a1a2e 0%, #0a0a1a 70%); color:#f1f5f9; font-family:'Outfit',sans-serif; overflow:hidden; }
+  body::before {
+    content:''; position:fixed; inset:0; pointer-events:none;
+    background-image:
+      linear-gradient(rgba(74,222,128,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(74,222,128,0.06) 1px, transparent 1px),
+      radial-gradient(rgba(100,116,139,0.35) 1px, transparent 1.2px);
+    background-size: 120px 120px, 120px 120px, 30px 30px;
+    z-index: 0;
+  }
+
+  /* Toolbar */
+  .ns-toolbar { position:fixed; top:0; left:0; right:0; height:64px; padding:0 24px;
+    background: rgba(10,10,26,0.75); backdrop-filter: blur(16px) saturate(140%);
+    border-bottom:1px solid rgba(74,222,128,0.18); display:flex; align-items:center; gap:16px; z-index:20;
+  }
+  .ns-brand { font-size:22px; font-weight:800; letter-spacing:-0.02em;
+    background: linear-gradient(135deg,#4ade80 0%,#22d3ee 100%); -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .ns-subtitle { font-size:11px; text-transform:uppercase; letter-spacing:0.15em; color:#64748b; font-weight:500; }
+  .ns-filter-toggle {
+    height:36px; padding:0 14px; border-radius:10px; border:1px solid rgba(74,222,128,0.28);
+    background: rgba(74,222,128,0.08); color:#f1f5f9; font:500 13px 'Outfit'; cursor:pointer; transition: all .15s;
+  }
+  .ns-filter-toggle:hover { border-color:#4ade80; background: rgba(74,222,128,0.14); box-shadow: 0 0 20px rgba(74,222,128,0.25); }
+  .ns-filter-toggle.active { background: rgba(74,222,128,0.22); border-color:#4ade80; color:#4ade80; }
+  .ns-filter-dropdown {
+    position:absolute; top:44px; right:0; width:260px; padding:10px;
+    background: rgba(15,15,35,0.96); border:1px solid rgba(74,222,128,0.25); border-radius:12px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 40px rgba(74,222,128,0.12);
+    display:flex; flex-direction:column; gap:2px; z-index:30;
+  }
+  .ns-filter-item { display:flex; align-items:center; gap:10px; padding:8px 10px; border-radius:8px; cursor:pointer; font-size:13px; }
+  .ns-filter-item:hover { background: rgba(74,222,128,0.08); }
+  .ns-filter-item input { accent-color:#4ade80; width:14px; height:14px; }
+  .ns-filter-dot { width:10px; height:10px; border-radius:50%; box-shadow: 0 0 8px currentColor; }
+  .ns-ctrl-group { display:flex; align-items:center; gap:4px; padding:4px; background: rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:10px; }
+  .ns-ibtn { width:32px; height:32px; border-radius:6px; border:none; background:transparent; color:#cbd5e1; cursor:pointer; font:600 14px 'Outfit'; transition: all .12s; }
+  .ns-ibtn:hover { background: rgba(74,222,128,0.15); color:#4ade80; }
+  .ns-zoom { font-size:12px; color:#94a3b8; min-width:46px; text-align:center; font-variant-numeric: tabular-nums; }
+
+  /* Canvas */
+  .ns-canvas-wrap { position:fixed; inset:64px 0 0 0; z-index:1; }
+
+  /* Tooltip */
+  .ns-tooltip { position:fixed; z-index:40; pointer-events:none; max-width:280px;
+    background: rgba(15,15,35,0.96); border:1px solid rgba(74,222,128,0.28); border-radius:12px; padding:12px 14px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 30px rgba(74,222,128,0.15);
+  }
+  .ns-tt-type { font-size:10px; text-transform:uppercase; letter-spacing:0.14em; font-weight:600; margin-bottom:4px; }
+  .ns-tt-title { font-size:15px; font-weight:700; margin-bottom:6px; }
+  .ns-tt-desc { font-size:12px; color:#cbd5e1; line-height:1.4; }
+
+  /* Info panel */
+  .ns-info-panel {
+    position:fixed; top:84px; right:20px; bottom:20px; width:380px; z-index:15;
+    background: rgba(15,15,35,0.94); border:1px solid rgba(74,222,128,0.22); border-radius:16px; padding:24px;
+    overflow-y:auto; transition: transform .35s cubic-bezier(.4,0,.2,1), opacity .3s;
+    box-shadow: -10px 0 40px rgba(0,0,0,0.4), 0 0 60px rgba(74,222,128,0.08);
+  }
+  .ns-info-panel.ns-hidden { transform: translateX(420px); opacity:0; pointer-events:none; }
+  .ns-close { position:absolute; top:16px; right:16px; width:32px; height:32px; border-radius:8px;
+    border:1px solid rgba(255,255,255,0.1); background:transparent; color:#cbd5e1; font-size:20px; cursor:pointer; transition: transform .2s, background .2s, color .2s; }
+  .ns-close:hover { transform: rotate(90deg); background: rgba(248,113,113,0.15); color:#f87171; border-color:rgba(248,113,113,0.35); }
+  .ns-info-overline { font-size:10px; text-transform:uppercase; letter-spacing:0.16em; font-weight:700; margin-bottom:6px; }
+  .ns-info-title { font-size:26px; font-weight:700; letter-spacing:-0.01em; margin:0 0 20px; }
+  .ns-info-section { margin-bottom:18px; }
+  .ns-info-section h3 { font-size:10px; text-transform:uppercase; letter-spacing:0.14em; color:#64748b; font-weight:600; margin:0 0 8px; }
+  .ns-info-section p { font-size:13px; line-height:1.55; color:#cbd5e1; margin:0; }
+  .ns-tag { display:inline-block; padding:3px 9px; margin:2px 4px 2px 0; border-radius:999px; font-size:11px; font-weight:600; }
+  .ns-tag-outline { background: transparent; border:1px solid rgba(203,213,225,0.28); color:#cbd5e1; }
+
+  /* Legend */
+  .ns-legend { position:fixed; bottom:20px; right:20px; width:300px; z-index:10;
+    background: rgba(15,15,35,0.92); border:1px solid rgba(255,255,255,0.08); border-radius:14px; }
+  .ns-legend-header { display:flex; align-items:center; justify-content:space-between; padding:12px 16px; cursor:pointer; border-bottom:1px solid rgba(255,255,255,0.06); }
+  .ns-legend-header h3 { margin:0; font-size:11px; text-transform:uppercase; letter-spacing:0.14em; color:#94a3b8; font-weight:600; }
+  .ns-legend-chev { color:#4ade80; }
+  .ns-legend-body { padding:12px 16px; display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  .ns-legend-sec { font-size:10px; text-transform:uppercase; letter-spacing:0.14em; color:#64748b; font-weight:600; margin-bottom:6px; }
+  .ns-legend-item { display:flex; align-items:center; gap:8px; font-size:11px; color:#cbd5e1; margin-bottom:6px; }
+  .ns-shape { flex-shrink:0; display:inline-flex; align-items:center; justify-content:center; font-size:9px; font-weight:700; color:#0a0a1a; box-shadow:0 0 8px currentColor; }
+  .ns-circle { width:14px; height:14px; border-radius:50%; }
+  .ns-circ-sm { width:10px; height:10px; border-radius:50%; }
+  .ns-pill { width:20px; height:11px; border-radius:6px; }
+  .ns-hex { width:14px; height:14px; clip-path: polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%); }
+  .ns-dia { width:12px; height:12px; transform: rotate(45deg); }
+  .ns-line { width:24px; height:2px; border-radius:1px; flex-shrink:0; }
+  .ns-l-syn { background: rgba(96,165,250,0.9); }
+  .ns-l-deg { background: repeating-linear-gradient(90deg, rgba(248,113,113,0.9) 0 4px, transparent 4px 7px); }
+  .ns-l-reu { background: repeating-linear-gradient(90deg, rgba(34,211,238,0.9) 0 4px, transparent 4px 8px); }
+  .ns-l-con { background: repeating-linear-gradient(90deg, rgba(245,158,11,0.8) 0 3px, transparent 3px 6px); }
+
+  /* Minimap */
+  .ns-minimap { position:fixed; bottom:20px; left:20px; width:220px; height:165px; z-index:10;
+    background: rgba(15,15,35,0.92); border:1px solid rgba(255,255,255,0.1); border-radius:12px; overflow:hidden; }
+  .ns-mm-vp { position:absolute; border:1.5px solid #4ade80; background: rgba(74,222,128,0.08); box-shadow: 0 0 12px rgba(74,222,128,0.3); pointer-events:none; border-radius:2px; }
+
+  /* Hint */
+  .ns-hint { position:fixed; top:80px; left:50%; transform:translateX(-50%); z-index:5;
+    padding:8px 16px; background: rgba(15,15,35,0.88); border:1px solid rgba(255,255,255,0.08); border-radius:999px;
+    font-size:11px; color:#94a3b8; letter-spacing:0.06em; }
+  .ns-hint strong { color:#4ade80; font-weight:600; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<div class="ns-hint">Przeciągnij, aby przesunąć · Kółko myszy, aby przybliżyć · Kliknij węzeł, aby zobaczyć szczegóły</div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script type="text/babel">
+
+/* ===== Toolbar.jsx ===== */
+// Toolbar.jsx — top chrome
+const Toolbar = ({ zoom, onZoomIn, onZoomOut, onReset, systems, onToggleSystem, interactions, onToggleInteractions }) => {
+  const [openFilter, setOpenFilter] = React.useState(false);
+  return (
+    <header className="ns-toolbar">
+      <div className="ns-brand">NeuroShit</div>
+      <span className="ns-subtitle">Neuro · Atlas Biochemiczny</span>
+
+      <div className="ns-filter-wrap" style={{ marginLeft: 'auto', position: 'relative' }}>
+        <button className="ns-filter-toggle" onClick={() => setOpenFilter(o => !o)}>Systemy</button>
+        {openFilter && (
+          <div className="ns-filter-dropdown">
+            {systems.map(s => (
+              <label key={s.id} className="ns-filter-item" onClick={e => { if (e.target.tagName !== 'INPUT') e.preventDefault(); }}>
+                <input type="checkbox" checked={s.active} onChange={() => onToggleSystem(s.id)} />
+                <span className="ns-filter-dot" style={{ background: s.color, color: s.color }}></span>
+                <span>{s.name}</span>
+              </label>
+            ))}
+          </div>
+        )}
+      </div>
+
+      <button className={`ns-filter-toggle ${interactions ? 'active' : ''}`} onClick={onToggleInteractions}>Interakcje</button>
+
+      <div className="ns-ctrl-group">
+        <button className="ns-ibtn" onClick={onZoomOut} title="Oddal (−)">−</button>
+        <span className="ns-zoom">{Math.round(zoom * 100)}%</span>
+        <button className="ns-ibtn" onClick={onZoomIn} title="Przybliż (+)">+</button>
+        <button className="ns-ibtn" onClick={onReset} title="Reset (0)">⌂</button>
+      </div>
+    </header>
+  );
+};
+
+window.Toolbar = Toolbar;
+
+
+/* ===== Tooltip.jsx ===== */
+// Tooltip.jsx — hover card
+const Tooltip = ({ node, pos }) => {
+  if (!node) return null;
+  return (
+    <div className="ns-tooltip" style={{ left: pos.x + 14, top: pos.y + 14 }}>
+      <div className="ns-tt-type" style={{ color: node.color }}>{node.typeLabel}</div>
+      <div className="ns-tt-title">{node.label}</div>
+      <div className="ns-tt-desc">{node.description}</div>
+    </div>
+  );
+};
+
+window.Tooltip = Tooltip;
+
+
+/* ===== InfoPanel.jsx ===== */
+// InfoPanel.jsx — right-docked detail panel
+const InfoPanel = ({ node, onClose }) => {
+  const open = !!node;
+  return (
+    <div className={`ns-info-panel ${open ? '' : 'ns-hidden'}`}>
+      <button className="ns-close" onClick={onClose} aria-label="Zamknij">×</button>
+      {node && (
+        <>
+          <div className="ns-info-overline" style={{ color: node.color }}>{node.typeLabel}</div>
+          <h2 className="ns-info-title">{node.label}</h2>
+          {node.formula && (
+            <div className="ns-info-section">
+              <h3>Wzór sumaryczny</h3>
+              <p style={{ fontFamily: "'Fira Code', monospace" }}>{node.formula}</p>
+            </div>
+          )}
+          <div className="ns-info-section">
+            <h3>Opis</h3>
+            <p>{node.description}</p>
+          </div>
+          {node.gProtein && (
+            <div className="ns-info-section">
+              <h3>Białko G · Sygnalizacja</h3>
+              <p>
+                <span className="ns-tag" style={{ background: node.color, color: '#0a0a1a' }}>{node.gProtein}</span>
+                {node.signaling && <span className="ns-tag ns-tag-outline">{node.signaling}</span>}
+              </p>
+            </div>
+          )}
+          {node.functions && (
+            <div className="ns-info-section">
+              <h3>Funkcje</h3>
+              <p>{node.functions.join(' · ')}</p>
+            </div>
+          )}
+          {node.ligands && (
+            <div className="ns-info-section">
+              <h3>Ligandy naturalne</h3>
+              <p>{node.ligands.map((l, i) => <span key={i} className="ns-tag ns-tag-outline">{l}</span>)}</p>
+            </div>
+          )}
+          {node.agonists && (
+            <div className="ns-info-section">
+              <h3>Agoniści farmakologiczni</h3>
+              <p>{node.agonists.map((l, i) => <span key={i} className="ns-tag" style={{ background:'rgba(74,222,128,0.18)', color:'#4ade80', border:'1px solid rgba(74,222,128,0.35)' }}>{l}</span>)}</p>
+            </div>
+          )}
+          {node.antagonists && (
+            <div className="ns-info-section">
+              <h3>Antagoniści</h3>
+              <p>{node.antagonists.map((l, i) => <span key={i} className="ns-tag" style={{ background:'rgba(248,113,113,0.18)', color:'#f87171', border:'1px solid rgba(248,113,113,0.35)' }}>{l}</span>)}</p>
+            </div>
+          )}
+        </>
+      )}
+    </div>
+  );
+};
+
+window.InfoPanel = InfoPanel;
+
+
+/* ===== Legend.jsx ===== */
+// Legend.jsx — bottom-right node + edge key
+const Legend = () => {
+  const [open, setOpen] = React.useState(true);
+  return (
+    <aside className="ns-legend">
+      <header className="ns-legend-header" onClick={() => setOpen(o => !o)}>
+        <h3>Legenda</h3>
+        <span className="ns-legend-chev">{open ? '▾' : '▸'}</span>
+      </header>
+      {open && (
+        <div className="ns-legend-body">
+          <div className="ns-legend-col">
+            <div className="ns-legend-sec">Węzły</div>
+            <div className="ns-legend-item"><span className="ns-shape ns-circle" style={{ background:'#4ade80', color:'#4ade80' }}></span>Neuroprzekaźnik</div>
+            <div className="ns-legend-item"><span className="ns-shape ns-pill" style={{ background:'#60a5fa' }}>E</span>Enzym syntezy</div>
+            <div className="ns-legend-item"><span className="ns-shape ns-pill" style={{ background:'#f87171' }}>E</span>Enzym degradacji</div>
+            <div className="ns-legend-item"><span className="ns-shape ns-hex" style={{ background:'#c084fc' }}></span>Receptor</div>
+            <div className="ns-legend-item"><span className="ns-shape ns-dia" style={{ background:'#22d3ee' }}></span>Transporter</div>
+            <div className="ns-legend-item"><span className="ns-shape ns-circ-sm" style={{ background:'#f59e0b', color:'#f59e0b' }}></span>Prekursor</div>
+            <div className="ns-legend-item"><span className="ns-shape ns-circ-sm" style={{ background:'#94a3b8' }}></span>Metabolit</div>
+          </div>
+          <div className="ns-legend-col">
+            <div className="ns-legend-sec">Połączenia</div>
+            <div className="ns-legend-item"><span className="ns-line ns-l-syn"></span>Synteza</div>
+            <div className="ns-legend-item"><span className="ns-line ns-l-deg"></span>Degradacja</div>
+            <div className="ns-legend-item"><span className="ns-line ns-l-reu"></span>Wychwyt zwrotny</div>
+            <div className="ns-legend-item"><span className="ns-line ns-l-con"></span>Konwersja prekursora</div>
+          </div>
+        </div>
+      )}
+    </aside>
+  );
+};
+
+window.Legend = Legend;
+
+
+/* ===== Minimap.jsx ===== */
+// Minimap.jsx — bottom-left overview with viewport rectangle
+const Minimap = ({ nodes, camera, bounds }) => {
+  const w = 220, h = 165;
+  if (!bounds) return <div className="ns-minimap"></div>;
+  const { minX, minY, maxX, maxY } = bounds;
+  const sx = (w - 20) / (maxX - minX || 1);
+  const sy = (h - 20) / (maxY - minY || 1);
+  const s = Math.min(sx, sy);
+  const offX = (w - (maxX - minX) * s) / 2 - minX * s;
+  const offY = (h - (maxY - minY) * s) / 2 - minY * s;
+
+  // viewport rect approximation
+  const vp = {
+    left: Math.max(0, Math.min(w, offX + (camera.x - 400 / camera.scale) * s)) ,
+    top: Math.max(0, Math.min(h, offY + (camera.y - 300 / camera.scale) * s)),
+    width: Math.min(w, (800 / camera.scale) * s),
+    height: Math.min(h, (600 / camera.scale) * s),
+  };
+
+  return (
+    <div className="ns-minimap">
+      <svg viewBox={`0 0 ${w} ${h}`} width={w} height={h}>
+        {nodes.map(n => (
+          <circle key={n.id} cx={offX + n.x * s} cy={offY + n.y * s} r="2.5" fill={n.color} opacity="0.9"/>
+        ))}
+      </svg>
+      <div className="ns-mm-vp" style={{ left: vp.left, top: vp.top, width: Math.max(20, vp.width), height: Math.max(20, vp.height) }}></div>
+    </div>
+  );
+};
+
+window.Minimap = Minimap;
+
+
+/* ===== AtlasCanvas.jsx ===== */
+// AtlasCanvas.jsx — canvas-rendered biochemical graph (cosmetic subset)
+const { useEffect, useRef, useState } = React;
+
+// Subset of nodes from the dopamine + serotonin + noradrenaline systems
+const NODES = [
+  // Dopamine
+  { id:'DA_Tyr', type:'precursor', label:'Tyrozyna', x:80, y:200, formula:'C₉H₁₁NO₃', description:'Aminokwas — bezpośredni prekursor syntezy katecholamin.', sys:'dopamine' },
+  { id:'DA_TH', type:'syntheticEnzyme', label:'TH', fullLabel:'TH (Hydroksylaza tyrozyny)', x:230, y:200, description:'Hydroksylaza tyrozynowa — etap limitujący syntezę katecholamin. Tyr→L-DOPA. Kofaktor: BH4, Fe²⁺, O₂.', sys:'dopamine' },
+  { id:'DA_LDOPA', type:'precursor', label:'L-DOPA', x:380, y:200, formula:'C₉H₁₁NO₄', description:'L-3,4-dihydroksyfenyloalanina. Prekursor dopaminy. Stosowana w chorobie Parkinsona.', sys:'dopamine' },
+  { id:'AADC', type:'syntheticEnzyme', label:'AADC', fullLabel:'AADC (Dekarboksylaza aminokwasów arom.)', x:530, y:200, description:'Dekarboksylaza L-aminokwasów aromatycznych. Katalizuje L-DOPA→dopamina oraz 5-HTP→serotonina. Kofaktor: pirydoksal (B6).', sys:'dopamine' },
+  { id:'DA', type:'neurotransmitter', label:'Dopamina', x:700, y:200, formula:'C₈H₁₁NO₂', description:'Katecholamina. Kluczowa rola w: nagroda i motywacja, funkcje wykonawcze, kontrola ruchowa, regulacja prolaktyny.', sys:'dopamine' },
+  { id:'DA_D1', type:'receptor', label:'D₁', x:870, y:100, description:'Receptor D1. D1-like (Gs). ↑cAMP. Pamięć robocza, nagroda.', gProtein:'Gs/Golf', signaling:'↑cAMP → PKA', functions:['Pamięć robocza','Nagroda','Lokomocja'], ligands:['Dopamina'], agonists:['SKF-81297','Fenoldopam'], antagonists:['SCH-23390','Ecopipam'], sys:'dopamine' },
+  { id:'DA_D2', type:'receptor', label:'D₂', x:870, y:200, description:'Receptor D2. D2-like (Gi/Go). ↓cAMP. Cel leków przeciwpsychotycznych.', gProtein:'Gi/Go', signaling:'↓cAMP, ↑K⁺, ↓Ca²⁺', functions:['Kontrola ruchowa','Hamowanie prolaktyny','Nagroda','Autoreceptor'], ligands:['Dopamina'], agonists:['Bromokryptyna','Pramipeksol','Ropinirol'], antagonists:['Haloperidol','Olanzapina','Risperidon','Aripiprazol'], sys:'dopamine' },
+  { id:'DA_D3', type:'receptor', label:'D₃', x:870, y:300, description:'Receptor D3. D2-like. Jądro półleżące. Rola w uzależnieniach.', gProtein:'Gi/Go', signaling:'↓cAMP', functions:['Uzależnienia','Nastrój','Poznanie'], ligands:['Dopamina'], agonists:['Pramipeksol','Rotigotyna'], antagonists:['Buspiron (słaby)'], sys:'dopamine' },
+  { id:'DAT', type:'transporter', label:'DAT', x:700, y:330, description:'Transporter dopaminy (SLC6A3). Cel: kokaina, amfetamina, metylfenidat.', sys:'dopamine' },
+  { id:'MAO-A', type:'catabolicEnzyme', label:'MAO-A', x:700, y:60, description:'Monoaminooksydaza A. Główny enzym degradacji serotoniny, noradrenaliny i dopaminy. Hamowany przez moklobemid.', sys:'shared' },
+
+  // Serotonin (left side)
+  { id:'5HT_Trp', type:'precursor', label:'Tryptofan', x:80, y:430, formula:'C₁₁H₁₂N₂O₂', description:'Aminokwas egzogenny. Prekursor serotoniny i melatoniny.', sys:'serotonin' },
+  { id:'5HT_TPH2', type:'syntheticEnzyme', label:'TPH2', fullLabel:'TPH2 (Hydroksylaza tryptofanu 2)', x:230, y:430, description:'Hydroksylaza tryptofanu 2. OUN: jądra szwu. Etap limitujący syntezę 5-HT w mózgu.', sys:'serotonin' },
+  { id:'5HT_5HTP', type:'precursor', label:'5-HTP', x:380, y:430, formula:'C₁₁H₁₂N₂O₃', description:'5-hydroksytryptofan. Pośredni prekursor serotoniny.', sys:'serotonin' },
+  { id:'5HT', type:'neurotransmitter', label:'Serotonina', x:700, y:500, formula:'C₁₀H₁₂N₂O', description:'5-hydroksytryptamina. Regulacja nastroju, snu, apetytu, bólu. 90% w jelicie.', sys:'serotonin' },
+  { id:'5HT_2A', type:'receptor', label:'5-HT₂A', x:870, y:430, description:'5-HT2A. Gq→↑IP3/DAG. Cel psychodelików (LSD, psylocybina).', gProtein:'Gq/11', signaling:'↑IP3/DAG → ↑Ca²⁺, PKC', functions:['Percepcja','Halucynacje','Plastyczność synaptyczna'], ligands:['Serotonina','DMT'], agonists:['LSD','Psylocybina','Meskalina','DMT'], antagonists:['Klozapina','Olanzapina','Trazodon'], sys:'serotonin' },
+  { id:'5HT_1A', type:'receptor', label:'5-HT₁A', x:870, y:530, description:'5-HT1A. Gi/Go→↓cAMP. Cel: buspiron (lęk).', gProtein:'Gi/Go', signaling:'↓cAMP, ↑K⁺ (GIRK)', functions:['Anksjoliza','Antydepresja','Autoreceptor'], ligands:['Serotonina'], agonists:['Buspiron','Tandospiron'], antagonists:['WAY-100635'], sys:'serotonin' },
+  { id:'SERT', type:'transporter', label:'SERT', x:530, y:570, description:'Transporter serotoniny (SLC6A4). Cel SSRI (fluoksetyna, sertralina) i MDMA.', sys:'serotonin' },
+];
+
+const EDGES = [
+  ['DA_Tyr','DA_TH','conversion'], ['DA_TH','DA_LDOPA','synthesis'],
+  ['DA_LDOPA','AADC','conversion'], ['AADC','DA','synthesis'],
+  ['DA','DA_D1','binding'], ['DA','DA_D2','binding'], ['DA','DA_D3','binding'],
+  ['DAT','DA','reuptake'], ['DA','MAO-A','degradation'],
+  ['5HT_Trp','5HT_TPH2','conversion'], ['5HT_TPH2','5HT_5HTP','synthesis'],
+  ['5HT_5HTP','AADC','conversion'], ['AADC','5HT','synthesis'],
+  ['5HT','5HT_2A','binding'], ['5HT','5HT_1A','binding'],
+  ['SERT','5HT','reuptake'],
+];
+
+const TYPE_COLORS = {
+  neurotransmitter:'#4ade80', syntheticEnzyme:'#60a5fa', catabolicEnzyme:'#f87171',
+  receptor:'#c084fc', transporter:'#22d3ee', precursor:'#f59e0b', metabolite:'#94a3b8',
+};
+const TYPE_LABELS = {
+  neurotransmitter:'Neuroprzekaźnik', syntheticEnzyme:'Enzym syntezy',
+  catabolicEnzyme:'Enzym degradacji', receptor:'Receptor',
+  transporter:'Transporter', precursor:'Prekursor', metabolite:'Metabolit',
+};
+const EDGE_STYLES = {
+  synthesis:   { color:'rgba(96,165,250,0.85)', width:1.5, dash:[] },
+  degradation: { color:'rgba(248,113,113,0.9)', width:1.5, dash:[6,3] },
+  binding:     { color:'rgba(192,132,252,0.85)', width:2, dash:[8,4] },
+  reuptake:    { color:'rgba(34,211,238,0.85)', width:1.5, dash:[5,4] },
+  conversion:  { color:'rgba(245,158,11,0.75)', width:1.8, dash:[4,3] },
+};
+
+const AtlasCanvas = ({ activeSystems, onSelectNode, onHoverNode }) => {
+  const canvasRef = useRef(null);
+  const wrapRef = useRef(null);
+  const [camera, setCamera] = useState({ x: 450, y: 350, scale: 0.85 });
+  const dragRef = useRef(null);
+  const [hoverId, setHoverId] = useState(null);
+  const [mouse, setMouse] = useState({ x: 0, y: 0 });
+
+  const visibleNodes = NODES.filter(n => activeSystems.has(n.sys) || n.sys === 'shared');
+  const visibleIds = new Set(visibleNodes.map(n => n.id));
+  const visibleEdges = EDGES.filter(([a,b]) => visibleIds.has(a) && visibleIds.has(b));
+
+  // draw
+  useEffect(() => {
+    const cvs = canvasRef.current; if (!cvs) return;
+    const dpr = window.devicePixelRatio || 1;
+    const rect = cvs.getBoundingClientRect();
+    cvs.width = rect.width * dpr; cvs.height = rect.height * dpr;
+    const ctx = cvs.getContext('2d');
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, rect.width, rect.height);
+
+    // camera
+    ctx.save();
+    ctx.translate(rect.width/2 - camera.x * camera.scale, rect.height/2 - camera.y * camera.scale);
+    ctx.scale(camera.scale, camera.scale);
+
+    // edges
+    visibleEdges.forEach(([a,b,type]) => {
+      const na = NODES.find(n=>n.id===a), nb = NODES.find(n=>n.id===b);
+      if (!na || !nb) return;
+      const st = EDGE_STYLES[type] || EDGE_STYLES.synthesis;
+      ctx.beginPath();
+      ctx.moveTo(na.x, na.y); ctx.lineTo(nb.x, nb.y);
+      ctx.strokeStyle = st.color; ctx.lineWidth = st.width/camera.scale;
+      ctx.setLineDash(st.dash);
+      ctx.stroke();
+      // arrow
+      const ang = Math.atan2(nb.y-na.y, nb.x-na.x);
+      const inset = 32/camera.scale;
+      const tx = nb.x - Math.cos(ang)*inset, ty = nb.y - Math.sin(ang)*inset;
+      const aSize = 6/camera.scale;
+      ctx.beginPath();
+      ctx.moveTo(tx, ty);
+      ctx.lineTo(tx - Math.cos(ang-0.5)*aSize, ty - Math.sin(ang-0.5)*aSize);
+      ctx.lineTo(tx - Math.cos(ang+0.5)*aSize, ty - Math.sin(ang+0.5)*aSize);
+      ctx.closePath(); ctx.fillStyle = st.color; ctx.fill();
+      ctx.setLineDash([]);
+    });
+
+    // nodes
+    visibleNodes.forEach(n => {
+      const c = TYPE_COLORS[n.type];
+      const hovered = hoverId === n.id;
+      ctx.save();
+      ctx.shadowBlur = hovered ? 24 : 10;
+      ctx.shadowColor = c;
+      ctx.fillStyle = c;
+      if (n.type === 'neurotransmitter') {
+        ctx.beginPath(); ctx.arc(n.x, n.y, 34, 0, Math.PI*2); ctx.fill();
+      } else if (n.type === 'precursor') {
+        ctx.beginPath(); ctx.arc(n.x, n.y, 26, 0, Math.PI*2); ctx.fill();
+      } else if (n.type === 'metabolite') {
+        ctx.beginPath(); ctx.arc(n.x, n.y, 16, 0, Math.PI*2); ctx.fill();
+      } else if (n.type === 'receptor') {
+        const r = 26;
+        ctx.beginPath();
+        for (let i=0;i<6;i++){const a=Math.PI/3*i - Math.PI/2; const px=n.x+Math.cos(a)*r, py=n.y+Math.sin(a)*r; if(i===0) ctx.moveTo(px,py); else ctx.lineTo(px,py);}
+        ctx.closePath(); ctx.fill();
+      } else if (n.type === 'transporter') {
+        const r = 24;
+        ctx.beginPath();
+        ctx.moveTo(n.x, n.y-r); ctx.lineTo(n.x+r, n.y); ctx.lineTo(n.x, n.y+r); ctx.lineTo(n.x-r, n.y);
+        ctx.closePath(); ctx.fill();
+      } else {
+        // enzyme — pill
+        const w=80, h=30;
+        ctx.beginPath();
+        const x=n.x-w/2, y=n.y-h/2, r=h/2;
+        ctx.moveTo(x+r,y); ctx.lineTo(x+w-r,y); ctx.arc(x+w-r,y+r,r,-Math.PI/2,Math.PI/2);
+        ctx.lineTo(x+r,y+h); ctx.arc(x+r,y+r,r,Math.PI/2,-Math.PI/2);
+        ctx.closePath(); ctx.fill();
+      }
+      ctx.restore();
+
+      // label
+      ctx.fillStyle = n.type === 'metabolite' ? '#f1f5f9' : '#0a0a1a';
+      ctx.font = `700 ${n.type==='neurotransmitter'?14:12}px Outfit, sans-serif`;
+      ctx.textAlign='center'; ctx.textBaseline='middle';
+      ctx.fillText(n.label, n.x, n.y);
+    });
+
+    ctx.restore();
+  }, [camera, hoverId, activeSystems]);
+
+  // hit test
+  const hitTest = (mx, my) => {
+    const rect = canvasRef.current.getBoundingClientRect();
+    const wx = (mx - rect.width/2) / camera.scale + camera.x;
+    const wy = (my - rect.height/2) / camera.scale + camera.y;
+    for (let i=visibleNodes.length-1; i>=0; i--) {
+      const n = visibleNodes[i];
+      const r = n.type==='neurotransmitter'?34 : n.type==='precursor'?26 : n.type==='metabolite'?16 : n.type==='receptor'||n.type==='transporter'?26 : 42;
+      const dx=wx-n.x, dy=wy-n.y;
+      if (dx*dx+dy*dy < r*r) return n;
+    }
+    return null;
+  };
+
+  const onMouseMove = (e) => {
+    const rect = canvasRef.current.getBoundingClientRect();
+    const mx = e.clientX - rect.left, my = e.clientY - rect.top;
+    if (dragRef.current) {
+      const dx = mx - dragRef.current.mx, dy = my - dragRef.current.my;
+      setCamera(c => ({ ...c, x: dragRef.current.cx - dx/c.scale, y: dragRef.current.cy - dy/c.scale }));
+      return;
+    }
+    setMouse({ x: e.clientX, y: e.clientY });
+    const hit = hitTest(mx, my);
+    setHoverId(hit ? hit.id : null);
+    onHoverNode(hit, { x: e.clientX, y: e.clientY });
+  };
+
+  const onMouseDown = (e) => {
+    const rect = canvasRef.current.getBoundingClientRect();
+    const mx = e.clientX - rect.left, my = e.clientY - rect.top;
+    dragRef.current = { mx, my, cx: camera.x, cy: camera.y };
+  };
+  const onMouseUp = (e) => {
+    const rect = canvasRef.current.getBoundingClientRect();
+    const mx = e.clientX - rect.left, my = e.clientY - rect.top;
+    const start = dragRef.current;
+    dragRef.current = null;
+    if (start && Math.abs(mx-start.mx) < 3 && Math.abs(my-start.my) < 3) {
+      const hit = hitTest(mx, my);
+      if (hit) {
+        const fullNode = { ...hit, color: TYPE_COLORS[hit.type], typeLabel: TYPE_LABELS[hit.type] };
+        onSelectNode(fullNode);
+      }
+    }
+  };
+  const onWheel = (e) => {
+    e.preventDefault();
+    const delta = -e.deltaY * 0.001;
+    setCamera(c => ({ ...c, scale: Math.max(0.25, Math.min(3, c.scale * (1 + delta))) }));
+  };
+
+  // expose camera control
+  React.useEffect(() => {
+    window.__ns_zoom_in  = () => setCamera(c => ({ ...c, scale: Math.min(3, c.scale*1.2) }));
+    window.__ns_zoom_out = () => setCamera(c => ({ ...c, scale: Math.max(0.25, c.scale/1.2) }));
+    window.__ns_reset    = () => setCamera({ x: 450, y: 350, scale: 0.85 });
+  }, []);
+
+  // bounds for minimap
+  const bounds = {
+    minX: Math.min(...visibleNodes.map(n=>n.x)) - 60,
+    minY: Math.min(...visibleNodes.map(n=>n.y)) - 60,
+    maxX: Math.max(...visibleNodes.map(n=>n.x)) + 60,
+    maxY: Math.max(...visibleNodes.map(n=>n.y)) + 60,
+  };
+  window.__ns_minimap = { nodes: visibleNodes.map(n => ({ id:n.id, x:n.x, y:n.y, color: TYPE_COLORS[n.type] })), camera, bounds };
+
+  return (
+    <div className="ns-canvas-wrap" ref={wrapRef}>
+      <canvas ref={canvasRef}
+              onMouseMove={onMouseMove} onMouseDown={onMouseDown}
+              onMouseUp={onMouseUp} onMouseLeave={() => { dragRef.current=null; setHoverId(null); onHoverNode(null); }}
+              onWheel={onWheel}
+              style={{ width:'100%', height:'100%', cursor: dragRef.current ? 'grabbing' : hoverId ? 'pointer' : 'grab' }} />
+    </div>
+  );
+};
+
+window.AtlasCanvas = AtlasCanvas;
+window.TYPE_COLORS = TYPE_COLORS;
+
+
+</script>
+
+<script type="text/babel">
+const Toolbar = window.Toolbar;
+const Tooltip = window.Tooltip;
+const InfoPanel = window.InfoPanel;
+const Legend = window.Legend;
+const Minimap = window.Minimap;
+const AtlasCanvas = window.AtlasCanvas;
+
+const ALL_SYSTEMS = [
+  { id:'dopamine',      name:'Dopamina',        color:'#4ade80' },
+  { id:'serotonin',     name:'Serotonina',      color:'#c084fc' },
+  { id:'noradrenaline', name:'Noradrenalina',   color:'#60a5fa' },
+  { id:'gaba',          name:'GABA',            color:'#22d3ee' },
+  { id:'glutamate',     name:'Glutaminian',     color:'#f87171' },
+  { id:'acetylcholine', name:'Acetylocholina',  color:'#f59e0b' },
+  { id:'endocannabinoid', name:'Endokannabinoidy', color:'#10b981' },
+  { id:'opioid',        name:'Opioidy',         color:'#ec4899' },
+  { id:'histamine',     name:'Histamina',       color:'#eab308' },
+];
+
+function App() {
+  const [systems, setSystems] = React.useState(() => ALL_SYSTEMS.map(s => ({ ...s, active: s.id==='dopamine' || s.id==='serotonin' })));
+  const [selected, setSelected] = React.useState(null);
+  const [hover, setHover] = React.useState(null);
+  const [hoverPos, setHoverPos] = React.useState({ x:0, y:0 });
+  const [interactions, setInteractions] = React.useState(true);
+  const [, force] = React.useReducer(x=>x+1, 0);
+
+  const active = new Set(systems.filter(s=>s.active).map(s=>s.id));
+
+  React.useEffect(() => {
+    const onKey = e => {
+      if (e.key==='+' || e.key==='=') window.__ns_zoom_in && window.__ns_zoom_in();
+      if (e.key==='-') window.__ns_zoom_out && window.__ns_zoom_out();
+      if (e.key==='0') window.__ns_reset && window.__ns_reset();
+      if (e.key==='Escape') setSelected(null);
+    };
+    window.addEventListener('keydown', onKey);
+    const tick = setInterval(force, 80); // keep minimap in sync
+    return () => { window.removeEventListener('keydown', onKey); clearInterval(tick); };
+  }, []);
+
+  const toggleSys = (id) => setSystems(arr => arr.map(s => s.id===id ? { ...s, active: !s.active } : s));
+
+  const mm = window.__ns_minimap || { nodes:[], camera:{x:0,y:0,scale:1}, bounds:null };
+
+  return (
+    <>
+      <Toolbar
+        zoom={mm.camera.scale} systems={systems} onToggleSystem={toggleSys}
+        interactions={interactions} onToggleInteractions={()=>setInteractions(v=>!v)}
+        onZoomIn={()=>window.__ns_zoom_in()} onZoomOut={()=>window.__ns_zoom_out()} onReset={()=>window.__ns_reset()}
+      />
+      <AtlasCanvas activeSystems={active} onSelectNode={setSelected}
+                   onHoverNode={(n,p) => { setHover(n); if (p) setHoverPos(p); }} />
+      <Tooltip node={hover ? { ...hover, color: window.TYPE_COLORS[hover.type], typeLabel: ({neurotransmitter:'Neuroprzekaźnik',syntheticEnzyme:'Enzym syntezy',catabolicEnzyme:'Enzym degradacji',receptor:'Receptor',transporter:'Transporter',precursor:'Prekursor',metabolite:'Metabolit'})[hover.type] } : null} pos={hoverPos} />
+      <InfoPanel node={selected} onClose={() => setSelected(null)} />
+      <Legend />
+      <Minimap nodes={mm.nodes} camera={mm.camera} bounds={mm.bounds} />
+    </>
+  );
+}
+
+function mount() {
+  if (!window.Toolbar || !window.Tooltip || !window.InfoPanel || !window.Legend || !window.Minimap || !window.AtlasCanvas) {
+    return setTimeout(mount, 40);
+  }
+  ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+}
+mount();
+</script>
+</body>
+</html>

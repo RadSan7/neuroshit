@@ -1,0 +1,90 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="_shared.css"><style>
+  .stack { display:flex; flex-direction:column; gap:14px; padding: 20px 24px; }
+  .head { display:flex; align-items:center; justify-content:space-between; font-family:'Fira Code',monospace; font-size:10px; letter-spacing:0.14em; color:#64748b; text-transform:uppercase; }
+  .head .live { color:#4ade80; display:flex; align-items:center; gap:6px; }
+  .head .live::before { content:''; width:6px; height:6px; border-radius:50%; background:#4ade80; box-shadow:0 0 8px #4ade80; animation: pulse 1.6s infinite; }
+  @keyframes pulse { 0%,100% { opacity:1 } 50% { opacity:0.35 } }
+
+  .mm { position: relative; width: 320px; height: 200px; background: rgba(12,17,33,0.78); backdrop-filter: blur(16px);
+        border: 1px solid rgba(74,222,128,0.18); border-radius: 12px; overflow: hidden;
+        box-shadow: 0 12px 40px rgba(0,0,0,0.5), inset 0 0 60px rgba(74,222,128,0.04); }
+
+  /* subsystem clusters with soft colored fills */
+  .cluster { position:absolute; border-radius: 50%; filter: blur(14px); opacity: 0.55; }
+
+  /* edges — simulated with thin lines */
+  .edge { position:absolute; height:1px; background: rgba(148,163,184,0.35); transform-origin:left center; }
+
+  /* nodes */
+  .dot { position:absolute; width:5px; height:5px; border-radius:50%; box-shadow: 0 0 6px currentColor; transform: translate(-50%,-50%); }
+  .big  { width:9px; height:9px; }
+  .tiny { width:3px; height:3px; }
+
+  /* viewport rectangle with corner brackets */
+  .vp { position: absolute; top: 26%; left: 38%; width: 32%; height: 38%;
+        background: rgba(74,222,128,0.05); border: 1px dashed rgba(74,222,128,0.7); }
+  .vp::before, .vp::after, .vp i, .vp i::after {
+    content:''; position:absolute; width:10px; height:10px; border: 1.5px solid #4ade80; box-shadow: 0 0 6px #4ade80;
+  }
+  .vp::before { top:-2px; left:-2px; border-right:none; border-bottom:none; }
+  .vp::after  { top:-2px; right:-2px; border-left:none; border-bottom:none; }
+  .vp i { display:block; position:absolute; bottom:-2px; left:-2px; border-right:none; border-top:none; background:transparent; }
+  .vp i::after { bottom:-10px; left:calc(100% + 290px - 10px); right:-2px; border-left:none; border-top:none; }
+
+  /* crosshair through viewport center */
+  .cross-h, .cross-v { position:absolute; background: rgba(74,222,128,0.25); pointer-events:none; }
+  .cross-h { left:0; right:0; top:45%; height:1px; }
+  .cross-v { top:0; bottom:0; left:54%; width:1px; }
+
+  /* grid */
+  .mm::before {
+    content:''; position:absolute; inset:0;
+    background-image:
+      linear-gradient(rgba(74,222,128,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(74,222,128,0.04) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+
+  /* coordinate readout */
+  .coords { font-family:'Fira Code', monospace; font-size: 9px; color:#64748b; display:flex; gap:14px; letter-spacing:0.08em; }
+  .coords b { color:#4ade80; font-weight:500; }
+</style></head>
+<body><div class="card-pad">
+  <div class="label-tiny">Minimap — overview + draggable viewport</div>
+  <div class="stack">
+    <div class="head"><span>MAP.OVERVIEW</span><span class="live">LIVE · 87 nodes</span></div>
+    <div class="mm">
+      <!-- cluster glows -->
+      <div class="cluster" style="width:120px;height:120px;top:-30px;left:30px;background:#4ade80"></div>
+      <div class="cluster" style="width:110px;height:110px;top:40px;left:150px;background:#c084fc"></div>
+      <div class="cluster" style="width:90px;height:90px;top:100px;left:60px;background:#60a5fa;opacity:0.35"></div>
+      <div class="cluster" style="width:80px;height:80px;top:120px;left:220px;background:#f87171;opacity:0.3"></div>
+
+      <!-- edges -->
+      <div class="edge" style="top:22%;left:16%;width:58px;transform:rotate(18deg)"></div>
+      <div class="edge" style="top:30%;left:28%;width:48px;transform:rotate(-10deg)"></div>
+      <div class="edge" style="top:48%;left:42%;width:62px;transform:rotate(22deg)"></div>
+      <div class="edge" style="top:58%;left:54%;width:44px;transform:rotate(-18deg)"></div>
+      <div class="edge" style="top:36%;left:58%;width:40px;transform:rotate(35deg)"></div>
+
+      <!-- dots -->
+      <div class="dot big"  style="top:20%;left:18%; background:#4ade80; color:#4ade80"></div>
+      <div class="dot"      style="top:28%;left:28%; background:#60a5fa; color:#60a5fa"></div>
+      <div class="dot"      style="top:36%;left:38%; background:#60a5fa; color:#60a5fa"></div>
+      <div class="dot big"  style="top:44%;left:50%; background:#c084fc; color:#c084fc"></div>
+      <div class="dot"      style="top:52%;left:62%; background:#22d3ee; color:#22d3ee"></div>
+      <div class="dot big"  style="top:32%;left:66%; background:#c084fc; color:#c084fc"></div>
+      <div class="dot"      style="top:60%;left:72%; background:#f59e0b; color:#f59e0b"></div>
+      <div class="dot"      style="top:70%;left:44%; background:#f87171; color:#f87171"></div>
+      <div class="dot tiny" style="top:66%;left:30%; background:#94a3b8; color:#94a3b8"></div>
+      <div class="dot tiny" style="top:78%;left:58%; background:#94a3b8; color:#94a3b8"></div>
+      <div class="dot tiny" style="top:14%;left:48%; background:#94a3b8; color:#94a3b8"></div>
+
+      <div class="cross-h"></div>
+      <div class="cross-v"></div>
+      <div class="vp"><i></i></div>
+    </div>
+    <div class="coords"><span>X:<b>+234</b></span><span>Y:<b>-118</b></span><span>ZOOM:<b>1.2×</b></span><span>FOCUS:<b>dopamine</b></span></div>
+  </div>
+</div></body></html>

@@ -1,6 +1,6 @@
 # NeuroShit — Project Map
 
-Interactive biochemical map of neurotransmitter systems and brain regions. Pure static web app (HTML/CSS/JS, Canvas 2D).
+Interactive biochemical map of neurotransmitter systems. Pure static web app (HTML/CSS/JS, Canvas 2D).
 No build tooling, no package.json — runs directly in a browser (open `index.html` or serve statically).
 
 ## Entry point
@@ -12,7 +12,6 @@ No build tooling, no package.json — runs directly in a browser (open `index.ht
   - `#info-panel` — slide-in details panel (right side).
   - `#minimap` — overview mini-canvas with draggable viewport rectangle.
   - `#legend` — node/connection legend (collapsible).
-  - `#toggleBrainRegions` / `#resetPositions` — region visibility + manual layout recovery controls.
 
 ## JavaScript
 
@@ -24,7 +23,6 @@ Exports `window.MEDICAL_ENCYCLOPEDIA`:
 - `sharedNodes` — enzymes shared across systems (AADC, MAO-A, MAO-B, COMT, DBH, PNMT, …).
 - `systems[]` — 9 neurotransmitter systems. Each has `id`, `name`, `color`, `nodes[]`, `connections[]`, optional `receptorGroups[]` (subtype hubs, e.g. D1/D2, 5-HT1/5-HT2).
 - `receptorInteractions[]` — cross-receptor modulation edges (facilitation/inhibition/modulation).
-- Brain-region nodes and region-presence edges are now part of the rendered atlas vocabulary.
 
 ### [script.js](script.js) — render + interaction engine (≈1600 lines, IIFE)
 Organised in thematic sections (all inside a single closure):
@@ -59,28 +57,8 @@ Not part of the runtime. Safe to ignore unless editing the encyclopedia.
 
 - [styles.css](styles.css) — single stylesheet. Sections: CSS variables, `body` background (radial-gradient stack), `#app` decorative layers (grid + glow), toolbar, tooltip, info-panel, minimap, legend, scrollbar, responsive (`max-width: 768px`).
 
-## Design System Workspace
-
-- [NeuroShit Design System/README.md](NeuroShit%20Design%20System/README.md) — visual direction, token philosophy, and preview inventory.
-- `NeuroShit Design System/colors_and_type.css` — design tokens and type system used as the visual reference source of truth.
-- `NeuroShit Design System/preview/` — isolated previews for colors, spacing, surfaces, and UI components.
-- `NeuroShit Design System/source/` — reference snapshot of the atlas implementation files.
-- `NeuroShit Design System/ui_kits/neuroshit/` — component-oriented UI references (`AtlasCanvas.jsx`, `Toolbar.jsx`, `InfoPanel.jsx`, `Legend.jsx`, `Minimap.jsx`, `Tooltip.jsx`).
-
-The runtime app still loads `styles.css` directly; the design-system workspace is currently a parallel reference package, not a wired build dependency.
-
-## Supporting Research And Assets
-
-- [assets/brain-human-lateral-view.svg](assets/brain-human-lateral-view.svg) — anatomical background used by the atlas.
-- [baza_receptorow_mozg.md](baza_receptorow_mozg.md) — curated receptor-to-brain-region research base used to extend regional atlas coverage.
-
 ## Backups
 - `script.js.bak`, `medical-encyclopedia.js.bak` — prior versions (not referenced).
-
-## Local-Only Artifacts
-
-- `.playwright-mcp/` — browser automation logs/snapshots. Not part of project history.
-- Root-level PNG captures are manual QA screenshots. Keep them local unless they are curated into documentation.
 
 ## Runtime topology
 
@@ -92,21 +70,8 @@ index.html
 
 No modules, no bundler, no framework. Everything talks via the single global and direct DOM IDs.
 
-## Current Snapshot
-
-- The atlas now presents neurotransmitters, enzymes, receptors, transporters, metabolites, and brain-region context in one canvas workspace.
-- UI chrome has shifted toward a dossier metaphor: richer hover cards, a structured side panel, minimap status chrome, and a denser legend/footer treatment.
-- A standalone design-system workspace now exists alongside the app to guide future UI refactors without introducing build tooling.
-
 ## Known performance hotspots
 
 1. `drawMinimap()` runs on **every** `draw()` call and re-assigns `canvas.width/height` each frame (full reallocation + clear). Should only repaint when `visibleNodes`/`visibleEdges` change; viewport rectangle can be updated purely via CSS on pan/zoom.
 2. `#app::after` uses `filter: blur(48px)` on a full-viewport layer — forces an offscreen raster on every repaint. Pre-blurred gradients are cheaper.
 3. `drawGrid()` paints the full visible grid every frame. Fine for pan/zoom, but could be rasterised to a tiled pattern if needed.
-
-## Next Implementation Steps
-
-1. Align runtime styling with the design-system token file so the live app and reference workspace cannot drift.
-2. Tackle the minimap/full-screen repaint costs before adding more dense regional overlays.
-3. Break `script.js` into smaller browser-loaded units after the interaction surface settles.
-4. Add lightweight regression checks for zoom, minimap sync, panel content, legend counts, and region toggling.

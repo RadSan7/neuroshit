@@ -1,0 +1,98 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="_shared.css"><style>
+.legend {
+  background: linear-gradient(180deg, rgba(6,16,29,0.94), rgba(4,8,18,0.94));
+  border: 1px solid rgba(74,222,128,0.22);
+  padding: 0;
+  width: 190px;
+  font-family: var(--font-mono);
+  position: relative;
+  clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+}
+.legend::before, .legend::after {
+  content:""; position:absolute; width:6px; height:6px;
+  border: solid #4ade80; border-width:0;
+}
+.legend::before { top:-1px; left:-1px; border-top-width:1px; border-left-width:1px; }
+.legend::after  { bottom:-1px; right:-1px; border-bottom-width:1px; border-right-width:1px; }
+
+.hd {
+  display:flex; justify-content:space-between; align-items:center;
+  padding: 5px 9px;
+  border-bottom: 1px dashed rgba(74,222,128,0.2);
+  background: rgba(74,222,128,0.05);
+  font-size: 9px; letter-spacing:0.14em; text-transform:uppercase;
+  color: #4ade80;
+}
+.hd .c { color: #64748b; }
+
+.sec {
+  font-size: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: #64748b;
+  padding: 6px 9px 2px;
+  display:flex; align-items:center; gap:4px;
+}
+.sec::before { content: "▸"; color:#4ade80; font-size: 8px; }
+
+.list { padding: 0 9px 6px; }
+.item {
+  display: grid;
+  grid-template-columns: 14px 1fr;
+  align-items: center;
+  gap: 8px;
+  font-size: 10px;
+  color: #cbd5e1;
+  padding: 2px 0;
+  letter-spacing: 0.01em;
+}
+
+.s-circ { width:10px; height:10px; border-radius:50%; box-shadow:0 0 6px currentColor; }
+.s-hex  { width:11px; height:11px; clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%); }
+.s-dia  { width:10px; height:10px; transform: rotate(45deg); box-shadow: 0 0 6px currentColor; }
+.s-pill { width:14px; height:8px; border-radius: 4px; }
+.s-sm   { width:6px; height:6px; border-radius:50%; box-shadow:0 0 6px currentColor; margin-left: 2px; }
+
+.line { width: 14px; height: 2px; }
+.l-syn { background: #4ade80; box-shadow: 0 0 4px #4ade80; }
+.l-deg { background: repeating-linear-gradient(90deg, #f87171 0 4px, transparent 4px 7px); }
+.l-bnd { background: repeating-linear-gradient(90deg, #c084fc 0 5px, transparent 5px 9px); }
+.l-reu { background: repeating-linear-gradient(90deg, #22d3ee 0 2px, transparent 2px 5px); }
+
+.ft {
+  padding: 4px 9px;
+  border-top: 1px dashed rgba(74,222,128,0.15);
+  background: rgba(0,0,0,0.25);
+  font-size: 8px; letter-spacing:0.12em; text-transform:uppercase;
+  color:#64748b;
+  display:flex; justify-content:space-between;
+}
+</style></head>
+<body><div class="card-pad">
+  <div class="label-tiny">Legend — compact key (190px)</div>
+  <aside class="legend">
+    <div class="hd"><span>LEGEND</span><span class="c">v2</span></div>
+
+    <div class="sec">Nodes</div>
+    <div class="list">
+      <div class="item"><span class="s-circ" style="background:#4ade80; color:#4ade80"></span><span>neurotransm.</span></div>
+      <div class="item"><span class="s-pill" style="background:#60a5fa"></span><span>synthesis enz.</span></div>
+      <div class="item"><span class="s-pill" style="background:#f87171"></span><span>catabolic enz.</span></div>
+      <div class="item"><span class="s-hex" style="background:#c084fc"></span><span>receptor</span></div>
+      <div class="item"><span class="s-dia" style="background:#22d3ee; color:#22d3ee"></span><span>transporter</span></div>
+      <div class="item"><span class="s-sm" style="background:#f59e0b; color:#f59e0b"></span><span>precursor</span></div>
+      <div class="item"><span class="s-sm" style="background:#94a3b8"></span><span>metabolite</span></div>
+    </div>
+
+    <div class="sec">Edges</div>
+    <div class="list">
+      <div class="item"><span class="line l-syn"></span><span>synteza</span></div>
+      <div class="item"><span class="line l-deg"></span><span>degradacja</span></div>
+      <div class="item"><span class="line l-bnd"></span><span>binding</span></div>
+      <div class="item"><span class="line l-reu"></span><span>reuptake</span></div>
+    </div>
+
+    <div class="ft"><span>N:157 · E:312</span><span>▾</span></div>
+  </aside>
+</div></body></html>

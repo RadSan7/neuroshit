@@ -1,0 +1,10 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="_shared.css"><style>
+.bg { position: absolute; inset:0; }
+.bg::before { content:""; position:absolute; inset:0; background: radial-gradient(circle at 16% 20%, rgba(74,222,128,0.16), transparent 0 22%), radial-gradient(circle at 82% 14%, rgba(34,211,238,0.15), transparent 0 24%), radial-gradient(circle at 52% 78%, rgba(251,146,60,0.1), transparent 0 26%), linear-gradient(180deg,#06101d,#040812); }
+.bg::after { content:""; position:absolute; inset:0; background: radial-gradient(circle at center, rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(148,163,184,0.05) 1px, transparent 1px), linear-gradient(rgba(148,163,184,0.05) 1px, transparent 1px); background-size: 26px 26px, 104px 104px, 104px 104px; opacity: 0.4; mask-image: radial-gradient(circle at center, rgba(0,0,0,1), transparent 95%); }
+.label { position: relative; z-index:2; padding: 20px 24px; color:#94a3b8; font-size:10px; font-family: var(--font-sans); font-weight:600; letter-spacing:1.2px; text-transform:uppercase; }
+</style></head>
+<body style="background:#040812"><div class="bg"></div>
+<div class="label">Background — radial glow stack over dot-grid + 4× larger grid lines, masked</div>
+</body></html>

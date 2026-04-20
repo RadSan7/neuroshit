@@ -1,0 +1,194 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="_shared.css"><style>
+.wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  height: 100%;
+  font-family: var(--font-mono);
+}
+.panel {
+  background: linear-gradient(180deg, rgba(6,16,29,0.92), rgba(4,8,18,0.92));
+  border: 1px solid rgba(74,222,128,0.22);
+  padding: 0;
+  position: relative;
+  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+  display: flex; flex-direction: column;
+}
+.panel::before, .panel::after {
+  content:""; position:absolute; width:8px; height:8px;
+  border: solid #4ade80; border-width:0;
+}
+.panel::before { top:-1px; left:-1px; border-top-width:1px; border-left-width:1px; }
+.panel::after  { bottom:-1px; right:-1px; border-bottom-width:1px; border-right-width:1px; }
+
+.hd {
+  display:flex; justify-content:space-between; align-items:center;
+  padding: 6px 10px;
+  border-bottom: 1px dashed rgba(74,222,128,0.2);
+  background: rgba(74,222,128,0.05);
+  font-size: 9px; letter-spacing:0.14em; text-transform:uppercase;
+  color: #4ade80;
+}
+.hd .idx { color:#64748b; }
+
+.body { padding: 10px 12px; display:flex; flex-direction:column; gap: 10px; flex:1; overflow: auto; }
+
+.title-row { display:flex; align-items:baseline; justify-content:space-between; gap: 8px; }
+.name { color: #f1f5f9; font-size: 18px; font-weight: 700; letter-spacing: -0.01em; }
+.formula { color: #22d3ee; font-size: 10px; letter-spacing: 0.06em; }
+
+.grid-2 { display:grid; grid-template-columns: 72px 1fr; gap: 6px 10px; font-size: 10px; }
+.grid-2 .k { color: #64748b; letter-spacing: 0.1em; text-transform:uppercase; }
+.grid-2 .v { color: #cbd5e1; }
+.grid-2 .v .hi { color: #4ade80; }
+
+.h3 {
+  font-size: 9px; text-transform: uppercase; letter-spacing: 0.14em;
+  color: #64748b; font-weight: 700;
+  display:flex; align-items:center; gap:6px;
+  margin-bottom: 5px;
+}
+.h3::before { content:"▸"; color:#4ade80; }
+
+.tags { display:flex; flex-wrap:wrap; gap: 4px; }
+.tag {
+  font-family: var(--font-mono);
+  font-size: 10px; font-weight: 600;
+  padding: 2px 7px; border-radius: 0;
+  letter-spacing: 0.03em;
+  border: 1px solid;
+  clip-path: polygon(0 0, calc(100% - 4px) 0, 100% 4px, 100% 100%, 4px 100%, 0 calc(100% - 4px));
+}
+.t-g { background: rgba(74,222,128,0.12); color:#4ade80; border-color: rgba(74,222,128,0.4); }
+.t-c { background: rgba(34,211,238,0.10); color:#22d3ee; border-color: rgba(34,211,238,0.35); }
+.t-r { background: rgba(248,113,113,0.10); color:#f87171; border-color: rgba(248,113,113,0.35); }
+.t-p { background: rgba(192,132,252,0.10); color:#c084fc; border-color: rgba(192,132,252,0.35); }
+.t-a { background: rgba(245,158,11,0.10); color:#f59e0b; border-color: rgba(245,158,11,0.35); }
+.t-o { background: rgba(255,255,255,0.04); color:#cbd5e1; border-color: rgba(255,255,255,0.12); }
+
+.bar {
+  height: 4px; background: rgba(255,255,255,0.05); position: relative;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.bar > i { position:absolute; inset:0 auto 0 0; background: linear-gradient(90deg, #4ade80, #22d3ee); box-shadow: 0 0 8px #4ade80; }
+
+.kv-list { display:flex; flex-direction:column; gap: 4px; }
+.kv {
+  display:grid; grid-template-columns: 1fr auto; gap: 8px;
+  font-size: 10px; align-items:center;
+  border-bottom: 1px dotted rgba(255,255,255,0.05);
+  padding: 3px 0;
+}
+.kv .l { color:#cbd5e1; }
+.kv .r { color:#4ade80; font-weight:600; letter-spacing:0.04em; }
+
+.ft {
+  padding: 5px 10px;
+  border-top: 1px dashed rgba(74,222,128,0.15);
+  background: rgba(0,0,0,0.3);
+  font-size: 9px; letter-spacing:0.1em; text-transform:uppercase;
+  color:#64748b;
+  display:flex; justify-content:space-between;
+}
+.ft .hz { color:#facc15; }
+
+.xref { color: #22d3ee; text-decoration: underline; text-decoration-style: dotted; }
+</style></head>
+<body><div class="card-pad">
+  <div class="label-tiny">Info panel — dense dossier layout</div>
+  <div class="wrap">
+    <!-- LEFT: identity + pharmacology -->
+    <section class="panel">
+      <div class="hd"><span>DOSSIER // RECEPTOR</span><span class="idx">NODE:0x2B · REV.014</span></div>
+      <div class="body">
+        <div class="title-row">
+          <div>
+            <div class="name">D₂</div>
+            <div class="formula">DRD2 · chr11q23.2 · 443aa</div>
+          </div>
+          <span class="tag t-p">RECEPTOR</span>
+        </div>
+
+        <div class="grid-2">
+          <span class="k">Class</span><span class="v">D2-like · <span class="hi">GPCR-A</span></span>
+          <span class="k">G-prot</span><span class="v">Gi/Go</span>
+          <span class="k">Signal</span><span class="v">↓cAMP · ↑K⁺(GIRK) · ↓Ca²⁺</span>
+          <span class="k">Expr</span><span class="v">striatum · VTA · pituitary</span>
+          <span class="k">Kd (DA)</span><span class="v"><span class="hi">1.8 nM</span></span>
+        </div>
+
+        <div>
+          <div class="h3">Funkcje</div>
+          <div class="tags">
+            <span class="tag t-o">motor-control</span>
+            <span class="tag t-o">reward</span>
+            <span class="tag t-o">prolactin ↓</span>
+            <span class="tag t-o">autoreceptor</span>
+          </div>
+        </div>
+
+        <div>
+          <div class="h3">Ligandy naturalne</div>
+          <div class="tags">
+            <span class="tag t-g">dopamina</span>
+          </div>
+        </div>
+
+        <div>
+          <div class="h3">Agoniści · Antagoniści</div>
+          <div class="tags">
+            <span class="tag t-g">bromokryptyna</span>
+            <span class="tag t-g">pramipeksol</span>
+            <span class="tag t-g">ropinirol</span>
+            <span class="tag t-r">haloperidol</span>
+            <span class="tag t-r">olanzapina</span>
+            <span class="tag t-r">risperidon</span>
+            <span class="tag t-a">aripiprazol*</span>
+          </div>
+        </div>
+      </div>
+      <div class="ft"><span>CONN · 14 EDGES</span><span><span class="hz">⚠</span> USE-CAUTION // EXTRAPYRAMIDAL</span></div>
+    </section>
+
+    <!-- RIGHT: affinity + connections + xrefs -->
+    <section class="panel">
+      <div class="hd"><span>BINDING PROFILE // Kᵢ</span><span class="idx">LIVE</span></div>
+      <div class="body">
+        <div class="kv-list">
+          <div class="kv"><span class="l">haloperidol</span><span class="r">1.4 nM</span></div>
+          <div class="bar"><i style="right:2%"></i></div>
+          <div class="kv"><span class="l">risperidon</span><span class="r">2.2 nM</span></div>
+          <div class="bar"><i style="right:6%"></i></div>
+          <div class="kv"><span class="l">olanzapina</span><span class="r">11 nM</span></div>
+          <div class="bar"><i style="right:24%"></i></div>
+          <div class="kv"><span class="l">aripiprazol</span><span class="r">0.34 nM</span> </div>
+          <div class="bar"><i style="right:1%"></i></div>
+          <div class="kv"><span class="l">klozapina</span><span class="r">126 nM</span></div>
+          <div class="bar"><i style="right:62%"></i></div>
+        </div>
+
+        <div>
+          <div class="h3">Powiązane węzły</div>
+          <div class="tags">
+            <span class="tag t-g">→ DA</span>
+            <span class="tag t-c">→ DAT</span>
+            <span class="tag t-r">→ MAO-A</span>
+            <span class="tag t-p">↔ D₁ · D₃</span>
+          </div>
+        </div>
+
+        <div>
+          <div class="h3">Xref · źródła</div>
+          <div class="kv-list">
+            <div class="kv"><span class="l"><span class="xref">UniProt</span></span><span class="r">P14416</span></div>
+            <div class="kv"><span class="l"><span class="xref">IUPHAR</span></span><span class="r">#215</span></div>
+            <div class="kv"><span class="l"><span class="xref">PDB</span></span><span class="r">6CM4 · 7JVR</span></div>
+            <div class="kv"><span class="l"><span class="xref">DrugBank</span></span><span class="r">12 agonistów</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="ft"><span>DATA · 2026.04.18</span><span>SHA: a7f3c2</span></div>
+    </section>
+  </div>
+</div></body></html>

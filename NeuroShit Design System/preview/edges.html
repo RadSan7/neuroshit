@@ -1,0 +1,58 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="_shared.css"><style>
+svg { width: 100%; height: 210px; }
+.lbl { font-size:11px; font-weight:600; font-family: var(--font-mono); letter-spacing:0.06em; text-transform:uppercase; }
+.sub { font-size:9px; font-family: var(--font-mono); fill:#64748b; letter-spacing:0.08em; }
+</style></head>
+<body><div class="card-pad">
+  <div class="label-tiny">Connection types — 7 distinct signal channels</div>
+  <svg viewBox="0 0 620 230" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <marker id="a-syn" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#4ade80"/></marker>
+      <marker id="a-deg" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#f87171"/></marker>
+      <marker id="a-bnd" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#c084fc"/></marker>
+      <marker id="a-reu" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#22d3ee"/></marker>
+      <marker id="a-cnv" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#f59e0b"/></marker>
+      <marker id="a-int" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#e879f9"/></marker>
+    </defs>
+    <g font-family="'Fira Code', monospace" font-size="11" fill="#cbd5e1">
+      <!-- col 1 -->
+      <line x1="20" y1="22" x2="170" y2="22" stroke="#4ade80" stroke-width="1.8" marker-end="url(#a-syn)" filter="drop-shadow(0 0 4px rgba(74,222,128,0.7))"/>
+      <text x="185" y="22" class="lbl" fill="#4ade80">SYNTEZA</text>
+      <text x="185" y="35" class="sub">solid · green · glow</text>
+
+      <line x1="20" y1="60" x2="170" y2="60" stroke="#f87171" stroke-width="1.8" stroke-dasharray="7,3" marker-end="url(#a-deg)"/>
+      <text x="185" y="60" class="lbl" fill="#f87171">DEGRADACJA</text>
+      <text x="185" y="73" class="sub">dash · red</text>
+
+      <line x1="20" y1="98" x2="170" y2="98" stroke="#c084fc" stroke-width="2" stroke-dasharray="9,5" marker-end="url(#a-bnd)"/>
+      <text x="185" y="98" class="lbl" fill="#c084fc">BINDING</text>
+      <text x="185" y="111" class="sub">long dash · purple</text>
+
+      <line x1="20" y1="136" x2="170" y2="136" stroke="#22d3ee" stroke-width="1.5" stroke-dasharray="2,3" marker-end="url(#a-reu)"/>
+      <text x="185" y="136" class="lbl" fill="#22d3ee">REUPTAKE</text>
+      <text x="185" y="149" class="sub">fine dot · cyan</text>
+
+      <!-- col 2 -->
+      <line x1="320" y1="22" x2="470" y2="22" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="1,4" stroke-linecap="round" marker-end="url(#a-cnv)"/>
+      <text x="485" y="22" class="lbl" fill="#f59e0b">KONWERSJA</text>
+      <text x="485" y="35" class="sub">dotted · amber</text>
+
+      <g>
+        <line x1="320" y1="60" x2="462" y2="60" stroke="#ec4899" stroke-width="2.6"/>
+        <line x1="462" y1="50" x2="462" y2="70" stroke="#ec4899" stroke-width="3.5"/>
+        <text x="485" y="60" class="lbl" fill="#ec4899">INHIBICJA</text>
+        <text x="485" y="73" class="sub">solid · T-cap · magenta</text>
+      </g>
+
+      <line x1="320" y1="98" x2="470" y2="98" stroke="#e879f9" stroke-width="1.5" stroke-dasharray="3,3,8,3" marker-end="url(#a-int)"/>
+      <text x="485" y="98" class="lbl" fill="#e879f9">INTERAKCJA</text>
+      <text x="485" y="111" class="sub">dash-dot · fuchsia</text>
+
+      <!-- divider + legend -->
+      <line x1="20" y1="172" x2="600" y2="172" stroke="rgba(255,255,255,0.06)" stroke-dasharray="2,4"/>
+      <text x="20" y="192" class="sub" fill="#64748b">// 7 CHANNELS · HUE-SEPARATED · PATTERN-REDUNDANT · AA-SAFE</text>
+      <text x="20" y="212" class="sub" fill="#64748b">// each edge type readable without color (dash pattern carries meaning)</text>
+    </g>
+  </svg>
+</div></body></html>

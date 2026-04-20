@@ -1,0 +1,22 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="_shared.css"><style>
+.grid { display:grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+.tok { background: rgba(10,15,28,0.6); border: 1px solid rgba(255,255,255,0.06); border-radius: 10px; padding: 8px; height: 82px; display:flex; flex-direction:column; gap:4px; align-items:flex-start; justify-content:flex-end; }
+.bar { width:100%; background: #4ade80; opacity: 0.85; border-radius: 4px; }
+.bar.s1 { height: 4px; } .bar.s2 { height: 8px; } .bar.s3 { height: 12px; } .bar.s4 { height: 16px; }
+.bar.s5 { height: 20px; } .bar.s6 { height: 24px; } .bar.s8 { height: 32px; } .bar.s10 { height: 40px; }
+.n { font-family: var(--font-mono); font-size: 10px; color:#22d3ee; }
+</style></head>
+<body><div class="card-pad">
+  <div class="label-tiny">Spacing scale — 4px base rhythm</div>
+  <div class="grid">
+    <div class="tok"><span class="n">--s-1 · 4</span><div class="bar s1"></div></div>
+    <div class="tok"><span class="n">--s-2 · 8</span><div class="bar s2"></div></div>
+    <div class="tok"><span class="n">--s-3 · 12</span><div class="bar s3"></div></div>
+    <div class="tok"><span class="n">--s-4 · 16</span><div class="bar s4"></div></div>
+    <div class="tok"><span class="n">--s-5 · 20</span><div class="bar s5"></div></div>
+    <div class="tok"><span class="n">--s-6 · 24</span><div class="bar s6"></div></div>
+    <div class="tok"><span class="n">--s-8 · 32</span><div class="bar s8"></div></div>
+    <div class="tok"><span class="n">--s-10 · 40</span><div class="bar s10"></div></div>
+  </div>
+</div></body></html>

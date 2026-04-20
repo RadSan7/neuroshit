@@ -1,0 +1,14 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><link rel="stylesheet" href="_shared.css"><style>
+.grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+.txt-sample { font-family: var(--font-sans); font-weight: 500; padding: 14px; border-radius: 10px; background: rgba(10,15,28,0.6); border: 1px solid rgba(255,255,255,0.05); }
+</style></head>
+<body><div class="card-pad">
+  <div class="label-tiny">Foreground text ramp</div>
+  <div class="grid">
+    <div class="swatch"><div class="txt-sample" style="color:#f1f5f9">Aa — primary</div><span class="name">--fg1</span><span>#F1F5F9</span></div>
+    <div class="swatch"><div class="txt-sample" style="color:#cbd5e1">Aa — secondary</div><span class="name">--fg2</span><span>#CBD5E1</span></div>
+    <div class="swatch"><div class="txt-sample" style="color:#94a3b8">Aa — muted</div><span class="name">--fg-muted</span><span>#94A3B8</span></div>
+    <div class="swatch"><div class="txt-sample" style="color:#64748b">Aa — dim</div><span class="name">--fg-dim</span><span>#64748B</span></div>
+  </div>
+</div></body></html>
