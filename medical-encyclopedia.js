@@ -87,7 +87,7 @@
   ];
 
   const DOPAMINE = {
-    id: "dopamine", name: "Układ dopaminowy", color: "#4ade80",
+    id: "dopamine", name: "Układ dopaminowy", color: "#22c55e",
     receptorGroups: [
       { label: "D₁-like", hubLabel: "D1-like", members: ["DA_D1", "DA_D5"] },
       { label: "D₂-like", hubLabel: "D2-like", members: ["DA_D2", "DA_D3", "DA_D4"] },
@@ -134,7 +134,7 @@
   };
 
   const NOREPINEPHRINE = {
-    id: "norepinephrine", name: "Układ noradrenergiczny", color: "#fb923c",
+    id: "norepinephrine", name: "Układ noradrenergiczny", color: "#f97316",
     receptorGroups: [
       { label: "α", hubLabel: "α", members: ["NE_a1", "NE_a2"] },
       { label: "β", hubLabel: "β", members: ["NE_b1", "NE_b2", "NE_b3"] },
@@ -172,7 +172,7 @@
   };
 
   const SEROTONIN = {
-    id: "serotonin", name: "Układ serotoninowy", color: "#a78bfa",
+    id: "serotonin", name: "Układ serotoninowy", color: "#c084fc",
     receptorGroups: [
       { label: "5-HT₁", hubLabel: "5HT1", members: ["5HT_1A", "5HT_1B", "5HT_1D", "5HT_1F"] },
       { label: "5-HT₂", hubLabel: "5HT2", members: ["5HT_2A", "5HT_2B", "5HT_2C"] },
@@ -238,7 +238,7 @@
   };
 
   const ACETYLCHOLINE = {
-    id: "acetylcholine", name: "Układ cholinergiczny", color: "#34d399",
+    id: "acetylcholine", name: "Układ cholinergiczny", color: "#06b6d4",
     receptorGroups: [
       { label: "Muskarynowe", hubLabel: "M", members: ["ACh_M1", "ACh_M2", "ACh_M3", "ACh_M4", "ACh_M5"] },
     ],
@@ -281,7 +281,7 @@
   };
 
   const GLUTAMATE = {
-    id: "glutamate", name: "Układ glutaminianowy", color: "#fbbf24",
+    id: "glutamate", name: "Układ glutaminianowy", color: "#eab308",
     nodes: [
       { id: "Glu_Gln", type: "precursor", label: "Glutamina", x: -1200, y: -250, formula: "C₅H₁₀N₂O₃", description: "Prekursor Glu. Syntetyzowana w astrocytach (cykl Glu-Gln)." },
       { id: "Glu_GLS", type: "syntheticEnzyme", label: "Glutaminaza\n(GLS)", x: -1200, y: -100, description: "Glutaminaza fosforanozależna. Gln→Glu+NH₃. Kluczowy enzym syntezy Glu w neuronach." },
@@ -313,7 +313,7 @@
   };
 
   const GABA_SYSTEM = {
-    id: "gaba", name: "Układ GABAergiczny", color: "#f472b6",
+    id: "gaba", name: "Układ GABAergiczny", color: "#ec4899",
     nodes: [
       { id: "GABA_GAD65", type: "syntheticEnzyme", label: "GAD65", x: -1300, y: 480, description: "Dekarboksylaza kwasu glutaminowego 65 kDa. Synteza GABA 'na żądanie'. Kofaktor: PLP (wit. B6). Autoantygen w cukrzycy typu 1." },
       { id: "GABA_GAD67", type: "syntheticEnzyme", label: "GAD67", x: -1100, y: 480, description: "Dekarboksylaza 67 kDa — >90% syntezy GABA. Ekspresja obniżona w schizofrenii." },
@@ -340,7 +340,7 @@
   };
 
   const HISTAMINE_SYS = {
-    id: "histamine", name: "Układ histaminowy", color: "#fb7185",
+    id: "histamine", name: "Układ histaminowy", color: "#ef4444",
     nodes: [
       { id: "His_His", type: "precursor", label: "Histydyna", x: 1600, y: 430, formula: "C₆H₉N₃O₂", description: "Aminokwas semi-esencjalny. Prekursor histaminy." },
       { id: "His_HDC", type: "syntheticEnzyme", label: "HDC\n(Dekarboksylaza\nhistydyny)", x: 1600, y: 540, description: "Jedyny enzym syntezujący histaminę. Kofaktor: PLP (B6)." },
@@ -371,7 +371,7 @@
   };
 
   const ENDORPHINS = {
-    id: "endorphins", name: "Układ opioidowy endogenny", color: "#a3e635",
+    id: "endorphins", name: "Układ opioidowy endogenny", color: "#84cc16",
     nodes: [
       { id: "Opi_POMC", type: "precursor", label: "POMC", x: -350, y: 430, description: "Proopiomelanokortyna. Prekursor: β-endorfina, ACTH, α-MSH. Przysadka, podwzgórze." },
       { id: "Opi_PENK", type: "precursor", label: "Proenkefalina", x: -180, y: 430, description: "Prekursor met/leu-enkefaliny. Prążkowie, ciało migdałowate, rdzeń kręgowy." },
@@ -406,7 +406,7 @@
   };
 
   const ENDOCANNABINOIDS = {
-    id: "endocannabinoids", name: "Układ endokannabinoidowy", color: "#2dd4bf",
+    id: "endocannabinoids", name: "Układ endokannabinoidowy", color: "#14b8a6",
     nodes: [
       { id: "eCB_NAPE", type: "precursor", label: "NAPE", x: 600, y: 430, description: "N-acylofosfatydyloetanoloamina. Prekursor anandamidu. Synteza 'na żądanie'." },
       { id: "eCB_DAG", type: "precursor", label: "DAG\n(z kw. arachi.)", x: 900, y: 430, description: "Diacyloglicerol z kwasem arachidonowym. Prekursor 2-AG. Z PIP2 (PLCβ)." },
@@ -444,7 +444,7 @@
   };
 
   const TRACE_AMINES = {
-    id: "traceAmines", name: "Aminy śladowe", color: "#e879f9",
+    id: "traceAmines", name: "Aminy śladowe", color: "#d946ef",
     nodes: [
       { id: "TA_PEA", type: "neurotransmitter", label: "Fenyloetyloamina\n(PEA)", x: 280, y: -300, formula: "C₈H₁₁N", description: "β-fenyloetyloamina. Endogenny psychostymulant. ↑DA, ↑NE. Występuje w czekoladzie. Substrat MAO-B." },
       { id: "TA_Tyramine", type: "neurotransmitter", label: "Tyramina", x: 430, y: -220, formula: "C₈H₁₁NO", description: "4-hydroksyfenyloetyloamina. Amina biogenna z diety (ser, wino). ↑NE (wypieranie z pęcherzyków). Interakcja z MAOI → kryza nadciśnieniowa." },
@@ -485,7 +485,7 @@
   };
 
   const OREXIN = {
-    id: "orexin", name: "Układ oreksynowy", color: "#f97316",
+    id: "orexin", name: "Układ oreksynowy", color: "#0ea5e9",
     nodes: [
       { id: "OX_PPO", type: "precursor", label: "Prepro-\noreksyna", x: -850, y: 430, description: "Preprooreksyna (HCRT). Gen HCRT. Ekspresja: boczne podwzgórze. Cięcie proteolityczne daje oreksyny A i B." },
       { id: "OX_PC", type: "syntheticEnzyme", label: "Konwertazy\nproproteinowe", x: -850, y: 540, description: "Enzymy proteolityczne. Cięcie preprooreksyny na oreksyny A i B w pęcherzykach wydzielniczych." },
@@ -508,7 +508,7 @@
   };
 
   const OXYTOCIN_VASOPRESSIN = {
-    id: "oxytocinVasopressin", name: "Układ oksytocyny i wazopresyny", color: "#f472b6",
+    id: "oxytocinVasopressin", name: "Układ oksytocyny i wazopresyny", color: "#7c3aed",
     nodes: [
       { id: "OXY_PreOXY", type: "precursor", label: "Prepro-\noksytocyna", x: -1500, y: 430, description: "Prekursor oksytocyny. Gen OXT. Podwzgórze: jądro nadwzrokowe i przykomorowe." },
       { id: "OXY_PreAVP", type: "precursor", label: "Prepro-\nwazopresyna", x: -1700, y: 430, description: "Prekursor wazopresyny. Gen AVP (blisko OXT na chr. 20). Jądro nadwzrokowe." },
@@ -539,7 +539,7 @@
   };
 
   const TACHYKININS = {
-    id: "tachykinins", name: "Tachykininy", color: "#fb923c",
+    id: "tachykinins", name: "Tachykininy", color: "#fb7185",
     nodes: [
       { id: "TK_PPTA", type: "precursor", label: "PPT-A\n(Preprotachykinina A)", x: -600, y: 1000, description: "Gen TAC1. Splicing alternatywny → substancja P, neurokinina A, neuropeptyd K." },
       { id: "TK_PPTB", type: "precursor", label: "PPT-B", x: -400, y: 1000, description: "Gen TAC3. Prekursor neurokininy B. Podwzgórze: neurony KNDy (kisspeptyna/NKB/dynorfina)." },
@@ -570,7 +570,7 @@
   };
 
   const NPY_SYSTEM = {
-    id: "npy", name: "Układ neuropeptydu Y", color: "#a3e635",
+    id: "npy", name: "Układ neuropeptydu Y", color: "#65a30d",
     nodes: [
       { id: "NPY_Pre", type: "precursor", label: "Pre-pro-NPY", x: -200, y: 1000, description: "Gen NPY. Ekspresja: podwzgórze (j. łukowate), ciało migdałowate, hipokamp, układ współczulny." },
       { id: "NPY_PC", type: "syntheticEnzyme", label: "Konwertazy\n(PC1/3, CPE)", x: -100, y: 1100, description: "Konwertaza proproteinowa 1/3 + karboksypeptydaza E. Cięcie i amidacja C-końca." },
@@ -640,7 +640,7 @@
       label: "Kora\nprzedczołowa",
       x: -1760,
       y: 1650,
-      description: "Obwody wykonawcze, kontrola top-down i pamięć robocza.",
+      description: "Przednia kora czołowa integrująca cele, reguły i kontrolę hamowania.\nUtrzymuje pamięć roboczą, wybór strategii i kontrolę top-down nad układem limbicznym.\nSilnie stroją ją dopamina, noradrenalina i acetylocholina.",
     },
     {
       id: "BR_CORTEX",
@@ -648,7 +648,7 @@
       label: "Kora\nasocjacyjna",
       x: -1380,
       y: 1650,
-      description: "Rozproszone obszary korowe odpowiedzialne za integrację sensoryczną, poznanie i plastyczność.",
+      description: "Rozproszone pola asocjacyjne czołowo-ciemieniowo-skroniowe integrujące sygnały wielomodalne.\nWspierają percepcję świadomą, język, planowanie i plastyczność sieciową.\nOdbierają szeroką modulację wzgórzową, monoaminergiczną i cholinergiczną.",
     },
     {
       id: "BR_HIPPOCAMPUS",
@@ -656,7 +656,7 @@
       label: "Hipokamp",
       x: -1000,
       y: 1650,
-      description: "Pamięć epizodyczna, kontekst i plastyczność synaptyczna.",
+      description: "Przyśrodkowo-skroniowy układ pamięci epizodycznej, kontekstu i nawigacji przestrzennej.\nŁączy nowość i kontekst z obwodami stresu, nagrody oraz rytmu theta.\nSzczególnie zależy od glutaminianu, acetylocholiny i serotoninowej modulacji plastyczności.",
     },
     {
       id: "BR_AMYGDALA",
@@ -664,7 +664,7 @@
       label: "Ciało\nmigdałowate",
       x: -620,
       y: 1650,
-      description: "Salience emocjonalna, lęk i uczenie awersyjne.",
+      description: "Limbiczny detektor zagrożenia, salience i uczenia emocjonalnego.\nSpina bodźce sensoryczne z lękiem, nagrodą i odpowiedzią autonomiczną, a następnie steruje podwzgórzem oraz pniem mózgu.\nMonoaminy i neuropeptydy decydują tu o nasileniu lęku oraz zachowań społecznych.",
     },
     {
       id: "BR_STRIATUM",
@@ -672,7 +672,7 @@
       label: "Prążkowie\n/ BG",
       x: -240,
       y: 1650,
-      description: "Brama ruchu, nawyków i selekcji akcji w jądrach podstawy.",
+      description: "Wejściowa brama jąder podstawy dla ruchu, nawyków i selekcji akcji.\nIntegruje cele korowe z sygnałem dopaminowym uczącym wartości i błędu przewidywania.\nRównowaga D1/D2, A2A, M4 oraz glutaminianu z GABA steruje wyjściem direct i indirect pathway.",
     },
     {
       id: "BR_NACC",
@@ -680,7 +680,7 @@
       label: "Nucleus\naccumbens",
       x: 140,
       y: 1650,
-      description: "Węzeł nagrody, motywacji i wzmocnienia.",
+      description: "Brzuszne prążkowie na styku nagrody, wysiłku i motywacji.\nŁączy dopaminową salience z hipokampalnym kontekstem i amygdalarną walencją emocjonalną.\nTo krytyczny węzeł uzależnień, anhedonii i uczenia opartego na wzmocnieniu.",
     },
     {
       id: "BR_HYPOTHALAMUS",
@@ -688,7 +688,7 @@
       label: "Podwzgórze",
       x: 520,
       y: 1650,
-      description: "Homeostaza, neuroendokrynnie i rytmy biologiczne.",
+      description: "Ośrodek homeostazy łączący stan wewnętrzny z odpowiedzią hormonalną i autonomiczną.\nKoordynuje głód, temperaturę, sen-czuwanie, zachowania seksualne, rytm dobowy i peptydy podwzgórzowe.\nStanowi most między korą, układem limbicznym, przysadką i pniem mózgu.",
     },
     {
       id: "BR_THALAMUS",
@@ -696,7 +696,7 @@
       label: "Wzgórze",
       x: 900,
       y: 1650,
-      description: "Przekaźnik czuciowy i bramka pobudzenia korowego.",
+      description: "Główny przekaźnik i bramka między sygnałem czuciowym, korą i pętlami jąder podstawy.\nKształtuje synchronię korową, poziom pobudzenia i wybór kanałów informacyjnych zależnie od stanu sieci.\nPośredniczy też w bólu, uwadze i integracji limbicznej.",
     },
     {
       id: "BR_MIDBRAIN_DA",
@@ -704,7 +704,7 @@
       label: "Śródmózgowie DA\n(VTA / SNc)",
       x: 1280,
       y: 1650,
-      description: "Neurony dopaminowe VTA i SNc, napęd nagrody oraz ruchu.",
+      description: "Połączone terytorium dopaminowe VTA i SNc.\nVTA stroi nagrodę, motywację i salience, a SNc uczy wartości ruchu oraz nawyków w pętlach prążkowia.\nSilnie modulują je GABA, glutaminian, opioidy i oreksyna.",
     },
     {
       id: "BR_BRAINSTEM",
@@ -712,7 +712,7 @@
       label: "Pień\nmózgu",
       x: 1660,
       y: 1650,
-      description: "Autonomia, czuwanie, oddech i integracja odruchowa.",
+      description: "Rdzeń, most i śródmózgowie poza jądrami wyszczególnionymi osobno.\nUruchamia wzorce oddechowe, sercowo-naczyniowe, arousal, odruchy obronne i integrację trzewną.\nJest finalnym wykonawcą wielu sygnałów homeostatycznych, bólowych i stresowych.",
     },
     {
       id: "BR_LC",
@@ -720,7 +720,7 @@
       label: "Locus\ncoeruleus",
       x: -1570,
       y: 1780,
-      description: "Główne jądro noradrenergiczne czuwania i stresu.",
+      description: "Zwarte mostowe jądro nadające ton noradrenergiczny całemu mózgowiu.\nPodnosi gain podczas nowości, stresu i czuwania oraz znaczy ślady pamięciowe bodźców istotnych.\nPracuje w ścisłej pętli z korą przedczołową, oreksyną i autonomicznym pniem mózgu.",
     },
     {
       id: "BR_RAPHE",
@@ -728,7 +728,7 @@
       label: "Jądra\nszwu",
       x: -1190,
       y: 1780,
-      description: "Jądra serotoninowe regulujące nastrój, ból i rytmy.",
+      description: "Pośrodkowe jądra serotoninowe ciągnące się przez śródmózgowie, most i rdzeń przedłużony.\nStroją nastrój, ból, sen REM, impulsywność i plastyczność korowo-limbiczną.\nZawierają zarówno neurony projekcyjne wstępujące, jak i lokalne hamulce autoreceptorowe.",
     },
     {
       id: "BR_CEREBELLUM",
@@ -736,7 +736,7 @@
       label: "Móżdżek",
       x: -810,
       y: 1780,
-      description: "Koordynacja, timing i predykcyjne strojenie sygnału.",
+      description: "Tyłomózgowa maszyneria predykcji błędu, precyzji czasowej i kalibracji ruchu.\nPoza motoryką wpływa też na timing języka, afekt i sensoryczne przewidywanie skutków działania.\nPrecyzję wyjścia kształtują tu szczególnie glutaminian, GABA i NE.",
     },
     {
       id: "BR_PAG",
@@ -744,7 +744,7 @@
       label: "PAG",
       x: -430,
       y: 1780,
-      description: "Ośrodek zstępującej kontroli bólu i reakcji obronnych.",
+      description: "Istota szara okołowodociągowa otaczająca wodociąg mózgu w śródmózgowiu.\nKoordynuje freezing, ucieczkę, opioidową analgezję i zstępującą kontrolę bólu przez przekaźniki rdzeniowo-opuszkowe.\nŁączy stan zagrożenia z odpowiedzią autonomiczną i wokalizacją obronną.",
     },
     {
       id: "BR_NTS_AP",
@@ -752,7 +752,7 @@
       label: "NTS /\narea postrema",
       x: -50,
       y: 1780,
-      description: "Ośrodek trzewno-wagalny, nudności i sygnałów interoceptywnych.",
+      description: "Grzbietowy kompleks wagalny obejmujący NTS i area postrema.\nIntegruje baroreceptory, chemosensorykę, sygnały jelitowe i humoralne, po czym przekazuje je do podwzgórza i autonomicznych sieci pnia.\nTo rdzeń nudności, sytości i interocepcji trzewnej.",
     },
     {
       id: "BR_OLFACTORY",
@@ -760,7 +760,7 @@
       label: "Opuszka\ni guzek węchowy",
       x: 330,
       y: 1780,
-      description: "Opuszka węchowa i guzek węchowy, salience zapachowe i wejście limbiczne.",
+      description: "Opuszka węchowa wraz z guzkiem węchowym tworzą wejście węchowo-limbiczne.\nPrzekładają sygnatury zapachowe na salience, walencję i zachowania podejścia lub unikania.\nSą szczególnie istotne dla amin śladowych oraz bodźców społecznych i pokarmowych.",
     },
     {
       id: "BR_SEPTAL_BNST",
@@ -768,7 +768,15 @@
       label: "Przegroda\n/ BNST",
       x: 710,
       y: 1780,
-      description: "Przegroda i BNST: stres przedłużony, więź i społeczne salience.",
+      description: "Przegroda i BNST spinają kontekst limbiczny z przewlekłym stresem oraz pamięcią społeczną.\nRegulują rytm hipokampalny, lęk utrzymujący się po bodźcu oraz komponent więzi i czujności społecznej.\nSą ważnym przekaźnikiem dla oksytocyny, wazopresyny i serotoniny.",
+    },
+    {
+      id: "BR_BASAL_FOREBRAIN",
+      type: "brainRegion",
+      label: "Przodomózgowie\npodstawne",
+      x: 900,
+      y: 1780,
+      description: "Cholinergiczne przodomózgowie podstawne obejmujące nucleus basalis, przegrodę przyśrodkową i pasmo diagonalne.\nDostarcza dominujący wyrzut ACh do kory i hipokampa, wzmacniając uwagę, detekcję wskazówek i plastyczność pamięciową.\nIntegruje także sygnały nikotynowe, histaminowe i oreksynowe zależne od poziomu czuwania.",
     },
     {
       id: "BR_SCN",
@@ -776,15 +784,23 @@
       label: "SCN / rytm\ndobowy",
       x: 1090,
       y: 1780,
-      description: "Zegar dobowy i synchronizacja rytmów biologicznych.",
+      description: "Jądro nadskrzyżowaniowe przedniego podwzgórza - nadrzędny zegar okołodobowy.\nSynchronizuje sen, temperaturę, hormony i okna żywieniowe z cyklem światło-ciemność.\nWysyła fazujące sygnały do podwzgórza, autonomii i sieci serotoninowo-melatoninowych.",
     },
     {
       id: "BR_CHOROID",
       type: "brainRegion",
       label: "Splot\nnaczyniowy",
+      x: 1280,
+      y: 1780,
+      description: "Splot naczyniowy i interfejs komorowy produkujący płyn mózgowo-rdzeniowy.\nTo barierowa i neuroimmunologiczna tkanka sygnalizacyjna, a nie klasyczny szybki węzeł synaptyczny.\nIstotna dla sygnałów 5-HT2B/2C, transportu CSF i komunikacji zapalnej przy komorach.",
+    },
+    {
+      id: "BR_HABENULA_IPN",
+      type: "brainRegion",
+      label: "Uzdeczka\n/ IPN",
       x: 1470,
       y: 1780,
-      description: "Interfejs komorowy: splot naczyniowy, ependyma i sygnały CSF.",
+      description: "Układ uzdeczkowo-międzykonarowy przekładający frustrację, odstawienie nikotyny i karę na antynagrodę.\nHamuje ton dopaminowy i serotoninowy oraz wzmacnia awersyjne uczenie o błędzie przewidywania.\nTo ważny węzeł nikotynowej zależności, stresu i punishment learning.",
     },
   ];
 
@@ -816,9 +832,9 @@
     "5HT_MT1": ["BR_SCN", "BR_HYPOTHALAMUS", "BR_THALAMUS", "BR_HIPPOCAMPUS"],
     "5HT_MT2": ["BR_SCN", "BR_THALAMUS", "BR_HIPPOCAMPUS"],
 
-    ACh_nAChR: ["BR_THALAMUS", "BR_CORTEX", "BR_HIPPOCAMPUS", "BR_MIDBRAIN_DA", "BR_STRIATUM"],
+    ACh_nAChR: ["BR_THALAMUS", "BR_CORTEX", "BR_HIPPOCAMPUS", "BR_MIDBRAIN_DA", "BR_STRIATUM", "BR_BASAL_FOREBRAIN", "BR_HABENULA_IPN"],
     ACh_M1: ["BR_CORTEX", "BR_HIPPOCAMPUS", "BR_STRIATUM"],
-    ACh_M2: ["BR_HIPPOCAMPUS", "BR_CORTEX", "BR_THALAMUS"],
+    ACh_M2: ["BR_HIPPOCAMPUS", "BR_CORTEX", "BR_THALAMUS", "BR_BASAL_FOREBRAIN"],
     ACh_M3: ["BR_HIPPOCAMPUS", "BR_THALAMUS", "BR_HYPOTHALAMUS", "BR_STRIATUM"],
     ACh_M4: ["BR_STRIATUM", "BR_CORTEX", "BR_HIPPOCAMPUS"],
     ACh_M5: ["BR_MIDBRAIN_DA", "BR_HIPPOCAMPUS"],
@@ -835,7 +851,7 @@
 
     HA_H1: ["BR_CORTEX", "BR_THALAMUS", "BR_HYPOTHALAMUS", "BR_HIPPOCAMPUS", "BR_NTS_AP"],
     HA_H2: ["BR_CORTEX", "BR_HIPPOCAMPUS", "BR_AMYGDALA", "BR_STRIATUM"],
-    HA_H3: ["BR_CORTEX", "BR_HIPPOCAMPUS", "BR_STRIATUM", "BR_HYPOTHALAMUS"],
+    HA_H3: ["BR_CORTEX", "BR_HIPPOCAMPUS", "BR_STRIATUM", "BR_HYPOTHALAMUS", "BR_BASAL_FOREBRAIN"],
     HA_H4: ["BR_CORTEX", "BR_HIPPOCAMPUS"],
 
     Opi_MOR: ["BR_PAG", "BR_THALAMUS", "BR_MIDBRAIN_DA", "BR_NACC", "BR_LC", "BR_AMYGDALA", "BR_NTS_AP"],
@@ -851,7 +867,7 @@
     TA_TAAR2: ["BR_OLFACTORY", "BR_AMYGDALA"],
     TA_TAAR5: ["BR_OLFACTORY", "BR_AMYGDALA", "BR_HYPOTHALAMUS"],
 
-    OX_OX1R: ["BR_LC", "BR_MIDBRAIN_DA", "BR_AMYGDALA", "BR_THALAMUS", "BR_CORTEX"],
+    OX_OX1R: ["BR_LC", "BR_MIDBRAIN_DA", "BR_AMYGDALA", "BR_THALAMUS", "BR_CORTEX", "BR_BASAL_FOREBRAIN"],
     OX_OX2R: ["BR_HYPOTHALAMUS", "BR_RAPHE", "BR_BRAINSTEM"],
 
     OXY_OXTR: ["BR_HYPOTHALAMUS", "BR_AMYGDALA", "BR_SEPTAL_BNST", "BR_NACC", "BR_HIPPOCAMPUS"],
@@ -875,6 +891,189 @@
     PUR_A2B: ["BR_HIPPOCAMPUS", "BR_CORTEX"],
     PUR_A3: ["BR_HIPPOCAMPUS", "BR_CORTEX"],
   };
+
+  const BRAIN_PATHWAYS = [
+    {
+      id: "PATH_DA_MESOLIMBIC",
+      label: "Szlak mezolimbiczny",
+      system: "dopamine",
+      signal: "dopamina",
+      from: "BR_MIDBRAIN_DA",
+      to: "BR_NACC",
+      description: "Dopaminowa projekcja z pola brzusznego nakrywki (VTA) do jądra półleżącego, wzmacniająca salience, nagrodę i uczenie oparte na wzmocnieniu.",
+    },
+    {
+      id: "PATH_DA_MESOCORTICAL",
+      label: "Szlak mezokortykalny",
+      system: "dopamine",
+      signal: "dopamina",
+      from: "BR_MIDBRAIN_DA",
+      to: "BR_PFC",
+      description: "Dopaminowa projekcja z VTA do kory przedczołowej regulująca pamięć roboczą, elastyczność poznawczą i kontrolę top-down.",
+    },
+    {
+      id: "PATH_DA_NIGROSTRIATAL",
+      label: "Szlak nigrostriatalny",
+      system: "dopamine",
+      signal: "dopamina",
+      from: "BR_MIDBRAIN_DA",
+      to: "BR_STRIATUM",
+      description: "Dopaminowa projekcja z istoty czarnej zbitej (SNc) do prążkowia, odpowiedzialna za uczenie wartości ruchu i płynne uruchamianie programów motorycznych.",
+    },
+    {
+      id: "PATH_GLU_CORTICOSTRIATAL",
+      label: "Projekcja korowo-prążkowiowa",
+      system: "glutamate",
+      signal: "glutaminian",
+      from: "BR_PFC",
+      to: "BR_STRIATUM",
+      description: "Glutaminergiczna projekcja z PFC do prążkowia, kierująca wyborem akcji, uczeniem reguł i bramkowaniem odpowiedzi w pętlach jąder podstawy.",
+    },
+    {
+      id: "PATH_GLU_HIPPO_NACC",
+      label: "Projekcja hipokampalno-accumbalna",
+      system: "glutamate",
+      signal: "glutaminian",
+      from: "BR_HIPPOCAMPUS",
+      to: "BR_NACC",
+      description: "Glutaminergiczna projekcja z hipokampa do nucleus accumbens, dostarczająca kontekst i nowość do obwodów motywacyjnych.",
+    },
+    {
+      id: "PATH_GLU_THALAMOCORTICAL",
+      label: "Projekcja wzgórzowo-korowa",
+      system: "glutamate",
+      signal: "glutaminian / rytmy",
+      from: "BR_THALAMUS",
+      to: "BR_CORTEX",
+      description: "Glutaminergiczna projekcja wzgórzowo-korowa przekazująca informację czuciową i fazująca pobudzenie sieci korowych.",
+    },
+    {
+      id: "PATH_NE_LC_PFC",
+      label: "Projekcja noradrenergiczna LC→PFC",
+      system: "norepinephrine",
+      signal: "noradrenalina",
+      from: "BR_LC",
+      to: "BR_PFC",
+      description: "Noradrenergiczna projekcja z locus coeruleus do PFC zwiększająca gain sieci, selekcję sygnału i stabilność pamięci roboczej.",
+    },
+    {
+      id: "PATH_NE_LC_HIPPO",
+      label: "Projekcja noradrenergiczna LC→hipokamp",
+      system: "norepinephrine",
+      signal: "noradrenalina",
+      from: "BR_LC",
+      to: "BR_HIPPOCAMPUS",
+      description: "Noradrenergiczna projekcja z locus coeruleus do hipokampa wzmacniająca kodowanie nowości i konsolidację pamięci zależnej od istotności bodźca.",
+    },
+    {
+      id: "PATH_5HT_RAPHE_PFC",
+      label: "Projekcja serotoninergiczna szwu→PFC",
+      system: "serotonin",
+      signal: "serotonina",
+      from: "BR_RAPHE",
+      to: "BR_PFC",
+      description: "Serotoninergiczna projekcja z jąder szwu do PFC, modulująca impulsywność, ocenę konfliktu i elastyczność poznawczą.",
+    },
+    {
+      id: "PATH_5HT_RAPHE_AMYGDALA",
+      label: "Projekcja serotoninergiczna szwu→amygdala",
+      system: "serotonin",
+      signal: "serotonina",
+      from: "BR_RAPHE",
+      to: "BR_AMYGDALA",
+      description: "Serotoninergiczna projekcja z jąder szwu do ciała migdałowatego, ograniczająca reaktywność lękową i przełączająca walencję bodźców emocjonalnych.",
+    },
+    {
+      id: "PATH_ACh_BF_CORTEX",
+      label: "Projekcja cholinergiczna BF→kora",
+      system: "acetylcholine",
+      signal: "acetylocholina",
+      from: "BR_BASAL_FOREBRAIN",
+      to: "BR_CORTEX",
+      description: "Cholinergiczna projekcja z przodomózgowia podstawnego do kory, poprawiająca uwagę, sensory gating i wykrywanie wskazówek istotnych behawioralnie.",
+    },
+    {
+      id: "PATH_ACh_BF_HIPPO",
+      label: "Projekcja cholinergiczna BF→hipokamp",
+      system: "acetylcholine",
+      signal: "acetylocholina",
+      from: "BR_BASAL_FOREBRAIN",
+      to: "BR_HIPPOCAMPUS",
+      description: "Cholinergiczna projekcja z przodomózgowia podstawnego do hipokampa, ustawiająca rytm theta i podatność sieci na kodowanie nowości.",
+    },
+    {
+      id: "PATH_OX_HYPO_LC",
+      label: "Projekcja oreksynergiczna podwzgórze→LC",
+      system: "orexin",
+      signal: "oreksyna",
+      from: "BR_HYPOTHALAMUS",
+      to: "BR_LC",
+      description: "Oreksynergiczna projekcja z bocznego podwzgórza do locus coeruleus, wzmacniająca czuwanie, gotowość reakcji i ton noradrenergiczny.",
+    },
+    {
+      id: "PATH_OX_HYPO_RAPHE",
+      label: "Projekcja oreksynergiczna podwzgórze→jądra szwu",
+      system: "orexin",
+      signal: "oreksyna",
+      from: "BR_HYPOTHALAMUS",
+      to: "BR_RAPHE",
+      description: "Oreksynergiczna projekcja z bocznego podwzgórza do jąder szwu, stabilizująca stan wake i przełączanie sen-czuwanie.",
+    },
+    {
+      id: "PATH_OPI_PAG_BRAINSTEM",
+      label: "Szlak zstępującej modulacji bólu",
+      system: "endorphins",
+      signal: "opioidy / GABA",
+      from: "BR_PAG",
+      to: "BR_BRAINSTEM",
+      description: "Zstępujący tor z PAG do pnia mózgu uruchamiający opioidową modulację bólu i wzorce obronne.",
+    },
+    {
+      id: "PATH_HAB_DA_BRAKE",
+      label: "Projekcja uzdeczkowo-śródmózgowiowa",
+      system: "dopamine",
+      signal: "glutaminian / ACh",
+      from: "BR_HABENULA_IPN",
+      to: "BR_MIDBRAIN_DA",
+      description: "Awersyjna projekcja uzdeczkowo-międzykonarowa wpływająca na śródmózgowie dopaminowe i tłumiąca napęd nagrody podczas kary, frustracji oraz odstawienia nikotyny.",
+    },
+    {
+      id: "PATH_HAB_RAPHE_AVERSION",
+      label: "Projekcja uzdeczkowo-szwu",
+      system: "serotonin",
+      signal: "glutaminian / 5-HT",
+      from: "BR_HABENULA_IPN",
+      to: "BR_RAPHE",
+      description: "Projekcja uzdeczki do jąder szwu przenosząca sygnał awersji i negatywnego przewidywania na serotoninowy ton stresu oraz wycofania.",
+    },
+    {
+      id: "PATH_TA_OLFACTORY_AMYGDALA",
+      label: "Projekcja węchowo-migdałowata",
+      system: "traceAmines",
+      signal: "węch / aminy śladowe",
+      from: "BR_OLFACTORY",
+      to: "BR_AMYGDALA",
+      description: "Węchowo-limbiczna projekcja przenosząca sygnały chemiczne i aminy śladowe do ciała migdałowatego, gdzie otrzymują walencję emocjonalną.",
+    },
+    {
+      id: "PATH_SCN_HYPO_CIRCADIAN",
+      label: "Wyjście dobowe SCN→podwzgórze",
+      system: "serotonin",
+      signal: "melatonina / rytm",
+      from: "BR_SCN",
+      to: "BR_HYPOTHALAMUS",
+      description: "Wyjście z jądra nadskrzyżowaniowego do podwzgórza rozprowadzające fazę dobową do osi hormonalnej, apetytu i autonomii.",
+    },
+    {
+      id: "PATH_NTS_HYPO_HOMEOSTASIS",
+      label: "Projekcja NTS/area postrema→podwzgórze",
+      system: "npy",
+      signal: "interocepcja / peptydy",
+      from: "BR_NTS_AP",
+      to: "BR_HYPOTHALAMUS",
+      description: "Trzewno-homeostatyczna projekcja z NTS i area postrema do podwzgórza, przekładająca sytość, nudności i stan autonomiczny na decyzje homeostatyczne.",
+    },
+  ];
 
   // Receptor-receptor interactions (cross-system crosstalk)
   const RECEPTOR_INTERACTIONS = [
@@ -941,13 +1140,14 @@
   ];
 
   window.MEDICAL_ENCYCLOPEDIA = {
-    version: "2.1.0",
+    version: "2.2.0",
     colors: COLORS,
     nodeShapes: NODE_SHAPES,
     connectionTypes: CONNECTION_TYPES,
     sharedNodes: SHARED_NODES,
     systems: SYSTEMS,
     brainRegions: BRAIN_REGIONS,
+    brainPathways: BRAIN_PATHWAYS,
     receptorBrainRegions: RECEPTOR_BRAIN_REGION_MAP,
     receptorInteractions: RECEPTOR_INTERACTIONS,
   };

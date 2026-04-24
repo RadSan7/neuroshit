@@ -15,7 +15,9 @@
   const NODE_SHAPES = encyclopedia.nodeShapes;
   const CONNECTION_TYPES = encyclopedia.connectionTypes;
   const BRAIN_REGIONS = encyclopedia.brainRegions || [];
+  const BRAIN_PATHWAYS = encyclopedia.brainPathways || [];
   const RECEPTOR_BRAIN_REGIONS = encyclopedia.receptorBrainRegions || {};
+  const SYSTEM_META_BY_ID = new Map((encyclopedia.systems || []).map(system => [system.id, system]));
   const SHARED_NODE_IDS = new Set((encyclopedia.sharedNodes || []).map(node => node.id));
   const SYSTEM_LAYOUT_SEQUENCE = [
     "dopamine",
@@ -42,25 +44,27 @@
     height: 1525,
   };
   const BRAIN_REGION_ATLAS_LAYOUT = {
-    BR_PFC: { anchor: [0.16, 0.24], label: [0.18, 0.22], width: 128 },
-    BR_CORTEX: { anchor: [0.60, 0.18], label: [0.61, 0.20], width: 132 },
-    BR_HIPPOCAMPUS: { anchor: [0.43, 0.49], label: [0.34, 0.52], width: 124 },
-    BR_AMYGDALA: { anchor: [0.35, 0.55], label: [0.22, 0.58], width: 130 },
-    BR_STRIATUM: { anchor: [0.46, 0.38], label: [0.36, 0.39], width: 132 },
-    BR_NACC: { anchor: [0.36, 0.45], label: [0.24, 0.46], width: 146, height: 48 },
-    BR_HYPOTHALAMUS: { anchor: [0.49, 0.58], label: [0.56, 0.60], width: 132 },
-    BR_THALAMUS: { anchor: [0.53, 0.36], label: [0.57, 0.36], width: 112 },
-    BR_MIDBRAIN_DA: { anchor: [0.58, 0.64], label: [0.68, 0.67], width: 160, height: 48 },
-    BR_BRAINSTEM: { anchor: [0.56, 0.84], label: [0.60, 0.87], width: 110 },
-    BR_LC: { anchor: [0.61, 0.70], label: [0.79, 0.59], width: 116 },
-    BR_RAPHE: { anchor: [0.53, 0.74], label: [0.41, 0.73], width: 112 },
+    BR_PFC: { anchor: [0.15, 0.27], label: [0.12, 0.24], width: 132 },
+    BR_CORTEX: { anchor: [0.66, 0.18], label: [0.72, 0.16], width: 138 },
+    BR_HIPPOCAMPUS: { anchor: [0.42, 0.52], label: [0.24, 0.54], width: 132 },
+    BR_AMYGDALA: { anchor: [0.34, 0.57], label: [0.18, 0.59], width: 136 },
+    BR_STRIATUM: { anchor: [0.44, 0.40], label: [0.31, 0.40], width: 136 },
+    BR_NACC: { anchor: [0.36, 0.48], label: [0.21, 0.48], width: 148, height: 48 },
+    BR_HYPOTHALAMUS: { anchor: [0.47, 0.60], label: [0.58, 0.63], width: 140 },
+    BR_THALAMUS: { anchor: [0.50, 0.38], label: [0.60, 0.35], width: 118 },
+    BR_MIDBRAIN_DA: { anchor: [0.58, 0.67], label: [0.73, 0.69], width: 168, height: 48 },
+    BR_BRAINSTEM: { anchor: [0.56, 0.87], label: [0.61, 0.92], width: 118 },
+    BR_LC: { anchor: [0.60, 0.74], label: [0.78, 0.65], width: 122 },
+    BR_RAPHE: { anchor: [0.52, 0.78], label: [0.39, 0.79], width: 118 },
     BR_CEREBELLUM: { anchor: [0.79, 0.54], label: [0.83, 0.53], width: 114 },
-    BR_PAG: { anchor: [0.56, 0.58], label: [0.70, 0.54], width: 84 },
-    BR_NTS_AP: { anchor: [0.54, 0.88], label: [0.32, 0.87], width: 148, height: 48 },
-    BR_OLFACTORY: { anchor: [0.14, 0.60], label: [0.13, 0.70], width: 156, height: 48 },
-    BR_SEPTAL_BNST: { anchor: [0.29, 0.44], label: [0.21, 0.36], width: 142, height: 48 },
-    BR_SCN: { anchor: [0.44, 0.61], label: [0.44, 0.66], width: 126 },
-    BR_CHOROID: { anchor: [0.60, 0.43], label: [0.77, 0.25], width: 126 },
+    BR_PAG: { anchor: [0.55, 0.61], label: [0.71, 0.58], width: 92 },
+    BR_NTS_AP: { anchor: [0.53, 0.90], label: [0.31, 0.91], width: 152, height: 48 },
+    BR_OLFACTORY: { anchor: [0.10, 0.58], label: [0.10, 0.73], width: 162, height: 48 },
+    BR_SEPTAL_BNST: { anchor: [0.31, 0.42], label: [0.16, 0.34], width: 150, height: 48 },
+    BR_BASAL_FOREBRAIN: { anchor: [0.24, 0.50], label: [0.08, 0.48], width: 176, height: 48 },
+    BR_SCN: { anchor: [0.40, 0.60], label: [0.33, 0.67], width: 132 },
+    BR_CHOROID: { anchor: [0.54, 0.32], label: [0.72, 0.23], width: 134 },
+    BR_HABENULA_IPN: { anchor: [0.58, 0.48], label: [0.80, 0.41], width: 170, height: 48 },
   };
 
   // ── Budowanie grafu ────────────────────────────────────────────
@@ -105,9 +109,7 @@
     system.nodes.forEach(sn => {
       if (nodeMap.has(sn.id)) return; // skip duplicates
       const shapeDef = NODE_SHAPES[sn.type] || { shape: "circle", radius: 24 };
-      const nodeColor = sn.type === "precursor"
-        ? fadeColor(system.color, 0.45)
-        : (COLORS[sn.type] || "#94a3b8");
+      const nodeColor = getSystemNodeColor(sn.type, system.color);
       const node = {
         id: sn.id,
         label: sn.label,
@@ -115,6 +117,8 @@
         x: sn.x,
         y: sn.y,
         color: nodeColor,
+        systemColor: system.color,
+        typeColor: COLORS[sn.type] || system.color,
         description: sn.description || "",
         formula: sn.formula || "",
         systems: sn.systems || [system.id],
@@ -467,6 +471,8 @@
         sourceIds,
         hubWidth: estimateHubWidth(hubLabel),
         hubHeight: 24,
+          hubOffsetX: 0,
+          hubOffsetY: 0,
       });
     });
   });
@@ -491,7 +497,7 @@
   let highlightedNodeId = null; // receptor or brain region selected for focus highlighting
 
   // ── Persistent node positions (localStorage) ──────────────────
-  const POSITION_STORAGE_KEY = "neuroshit_node_positions_v3";
+  const POSITION_STORAGE_KEY = "neuroshit_node_positions_v4";
 
   function loadSavedPositions() {
     try {
@@ -507,6 +513,13 @@
             node.labelX = pos.labelX;
             node.labelY = pos.labelY;
           }
+          continue;
+        }
+
+        const group = receptorGroupData.find(entry => getReceptorGroupStorageId(entry) === id);
+        if (group && typeof pos.x === "number" && typeof pos.y === "number") {
+          group.hubOffsetX = pos.x;
+          group.hubOffsetY = pos.y;
         }
       }
     } catch (e) { /* ignore corrupt data */ }
@@ -521,6 +534,12 @@
         positions[n.id].labelY = Math.round(n.labelY);
       }
     });
+    receptorGroupData.forEach(group => {
+      positions[getReceptorGroupStorageId(group)] = {
+        x: Math.round(group.hubOffsetX || 0),
+        y: Math.round(group.hubOffsetY || 0),
+      };
+    });
     localStorage.setItem(POSITION_STORAGE_KEY, JSON.stringify(positions));
   }
 
@@ -531,6 +550,11 @@
     y: n.y,
     labelX: n.labelX,
     labelY: n.labelY,
+  }));
+  const defaultGroupPositions = new Map();
+  receptorGroupData.forEach(group => defaultGroupPositions.set(getReceptorGroupStorageId(group), {
+    x: group.hubOffsetX || 0,
+    y: group.hubOffsetY || 0,
   }));
 
   loadSavedPositions();
@@ -573,6 +597,13 @@
         }
       }
     });
+    defaultGroupPositions.forEach((pos, id) => {
+      const group = receptorGroupData.find(entry => getReceptorGroupStorageId(entry) === id);
+      if (group) {
+        group.hubOffsetX = pos.x;
+        group.hubOffsetY = pos.y;
+      }
+    });
     localStorage.removeItem(POSITION_STORAGE_KEY);
     clearSystemSelection();
     requestRender();
@@ -587,7 +618,7 @@
     });
     const visibleIds = new Set(visibleNodes.map(n => n.id));
     visibleEdges = allEdges.filter(edge => {
-      if (edge.connectionType === "brainRegion" && !showBrainRegions) return false;
+      if (edge.connectionType === "brainRegion") return false;
       if (!activeSystems.has(edge.system)) return false;
       if (edge.connectionType === "degradation" && !validDegradationEdgeKeys.has(makeEdgeKey(edge))) return false;
       if (groupedBindingEdgeKeys.has(makeEdgeKey(edge))) return false;
@@ -698,6 +729,7 @@
       connectedNodeIds: new Set(),
       interactionEdges: [],
       brainRegionEdges: [],
+      brainPathways: [],
     };
 
     const highlightedNode = highlightedNodeId ? nodeMap.get(highlightedNodeId) : null;
@@ -719,13 +751,26 @@
       });
     }
 
-    visibleEdges.forEach(edge => {
+    allEdges.forEach(edge => {
       if (edge.connectionType !== "brainRegion") return;
+      if (!activeSystems.has(edge.system)) return;
+      if (!visibleIds.has(edge.from) || !visibleIds.has(edge.to)) return;
       if (edge.from !== highlightedNode.id && edge.to !== highlightedNode.id) return;
       state.brainRegionEdges.push(edge);
       state.connectedNodeIds.add(edge.from);
       state.connectedNodeIds.add(edge.to);
     });
+
+    if (highlightedNode.type === "brainRegion") {
+      BRAIN_PATHWAYS.forEach(pathway => {
+        if (!activeSystems.has(pathway.system)) return;
+        if (pathway.from !== highlightedNode.id && pathway.to !== highlightedNode.id) return;
+        if (!visibleIds.has(pathway.from) || !visibleIds.has(pathway.to)) return;
+        state.brainPathways.push(pathway);
+        state.connectedNodeIds.add(pathway.from);
+        state.connectedNodeIds.add(pathway.to);
+      });
+    }
 
     return state;
   }
@@ -770,17 +815,24 @@
 
   function setNodeRenderPosition(node, nextX, nextY) {
     if (hasBrainRegionCallout(node)) {
-      const dx = nextX - node.labelX;
-      const dy = nextY - node.labelY;
       node.labelX = nextX;
       node.labelY = nextY;
-      node.x += dx;
-      node.y += dy;
       return;
     }
 
     node.x = nextX;
     node.y = nextY;
+  }
+
+  function setNodeAnchorPosition(node, nextX, nextY) {
+    node.x = nextX;
+    node.y = nextY;
+  }
+
+  function hitTestBrainRegionAnchor(node, wx, wy) {
+    if (!hasBrainRegionCallout(node)) return false;
+    const anchorRadius = (node.anchorRadius || 8) + 5;
+    return Math.hypot(wx - node.x, wy - node.y) <= anchorRadius;
   }
 
   function hitTestNode(node, wx, wy) {
@@ -856,6 +908,20 @@
     return `rgba(${r},${g},${b},${alpha})`;
   }
 
+  function mixHexColors(left, right, ratio) {
+    const clampRatio = Math.max(0, Math.min(1, ratio));
+    const leftR = parseInt(left.slice(1, 3), 16);
+    const leftG = parseInt(left.slice(3, 5), 16);
+    const leftB = parseInt(left.slice(5, 7), 16);
+    const rightR = parseInt(right.slice(1, 3), 16);
+    const rightG = parseInt(right.slice(3, 5), 16);
+    const rightB = parseInt(right.slice(5, 7), 16);
+    const mixedR = Math.round(leftR + (rightR - leftR) * clampRatio);
+    const mixedG = Math.round(leftG + (rightG - leftG) * clampRatio);
+    const mixedB = Math.round(leftB + (rightB - leftB) * clampRatio);
+    return `#${mixedR.toString(16).padStart(2, "0")}${mixedG.toString(16).padStart(2, "0")}${mixedB.toString(16).padStart(2, "0")}`;
+  }
+
   function fadeColor(hex, factor) {
     const r = parseInt(hex.slice(1, 3), 16);
     const g = parseInt(hex.slice(3, 5), 16);
@@ -864,6 +930,41 @@
     const fg = Math.round(g + (255 - g) * factor);
     const fb = Math.round(b + (255 - b) * factor);
     return `#${fr.toString(16).padStart(2, "0")}${fg.toString(16).padStart(2, "0")}${fb.toString(16).padStart(2, "0")}`;
+  }
+
+  function getSystemNodeColor(nodeType, systemColor) {
+    switch (nodeType) {
+      case "syntheticEnzyme":
+        return mixHexColors(systemColor, "#ffffff", 0.18);
+      case "catabolicEnzyme":
+        return mixHexColors(systemColor, "#0f172a", 0.18);
+      case "precursor":
+        return mixHexColors(systemColor, "#ffffff", 0.28);
+      case "metabolite":
+        return mixHexColors(systemColor, "#94a3b8", 0.42);
+      case "transporter":
+        return mixHexColors(systemColor, "#22d3ee", 0.24);
+      default:
+        return systemColor;
+    }
+  }
+
+  function getSystemColor(systemId, fallback = "#94a3b8") {
+    const system = SYSTEM_META_BY_ID.get(systemId);
+    return system && system.color ? system.color : fallback;
+  }
+
+  function getReceptorGroupStorageId(group) {
+    return `group:${group.system}:${group.hubLabel}`;
+  }
+
+  function hashString(value) {
+    let hash = 0;
+    for (let index = 0; index < value.length; index += 1) {
+      hash = ((hash << 5) - hash) + value.charCodeAt(index);
+      hash |= 0;
+    }
+    return Math.abs(hash);
   }
 
   const SUBSCRIPT_DIGITS = {
@@ -1148,6 +1249,7 @@
 
     highlightState.interactionEdges.forEach(edge => drawHighlightedEdge(edge));
     highlightState.brainRegionEdges.forEach(edge => drawHighlightedEdge(edge));
+    highlightState.brainPathways.forEach(pathway => drawBrainPathway(pathway));
 
     // Draw receptor group hubs and subtype branches
     drawReceptorGroups();
@@ -1441,7 +1543,8 @@
       style.arrowInset = 8;
       style.arrowSize = 7;
     } else if (edge.connectionType === "brainRegion") {
-      style.color = "rgba(56, 189, 248, 0.94)";
+      const accentColor = fromNode.systemColor || getSystemColor(edge.system, fromNode.color || "#38bdf8");
+      style.color = hexToRgba(accentColor, 0.94);
       style.lineWidth = 2.15;
       style.dash = [6, 4];
       style.curvature = 24;
@@ -1451,11 +1554,45 @@
 
     ctx.save();
     ctx.shadowColor = edge.connectionType === "brainRegion"
-      ? "rgba(56, 189, 248, 0.34)"
+      ? hexToRgba(fromNode.systemColor || getSystemColor(edge.system, fromNode.color || "#38bdf8"), 0.34)
       : "rgba(251, 191, 36, 0.34)";
     ctx.shadowBlur = 12;
     drawConnectionBetweenNodes(fromNode, toNode, style, { showLabel: false });
     ctx.restore();
+  }
+
+  function drawBrainPathway(pathway) {
+    const fromNode = nodeMap.get(pathway.from);
+    const toNode = nodeMap.get(pathway.to);
+    if (!fromNode || !toNode) return;
+
+    const pathwayColor = getSystemColor(pathway.system, "#38bdf8");
+    const curvatureSeed = (hashString(pathway.id || `${pathway.from}:${pathway.to}`) % 3) - 1;
+    const curvature = curvatureSeed === 0 ? 18 : curvatureSeed * 22;
+    const style = {
+      ...CONNECTION_TYPES.brainRegion,
+      color: hexToRgba(pathwayColor, 0.92),
+      lineWidth: 2.35,
+      dash: [10, 5],
+      curvature,
+      arrowInset: 8,
+      arrowSize: 8,
+    };
+
+    ctx.save();
+    ctx.shadowColor = hexToRgba(pathwayColor, 0.34);
+    ctx.shadowBlur = 12;
+    const geometry = drawConnectionBetweenNodes(fromNode, toNode, style, { showLabel: false, curvature });
+    ctx.restore();
+
+    if (!geometry || camera.zoom < 0.48) return;
+
+    const labelText = pathway.label || pathway.signal || "Pathway";
+    const midX = (geometry.startX + geometry.tipX) * 0.5;
+    const midY = (geometry.startY + geometry.tipY) * 0.5;
+    const labelX = midX + geometry.px * (curvature * 0.35);
+    const labelY = midY + geometry.py * (curvature * 0.35);
+    drawEdgeLabel(labelText, labelX, labelY, hexToRgba(pathwayColor, 0.98));
   }
 
   function drawArrow(x, y, nx, ny, style) {
@@ -1620,7 +1757,7 @@
 
   // ── Receptor group rendering ──────────────────────────────────
 
-  function getReceptorGroupHubNode(group, memberNodes, sourceNodes) {
+  function getReceptorGroupHubBaseNode(group, memberNodes, sourceNodes) {
     const memberCenter = averagePosition(memberNodes);
     const sourceCenter = averagePosition(sourceNodes);
     const dx = memberCenter.x - sourceCenter.x;
@@ -1638,7 +1775,17 @@
     };
   }
 
-  function drawReceptorGroups() {
+  function getReceptorGroupHubNode(group, memberNodes, sourceNodes) {
+    const baseNode = getReceptorGroupHubBaseNode(group, memberNodes, sourceNodes);
+    return {
+      ...baseNode,
+      x: baseNode.x + (group.hubOffsetX || 0),
+      y: baseNode.y + (group.hubOffsetY || 0),
+    };
+  }
+
+  function getVisibleReceptorGroupHubs() {
+    const hubs = [];
     receptorGroupData.forEach(group => {
       if (!activeSystems.has(group.system)) return;
 
@@ -1646,7 +1793,20 @@
       if (memberNodes.length < 2) return;
       const sourceNodes = group.sourceIds.map(id => nodeMap.get(id)).filter(Boolean);
       if (!sourceNodes.length) return;
-      const hubNode = getReceptorGroupHubNode(group, memberNodes, sourceNodes);
+
+      hubs.push({
+        group,
+        memberNodes,
+        sourceNodes,
+        baseHubNode: getReceptorGroupHubBaseNode(group, memberNodes, sourceNodes),
+        hubNode: getReceptorGroupHubNode(group, memberNodes, sourceNodes),
+      });
+    });
+    return hubs;
+  }
+
+  function drawReceptorGroups() {
+    getVisibleReceptorGroupHubs().forEach(({ group, memberNodes, sourceNodes, hubNode }) => {
 
       const incomingStyle = {
         ...CONNECTION_TYPES.binding,
@@ -1930,6 +2090,43 @@
     });
   }
 
+  function hitTestGroupHub(hubNode, wx, wy) {
+    return Math.abs(wx - hubNode.x) <= (hubNode.width || 56) * 0.5 + 4
+      && Math.abs(wy - hubNode.y) <= (hubNode.height || 24) * 0.5 + 4;
+  }
+
+  function findDraggableTarget(wx, wy) {
+    for (const node of visibleNodes) {
+      if (node.renderAsLabel) continue;
+      if (hitTestBrainRegionAnchor(node, wx, wy)) {
+        return { kind: "brainRegionAnchor", node };
+      }
+    }
+
+    if (camera.zoom >= 0.16) {
+      for (const hubEntry of getVisibleReceptorGroupHubs()) {
+        if (hitTestGroupHub(hubEntry.hubNode, wx, wy)) {
+          return { kind: "groupHub", ...hubEntry };
+        }
+      }
+    }
+
+    for (const node of visibleNodes) {
+      if (node.renderAsLabel) continue;
+      if (!hitTestNode(node, wx, wy)) continue;
+      if (hasBrainRegionCallout(node)) return { kind: "brainRegionLabel", node };
+      return { kind: "node", node };
+    }
+
+    for (const el of enzymeLabels) {
+      if (wx >= el.x && wx <= el.x + el.w && wy >= el.y && wy <= el.y + el.h) {
+        return { kind: "node", node: el.node };
+      }
+    }
+
+    return null;
+  }
+
 
   // ── Interaction: Pan / Zoom / Node Drag ───────────────────────
 
@@ -1943,12 +2140,17 @@
   let isDraggingNode = false;
   let isDraggingGroup = false;
   let draggedNode = null;
+  let draggedGroup = null;
+  let draggedGroupBaseNode = null;
+  let dragTargetKind = "node";
   let groupDragOffsets = new Map(); // id → { dx, dy }
   let dragOffsetX = 0;
   let dragOffsetY = 0;
   let dragHasMoved = false;
   let suppressNextClick = false;
   let isAltDown = false;
+  let panHasMoved = false;
+  let rightZoomHasMoved = false;
 
   window.addEventListener("keydown", e => {
     if (e.key === "Alt") { isAltDown = true; e.preventDefault(); requestRender(); }
@@ -1969,19 +2171,22 @@
     // Alt + left click = drag node
     if (e.button === 0 && e.altKey) {
       const world = screenToWorld(point.x, point.y);
-      let target = null;
-      for (const node of visibleNodes) {
-        if (node.renderAsLabel) continue;
-        if (hitTestNode(node, world.x, world.y)) { target = node; break; }
-      }
+      const target = findDraggableTarget(world.x, world.y);
       if (target) {
-        const targetPos = getNodeRenderPosition(target);
+        const targetPos = target.kind === "brainRegionAnchor"
+          ? { x: target.node.x, y: target.node.y }
+          : target.kind === "groupHub"
+            ? { x: target.hubNode.x, y: target.hubNode.y }
+            : getNodeRenderPosition(target.node);
         isDraggingNode = true;
-        draggedNode = target;
+        dragTargetKind = target.kind;
+        draggedNode = target.node || null;
+        draggedGroup = target.group || null;
+        draggedGroupBaseNode = target.baseHubNode || null;
         dragOffsetX = world.x - targetPos.x;
         dragOffsetY = world.y - targetPos.y;
         // Group drag if target belongs to the selected system
-        if (selectedSystemNodes.has(target.id) && selectedSystemNodes.size > 1) {
+        if (target.kind === "node" && target.node && selectedSystemNodes.has(target.node.id) && selectedSystemNodes.size > 1) {
           isDraggingGroup = true;
           groupDragOffsets.clear();
           selectedSystemNodes.forEach(id => {
@@ -1998,8 +2203,18 @@
       }
     }
 
-    if (e.button === 0) { isPanning = true; panStart.x = e.clientX; panStart.y = e.clientY; }
-    if (e.button === 2) { isRightZooming = true; rightZoomStartY = e.clientY; container.classList.add("is-right-zooming"); }
+    if (e.button === 0) {
+      isPanning = true;
+      panHasMoved = false;
+      panStart.x = e.clientX;
+      panStart.y = e.clientY;
+    }
+    if (e.button === 2) {
+      isRightZooming = true;
+      rightZoomHasMoved = false;
+      rightZoomStartY = e.clientY;
+      container.classList.add("is-right-zooming");
+    }
   });
 
   window.addEventListener("mousemove", e => {
@@ -2009,13 +2224,22 @@
     lastMouse.clientX = e.clientX;
     lastMouse.clientY = e.clientY;
 
-    if (isDraggingNode && draggedNode) {
+    if (isDraggingNode && (draggedNode || draggedGroup)) {
       const world = screenToWorld(point.x, point.y);
-      if (isDraggingGroup) {
+      if (dragTargetKind === "groupHub" && draggedGroup && draggedGroupBaseNode) {
+        draggedGroup.hubOffsetX = Math.round(world.x - dragOffsetX - draggedGroupBaseNode.x);
+        draggedGroup.hubOffsetY = Math.round(world.y - dragOffsetY - draggedGroupBaseNode.y);
+      } else if (isDraggingGroup) {
         groupDragOffsets.forEach((off, id) => {
           const n = nodeMap.get(id);
           if (n) { n.x = Math.round(world.x - off.dx); n.y = Math.round(world.y - off.dy); }
         });
+      } else if (dragTargetKind === "brainRegionAnchor" && draggedNode) {
+        setNodeAnchorPosition(
+          draggedNode,
+          Math.round(world.x - dragOffsetX),
+          Math.round(world.y - dragOffsetY)
+        );
       } else {
         setNodeRenderPosition(
           draggedNode,
@@ -2030,10 +2254,15 @@
 
     if (isRightZooming) {
       const dy = e.clientY - rightZoomStartY;
-      if (dy !== 0) { zoomAt(lastMouse.canvasX, lastMouse.canvasY, Math.exp(-dy * 0.01)); rightZoomStartY = e.clientY; }
+      if (dy !== 0) {
+        rightZoomHasMoved = true;
+        zoomAt(lastMouse.canvasX, lastMouse.canvasY, Math.exp(-dy * 0.01));
+        rightZoomStartY = e.clientY;
+      }
       return;
     }
     if (isPanning) {
+      if (e.clientX !== panStart.x || e.clientY !== panStart.y) panHasMoved = true;
       targetCamera.x -= (e.clientX - panStart.x) / camera.zoom;
       targetCamera.y -= (e.clientY - panStart.y) / camera.zoom;
       panStart.x = e.clientX; panStart.y = e.clientY;
@@ -2053,16 +2282,28 @@
         isDraggingNode = false;
         isDraggingGroup = false;
         draggedNode = null;
+        draggedGroup = null;
+        draggedGroupBaseNode = null;
+        dragTargetKind = "node";
         groupDragOffsets.clear();
         requestRender();
       }
+      if (isPanning && panHasMoved) suppressNextClick = true;
       isPanning = false;
     }
     if (e.button === 2) { isRightZooming = false; container.classList.remove("is-right-zooming"); }
   });
 
   window.addEventListener("blur", () => {
-    isPanning = false; isRightZooming = false; container.classList.remove("is-right-zooming");
+    isPanning = false;
+    isRightZooming = false;
+    isDraggingNode = false;
+    isDraggingGroup = false;
+    draggedNode = null;
+    draggedGroup = null;
+    draggedGroupBaseNode = null;
+    dragTargetKind = "node";
+    container.classList.remove("is-right-zooming");
   });
 
   container.addEventListener("wheel", e => {
@@ -2167,6 +2408,15 @@
       requestRender();
     }
 
+    if (!closest && isAltDown) {
+      const dragTarget = findDraggableTarget(world.x, world.y);
+      if (dragTarget) {
+        container.style.cursor = "move";
+        tooltip.classList.add("hidden");
+        return;
+      }
+    }
+
     if (closest) {
       container.style.cursor = isAltDown ? "move" : "pointer";
       tooltip.querySelector(".tt-type").textContent = (TYPE_LABELS[closest.type] || closest.type).toUpperCase();
@@ -2251,6 +2501,10 @@
       if (!visibleIds.has(edge.from) || !visibleIds.has(edge.to)) return false;
       return edge.from === node.id || edge.to === node.id;
     });
+    const brainPathwayLinks = BRAIN_PATHWAYS.filter(pathway => {
+      if (!activeSystems.has(pathway.system)) return false;
+      return pathway.from === node.id || pathway.to === node.id;
+    });
 
     // Update dossier header
     const dossierLabel = document.getElementById("panel-dossier-label");
@@ -2300,13 +2554,28 @@
       const receptorTags = brainRegionLinks.map(edge => {
         const receptorNode = nodeMap.get(edge.from);
         const receptorLabel = receptorNode ? receptorNode.label.replace(/\n/g, " ") : edge.from;
-        const receptorColor = receptorNode ? receptorNode.color : "#c084fc";
+        const receptorColor = receptorNode ? (receptorNode.systemColor || receptorNode.color) : "#c084fc";
         const systemMeta = receptorNode && receptorNode.systemName
           ? ` <span style="color:#64748b;font-size:9px">${receptorNode.systemName}</span>`
           : "";
         return `<span class="tag" style="background:${hexToRgba(receptorColor, 0.12)};color:${receptorColor};border-color:${hexToRgba(receptorColor, 0.35)}">${receptorLabel}</span>${systemMeta}`;
       });
       html += sec(`Receptory w regionie (${receptorTags.length})`, receptorTags.join(" "));
+    }
+
+    if (node.type === "brainRegion" && brainPathwayLinks.length) {
+      const pathwayRows = brainPathwayLinks.map(pathway => {
+        const fromNode = nodeMap.get(pathway.from);
+        const toNode = nodeMap.get(pathway.to);
+        const fromLabel = fromNode ? fromNode.label.replace(/\n/g, " ") : pathway.from;
+        const toLabel = toNode ? toNode.label.replace(/\n/g, " ") : pathway.to;
+        const systemMeta = SYSTEM_META_BY_ID.get(pathway.system);
+        const systemColor = systemMeta ? systemMeta.color : "#38bdf8";
+        const systemLabel = systemMeta ? systemMeta.name : "Szlak regionalny";
+        const signalLabel = pathway.signal ? `SIG: ${pathway.signal}` : "SIG: modulacja";
+        return `<span class="tag" style="background:${hexToRgba(systemColor, 0.12)};color:${systemColor};border-color:${hexToRgba(systemColor, 0.35)}">${pathway.label}</span> ${fromLabel} → ${toLabel}<br><span style="color:#94a3b8">${signalLabel} · ${pathway.description}</span><br><span style="color:#64748b;font-size:9px">${systemLabel}</span>`;
+      });
+      html += sec(`Pathways sygnałowe (${brainPathwayLinks.length})`, pathwayRows.join("<br><br>"));
     }
 
     // Receptor extended info
@@ -2376,7 +2645,7 @@
         if (node.type === "receptor" && brainRegionLinks.length) {
           footerLeft.textContent = `CONN · ${connected.length} · REG · ${brainRegionLinks.length}`;
         } else if (node.type === "brainRegion") {
-          footerLeft.textContent = `REC · ${brainRegionLinks.length}`;
+          footerLeft.textContent = `REC · ${brainRegionLinks.length} · PATH · ${brainPathwayLinks.length}`;
         } else {
           footerLeft.textContent = `CONN · ${connected.length}`;
         }
@@ -2386,7 +2655,7 @@
         if (node.type === "receptor" && brainRegionLinks.length) {
           footerLeft.textContent = `CONN · 0 · REG · ${brainRegionLinks.length}`;
         } else if (node.type === "brainRegion") {
-          footerLeft.textContent = `REC · ${brainRegionLinks.length}`;
+          footerLeft.textContent = `REC · ${brainRegionLinks.length} · PATH · ${brainPathwayLinks.length}`;
         } else {
           footerLeft.textContent = "CONN · 0";
         }
